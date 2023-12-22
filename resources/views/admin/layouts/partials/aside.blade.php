@@ -35,21 +35,21 @@
                         </li>-->
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Użytkownicy</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.user') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="users" class="feather-icon"></i><span
                                     class="hide-menu">Lista użytkowników </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.comment') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span
                                     class="hide-menu">Komentarze </span></a>
                         </li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Marketing</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.order') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="shopping-bag" class="feather-icon"></i><span
                                     class="hide-menu">Sprzedaż </span></a>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.ad') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
                                 aria-expanded="false"><i data-feather="globe" class="feather-icon"></i><span
                                     class="hide-menu">Reklamy </span></a>
                         </li>

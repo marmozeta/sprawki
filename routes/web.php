@@ -15,7 +15,7 @@ use App\Admin\Controllers\MenuController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to('admin');
 });
 
 Route::namespace('App\Http\Controllers\Admin')->group(function () { 

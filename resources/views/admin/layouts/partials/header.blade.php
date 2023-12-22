@@ -145,7 +145,7 @@
                                 <img src="{{ asset('images/users/profile-pic.jpg') }}" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ms-2 d-none d-lg-inline-block"><span>Witaj,</span> <span
-                                        class="text-dark">administrator</span> <i data-feather="chevron-down"
+                                        class="text-dark">{{ auth()->user()->email }}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-right user-dd animated flipInY">
