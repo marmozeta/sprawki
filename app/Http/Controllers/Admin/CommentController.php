@@ -11,8 +11,8 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $categories = Comment::all();
-        return view('admin.comment', ['categories' => $categories]);
+        $comments = new Comment();
+        return view('admin.comment', ['comments' => $comments->getComments()]);
     }
     
     public function create() {

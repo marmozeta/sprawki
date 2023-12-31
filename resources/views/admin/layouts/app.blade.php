@@ -15,6 +15,7 @@
     <link href="{{ asset('admin/css/c3.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/chartist.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{ asset('admin/css/style.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
@@ -25,7 +26,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    <x-head.tinymce-config/>
 </head>
     
 <body>
@@ -81,7 +81,9 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>  
+    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
+    <script> bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });</script>
     <!-- apps -->
     <!-- apps -->
     <script src="{{ asset('admin/js/app-style-switcher.js') }}"></script>
@@ -91,6 +93,8 @@
     
     <script src="https://unpkg.com/@yaireo/tagify"></script>
     <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
+    
+   
     <!--Custom JavaScript -->
     <script src="{{ asset('admin/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin/js/app.js') }}"></script>
@@ -102,6 +106,7 @@
     <script src="{{ asset('admin/js/jquery-jvectormap-2.0.2.min.js') }}"></script>
     <script src="{{ asset('admin/js/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('admin/js/dashboard1.min.js') }}"></script>
+    
     
 </body>
 

@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                           <!-- <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.category') }}">Nowa kategoria</a>-->
+                           <!-- <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.comment') }}">Nowa kategoria</a>-->
                         </div>
                     </div>
                 </div>
@@ -43,45 +43,32 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nazwa</th>
-                                                <th>Status</th>
+                                                <th>Komentarz</th>
+                                                <th>Użytkownik</th>
                                                 <th>Data dodania</th>
-                                                <th>Data modyfikacji</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categories as $category)
+                                            @foreach ($comments as $comment)
                                                 <tr>
-                                                    <td>{{ $category->cat_id }}</td>
-                                                    <td>{{ $category->name }}</td>
+                                                    <td>{{ $comment->comm_id }}</td>
+                                                    <td>{{ $comment->comment }}</td>
+                                                    <td>{{ $comment->name }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($comment->created_at) }}</td>
+                                                    <td class="text-center"><a href="{{ route('admin.forms.comment.edit', ['id' => $comment->comm_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        @if($category->active == 1)
-                                                            <i class="fa fa-circle text-success font-12"
-                                                        data-bs-toggle="tooltip" data-placement="top"
-                                                        title="Aktywna"></i>
-                                                        @else
-                                                            <i class="fa fa-circle text-danger font-12"
-                                                        data-bs-toggle="tooltip" data-placement="top"
-                                                        title="Nieaktywna"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $category->created_at->format('d.m.Y H:i') }}</td>
-                                                    <td>{{ $category->updated_at->format('d.m.Y H:i') }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.category.edit', ['id' => $category->cat_id]) }}"><i class="fa fa-edit"></i></a></td>
-                                                    <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $category->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.comment.remove', ['id' => $comment->comm_id]) }}"><i class="fa fa-trash"></i></a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nazwa</th>
-                                                <th>Status</th>
+                                                <th>Komentarz</th>
+                                                <th>Użytkownik</th>
                                                 <th>Data dodania</th>
-                                                <th>Data modyfikacji</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -110,7 +97,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          Czy na pewno chcesz usunąć tą kategorię?
+          Czy na pewno chcesz usunąć ten komentarz?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
