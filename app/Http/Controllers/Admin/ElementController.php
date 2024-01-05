@@ -180,7 +180,7 @@ class ElementController extends Controller
     
     public function upload_file() {
         $random = Str::random(15);
-        $uploads_dir = '/home/srv28629/domains/srv28629.microhost.com.pl/public_html/sprawkidev/public/images/elements';
+        $uploads_dir = env('ELEMENTS_IMAGES_URL');
         $tmp_name = $_FILES["croppedImage"]["tmp_name"];
         if(move_uploaded_file($tmp_name, "$uploads_dir/$random.png")) echo $random.'.png';
     }
