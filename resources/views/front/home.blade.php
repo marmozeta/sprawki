@@ -55,7 +55,7 @@
                                       @if($menu->is_social) 
                                         {{ $element->title }}<br/>
                                         @endif
-                                        {{ strip_tags($element->description) }}</div>
+                                        {{ substr(strip_tags($element->description), 0, 200) }} ...</div>
                                     @endif
                                     <!--<span class="icon-corner"><i class="fa fa-video" style="color: #fff;"></i></span>-->
                                     
