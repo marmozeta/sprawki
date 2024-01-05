@@ -162,7 +162,7 @@ span.date {
     width: 46%;
 }
 
-.navbar {
+.navbar, #filter-bar {
     display: none;
 }
                 }     
