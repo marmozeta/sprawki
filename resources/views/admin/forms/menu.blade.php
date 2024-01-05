@@ -40,6 +40,17 @@
                                         <input type="text" class="form-control" name="name" value="{{ old('name', $menu->name ?? '') }}" placeholder="" />
                                         <input type="hidden" name="ordinal_number" value="1" />
                                     </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Ikona *</label>
+                                        <input type="text" class="form-control" name="icon" value="{{ old('icon', $menu->icon ?? '') }}" placeholder="" />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Wyświetlaj w menu *</label>
+                                        <select class="form-control" name="in_menu">
+                                            <option value="1" {{ (old('in_menu', $menu->in_menu ?? '')==1)?'selected':'' }}>tak</option>
+                                            <option value="0" {{ (old('in_menu', $menu->in_menu ?? '')==0)?'selected':'' }}>nie</option>
+                                        </select>
+                                    </div>
                                     <div>
                                         
                                 <label class="form-label pt-2">Atrybuty *</label>
@@ -48,10 +59,12 @@
                                     <label>
                                         <input type="checkbox" class="attribute" name="attrs[{{$attr->attr_id}}]" @if(array_key_exists($attr->attr_id, $checked)) checked @endif> &nbsp; &nbsp; &nbsp;{{ $attr->name }}
                                     </label>
-                                    <div class="form-check form-switch required @if(!array_key_exists($attr->attr_id, $checked)) d-none @endif mb-0">
-                                        <input class="form-check-input" type="checkbox" name="required[{{$attr->attr_id}}]" role="switch" id="flexSwitchCheckDefault" @if(isset($checked[$attr->attr_id]) && $checked[$attr->attr_id]) checked @endif>
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">Wymagany</label>
-                                    </div>
+                                    @if($attr->slug != 'is_new' && $attr->slug != 'is_hot' && $attr->slug != 'is_sale')  
+                                        <div class="form-check form-switch required @if(!array_key_exists($attr->attr_id, $checked)) d-none @endif mb-0">
+                                            <input class="form-check-input" type="checkbox" name="required[{{$attr->attr_id}}]" role="switch" id="flexSwitchCheckDefault{{ $attr->attr_id }}" @if(isset($checked[$attr->attr_id]) && $checked[$attr->attr_id]) checked @endif>
+                                                   <label class="form-check-label" for="flexSwitchCheckDefault{{ $attr->attr_id }}">Wymagany</label>
+                                        </div>
+                                    @endif
                                 </fieldset>
                                 <hr style="margin: 0.3rem 0;"/>
                                 @endforeach

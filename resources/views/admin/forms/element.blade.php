@@ -34,7 +34,7 @@
                             @endif
                             
                                 @csrf <!-- {{ csrf_field() }} -->
-                                <div class="form-body">
+                                <div class="form-body row">
                                     @foreach($attributes as $attr)
                                         @include('admin.forms.attributes.'.$attr->slug)   
                                     @endforeach

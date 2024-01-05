@@ -20,17 +20,17 @@ class CategoryController extends Controller
     }
     
     public function edit($id) {
-        $category = Menu::where('cat_id', $id)->first();
+        $category = Category::where('cat_id', $id)->first();
         return view('admin.forms.category', ['category' => $category]);
     }
     
     public function store(Request $request): RedirectResponse
     {
 
-        $category = new Category;
-        $category->name = $request->name;
-        $category->active = ($request->active == 'on');
-        $category->save();
+        $Category = new Category;
+        $Category->name = $request->name;
+        $Category->active = ($request->active == 'on');
+        $Category->save();
  
         return redirect('/admin/category');
     }
@@ -38,17 +38,17 @@ class CategoryController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
  
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->active = 1;
-        $category->save();
+        $Category = Category::find($id);
+        $Category->name = $request->name;
+        $Category->active = 1;
+        $Category->save();
  
         return redirect('/admin/category');
     }
     
     public function remove($id) {
-        $category = Category::find($id);
-        $category->delete();
+        $Category = Category::find($id);
+        $Category->delete();
         
         return redirect('/admin/category');
     }

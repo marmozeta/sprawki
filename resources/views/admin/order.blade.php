@@ -6,12 +6,12 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Marketing</h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Zamówienia</h4>
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
                                     <li class="breadcrumb-item"><a href="index.html" class="text-muted">Tablica</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Zamówienia</li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Marketing</li>
                                 </ol>
                             </nav>
                         </div>
@@ -43,46 +43,31 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nazwa</th>
-                                                <th>Status</th>
-                                                <th>Data dodania</th>
-                                                <th>Data modyfikacji</th>
-                                                <th></th>
+                                                <th>Użytkownik</th>
+                                                <th>Suma</th>
+                                                <th>Data zamówienia</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($categories as $category)
+                                            @foreach ($orders as $order)
                                                 <tr>
-                                                    <td>{{ $category->cat_id }}</td>
-                                                    <td>{{ $category->name }}</td>
+                                                    <td>#{{ $order->id }}</td>
+                                                    <td>{{ $order->user_name }}</td>
+                                                    <td>{{ $order->sum }} zł (w tym podatek {{ round($order->vat, 2) }} zł VAT)</td>
+                                                    <td>{{ Carbon\Carbon::parse($order->created_at) }}</td>
+                                                    <td class="text-center"><a href="{{ route('admin.forms.category.edit', ['id' => $order->id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        @if($category->active == 1)
-                                                            <i class="fa fa-circle text-success font-12"
-                                                        data-bs-toggle="tooltip" data-placement="top"
-                                                        title="Aktywna"></i>
-                                                        @else
-                                                            <i class="fa fa-circle text-danger font-12"
-                                                        data-bs-toggle="tooltip" data-placement="top"
-                                                        title="Nieaktywna"></i>
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $category->created_at->format('d.m.Y H:i') }}</td>
-                                                    <td>{{ $category->updated_at->format('d.m.Y H:i') }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.category.edit', ['id' => $category->cat_id]) }}"><i class="fa fa-edit"></i></a></td>
-                                                    <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $category->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $order->id]) }}"><i class="fa fa-trash"></i></a></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Nazwa</th>
-                                                <th>Status</th>
-                                                <th>Data dodania</th>
-                                                <th>Data modyfikacji</th>
-                                                <th></th>
+                                                <th>Użytkownik</th>
+                                                <th>Suma</th>
+                                                <th>Data zamówienia</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>

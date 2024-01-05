@@ -36,10 +36,11 @@ class MenuAttribute extends Model
     
     public function getAttributesByMenuSlug($slug) {
          return DB::table('menu_attributes')
+            ->select(DB::raw('menu_attributes.*, attributes.*'))        
             ->leftJoin('attributes', 'menu_attributes.attribute_id', '=', 'attributes.attr_id')
             ->join('menus', 'menus.menu_id', '=', 'menu_attributes.menu_id')
-             ->select(DB::raw('menu_attributes.*, attributes.*'))      
             ->where('menus.slug', $slug)
+            ->whereNull('menus.deleted_at')
             ->get();
     }
 }

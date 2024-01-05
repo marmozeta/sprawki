@@ -5,3 +5,151 @@
   line-height: 30px;
   padding: 0;
 }
+
+.menu {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    display: flex;
+    column-gap: 37px;
+    align-items: center;
+    justify-content: end;
+    margin: 0;
+}
+
+.menu li:first-child {
+    list-style-type: none;
+}
+
+.menu a {
+    color: #fff;   
+    font-variant: petite-caps;
+}
+
+#fh5co-header .navbar-brand {
+    display: contents;
+}
+
+.fh5co-menu-btn {
+    margin: 0;
+}
+
+#fh5co-header {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+#fh5co-board .item .fh5co-desc {
+    width: 100%;
+    font-family: Oswald;
+}
+
+#fh5co-header {
+    margin-bottom: 0;
+}
+
+.filters li {
+    list-style-type: none;
+   display: inline-block;
+}
+
+#filter-bar {
+    background: #fff;
+}
+
+#filter-bar .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 0;
+}
+
+#filter-bar .filters ul {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #ccc;
+    font-family: Oswald;
+}
+
+#filter-bar .filters ul span {
+    color: #333;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+#filter-bar .filters ul li:first-child {
+    margin-right: 15px;
+}
+
+#filter-bar .filters ul li a {
+    color: #ccc;
+}
+
+#filter-bar .filters ul li a.selected {
+    color: #ef5353;
+}
+
+.filter-button {
+    letter-spacing: normal !important;
+    font-size: 15px;
+    font-family: Oswald;
+    line-height: 15px;
+    margin: 0;
+}
+
+#fh5co-board {
+    margin-top: 1em;
+}
+
+#fh5co-board .item {
+    padding: 0;
+}
+
+.animate-box img {
+    height: 200px;
+}
+
+.animate-box div.caffle {
+    height: 200px;
+    font-family: Oswald;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+span.date {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			background: #cb1d24;
+			color: #fff;
+			padding: 0 10px;
+			opacity: 0.7;
+			border-top-left-radius: 2px;
+			font-size: 11px;
+		}
+		
+		span.icon-corner {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+		}
+		
+		span.icon-corner i {
+			color: #ef5353;
+                        font-size: 20px;
+		}
+                
+                .fh5co-desc .icons {
+                    display: flex;
+                    column-gap: 15px;
+                }
+                
+                span.user-name {
+			position: absolute;
+			top: 5px;
+			right: 15px;
+                        font-family: Oswald;
+                        color: #000;
+                        font-size: 13px;
+		}

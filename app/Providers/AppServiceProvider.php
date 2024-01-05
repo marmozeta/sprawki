@@ -22,5 +22,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $menus = Menu::all();
         view()->share(compact('menus'));
+        
+        $menus_front = Menu::where('in_menu', 1)->orderBy('ordinal_number')->get();
+        view()->share(compact('menus_front'));
     }
 }

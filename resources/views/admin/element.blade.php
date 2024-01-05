@@ -39,6 +39,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    @if(count($elements)>0)
                                     <table id="zero_config" class="table border table-striped table-bordered text-nowrap">
                                         <thead>
                                             <tr>
@@ -77,6 +78,9 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    @else
+                                        Do tej pozycji menu nie dodano jeszcze żadnych elementów
+                                    @endif
                                 </div>
                             </div>
                         </div>

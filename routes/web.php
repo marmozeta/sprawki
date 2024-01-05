@@ -14,10 +14,6 @@ use App\Admin\Controllers\MenuController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->to('admin');
-});
-
 Route::namespace('App\Http\Controllers\Admin')->group(function () { 
     Route::get('/admin/login', 'LoginController@show')->name('admin.login');
     Route::post('/admin/login', 'LoginController@login')->name('admin.login.perform');
@@ -33,13 +29,13 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::get('admin/menu/edit/{id}', 'MenuController@edit')->name('admin.forms.menu.edit')->middleware('auth'); 
     Route::get('admin/menu/remove/{id}', 'MenuController@remove')->name('admin.forms.menu.remove')->middleware('auth'); 
     
-    //kategorie
-    Route::get('admin/category', 'CategoryController@index')->name('admin.category')->middleware('auth'); 
-    Route::get('admin/category/create', 'CategoryController@create')->name('admin.forms.category')->middleware('auth'); 
-    Route::post('admin/category/store', 'CategoryController@store')->name('admin.forms.category.store')->middleware('auth'); 
-    Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('auth'); 
-    Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('auth'); 
-    Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('auth'); 
+    //tagi
+    Route::get('admin/tag', 'TagController@index')->name('admin.tag')->middleware('auth'); 
+    Route::get('admin/tag/create', 'TagController@create')->name('admin.forms.tag')->middleware('auth'); 
+    Route::post('admin/tag/store', 'TagController@store')->name('admin.forms.tag.store')->middleware('auth'); 
+    Route::post('admin/tag/update/{id}', 'TagController@update')->name('admin.forms.tag.update')->middleware('auth'); 
+    Route::get('admin/tag/edit/{id}', 'TagController@edit')->name('admin.forms.tag.edit')->middleware('auth'); 
+    Route::get('admin/tag/remove/{id}', 'TagController@remove')->name('admin.forms.tag.remove')->middleware('auth'); 
     
     //typy
     Route::get('admin/type', 'TypeController@index')->name('admin.type')->middleware('auth'); 
@@ -56,7 +52,8 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/element/update/{slug}/{id}', 'ElementController@update')->name('admin.forms.element.update')->middleware('auth'); 
     Route::get('admin/element/edit/{slug}/{id}', 'ElementController@edit')->name('admin.forms.element.edit')->middleware('auth'); 
     Route::get('admin/element/remove/{slug}/{id}', 'ElementController@remove')->name('admin.forms.element.remove')->middleware('auth'); 
-
+    Route::post('admin/element/upload_file', 'ElementController@upload_file')->name('admin.element.upload_file')->middleware('auth'); 
+    
     //użytkownicy
     Route::get('admin/user', 'UserController@index')->name('admin.user')->middleware('auth'); 
     Route::get('admin/user/create', 'UserController@create')->name('admin.forms.user')->middleware('auth'); 
@@ -81,13 +78,18 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::get('admin/order/edit/{id}', 'OrderController@edit')->name('admin.forms.order.edit')->middleware('auth'); 
     Route::get('admin/order/remove/{id}', 'OrderController@remove')->name('admin.forms.order.remove')->middleware('auth'); 
         
-    //reklamy
-    Route::get('admin/ad', 'AdController@index')->name('admin.ad')->middleware('auth'); 
-    Route::get('admin/ad/create', 'AdController@create')->name('admin.forms.ad')->middleware('auth'); 
-    Route::post('admin/ad/store', 'AdController@store')->name('admin.forms.ad.store')->middleware('auth'); 
-    Route::post('admin/ad/update/{id}', 'AdController@update')->name('admin.forms.ad.update')->middleware('auth'); 
-    Route::get('admin/ad/edit/{id}', 'AdController@edit')->name('admin.forms.ad.edit')->middleware('auth'); 
-    Route::get('admin/ad/remove/{id}', 'AdController@remove')->name('admin.forms.ad.remove')->middleware('auth'); 
+    //kategorie produktów
+    Route::get('admin/category', 'CategoryController@index')->name('admin.category')->middleware('auth'); 
+    Route::get('admin/category/create', 'CategoryController@create')->name('admin.forms.category')->middleware('auth'); 
+    Route::post('admin/category/store', 'CategoryController@store')->name('admin.forms.category.store')->middleware('auth'); 
+    Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('auth'); 
+    Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('auth'); 
+    Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('auth'); 
     
     
+});
+
+Route::namespace('App\Http\Controllers\Front')->group(function () { 
+    Route::get('/', function () { return redirect()->to('/sprawki');});
+    Route::get('/{slug}', 'HomeController@index')->name('home');
 });

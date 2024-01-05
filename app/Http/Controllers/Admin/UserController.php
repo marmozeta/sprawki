@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
  
 class UserController extends Controller
 {
@@ -20,7 +21,7 @@ class UserController extends Controller
     }
     
     public function edit($id) {
-        $user = User::where('user_id', $id)->first();
+        $user = User::where('id', $id)->first();
         return view('admin.forms.user', ['user' => $user]);
     }
     
@@ -29,7 +30,9 @@ class UserController extends Controller
 
         $user = new User;
         $user->name = $request->name;
-        $user->active = ($request->active == 'on');
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
         $user->save();
  
         return redirect('/admin/user');
@@ -39,6 +42,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->name = $request->name;
+        if(!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
         $user->active = 1;
         $user->save();
  

@@ -17,25 +17,25 @@
                         </li>
                         @foreach ($menus as $menu)
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.element', $menu->slug) }}"
-                                aria-expanded="false"><i data-feather="grid" class="feather-icon"></i><span
+                                aria-expanded="false"><i class="{{ ($menu->icon) ? $menu->icon : 'fa fa-list'}}"></i><span
                                     class="hide-menu">{{ $menu->name }}</span></a></li>
                         @endforeach
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Słowniki</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.category') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.tag') }}"
                                 aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">Kategorie
+                                    class="hide-menu">Tagi
                                 </span></a>
                         </li>
-                        <!--<li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.type') }}"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">Typy
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.category') }}"
+                                aria-expanded="false"><i data-feather="shopping-cart" class="feather-icon"></i><span
+                                    class="hide-menu">Sklep - kategorie
                                 </span></a>
-                        </li>-->
+                        </li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Użytkownicy</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.user') }}"
                                 aria-expanded="false"><i data-feather="users" class="feather-icon"></i><span
                                     class="hide-menu">Lista użytkowników </span></a>
                         </li>
@@ -45,7 +45,7 @@
                         </li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Marketing</span></li>
-                        <li class="sidebar-item"> <a class="sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.order') }}"
                                 aria-expanded="false"><i data-feather="shopping-bag" class="feather-icon"></i><span
                                     class="hide-menu">Sprzedaż </span></a>
                         </li>

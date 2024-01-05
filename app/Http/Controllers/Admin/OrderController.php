@@ -6,17 +6,19 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
  
 class OrderController extends Controller
 {
     public function index()
     {
-        $categories = Order::all();
-        return view('admin.order', ['categories' => $categories]);
+        $orders = new Order();
+        return view('admin.order', ['orders' => $orders->getOrders()]);
     }
     
     public function create() {
-        return view('admin.forms.order');
+        $users = User::all();
+        return view('admin.forms.order', ['users' => $users]);
     }
     
     public function edit($id) {

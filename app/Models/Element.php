@@ -19,6 +19,30 @@ class Element extends Model
             ->join('menus', 'elements.menu_id', '=', 'menus.menu_id')
             ->where('menus.slug', $slug)
             ->whereNull('elements.deleted_at')
+            ->whereNull('menus.deleted_at')
             ->get();
+    }
+    
+    public function getByMenuId($menu_id) {
+        return DB::table('elements')
+            ->select(DB::raw('GROUP_CONCAT(tags.name SEPARATOR " ") AS tags, elements.*'))
+            ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
+            ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
+            ->where('elements.menu_id', $menu_id)
+            ->whereNull('elements.deleted_at')
+            ->groupBy('elements.element_id')
+            ->get();
+    }
+    
+    public function getElement($element_id) {
+        return DB::table('elements')
+            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories'))
+            ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
+            ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
+            ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
+            ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
+            ->where('elements.element_id', $element_id)
+            ->whereNull('elements.deleted_at')
+            ->first();
     }
 }

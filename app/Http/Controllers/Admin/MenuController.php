@@ -14,8 +14,8 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
-        return view('admin.menu', ['menus' => $menus]);
+        $menus = new Menu();
+        return view('admin.menu', ['menus_list' => $menus->getMenus()]);
     }
     
     public function create() {
@@ -37,6 +37,8 @@ class MenuController extends Controller
  
         $menu = new Menu;
         $menu->name = $request->name;
+        $menu->icon = $request->icon;
+        $menu->in_menu = $request->in_menu;
         $menu->slug = Str::slug($request->name, "-");
         $menu->ordinal_number = $request->ordinal_number;
         $menu->save();
@@ -53,6 +55,8 @@ class MenuController extends Controller
  
         $menu = Menu::find($id);
         $menu->name = $request->name;
+        $menu->icon = $request->icon;
+        $menu->in_menu = $request->in_menu;
         $menu->slug = Str::slug($request->name, "-");
         $menu->ordinal_number = $request->ordinal_number;
         $menu->save();

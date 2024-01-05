@@ -44,7 +44,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nazwa pozycji</th>
-                                                <th>Ilość atrybutów</th>
+                                                <th>Lista atrybutów</th>
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
@@ -52,13 +52,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($menus as $menu)
+                                            @foreach ($menus_list as $menu)
                                                 <tr>
                                                     <td>{{ $menu->menu_id }}</td>
                                                     <td>{{ $menu->name }}</td>
-                                                    <td>1</td>
-                                                    <td>{{ $menu->created_at->format('d.m.Y H:i') }}</td>
-                                                    <td>{{ $menu->updated_at->format('d.m.Y H:i') }}</td>
+                                                    <td class="text-wrap">{{ $menu->attrs_list }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($menu->created_at) }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($menu->created_at) }}</td>
                                                     <td class="text-center"><a href="{{ route('admin.forms.menu.edit', ['id' => $menu->menu_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.menu.remove', ['id' => $menu->menu_id]) }}"><i class="fa fa-trash"></i></a></td>
@@ -69,7 +69,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nazwa pozycji</th>
-                                                <th>Ilość atrybutów</th>
+                                                <th>Lista atrybutów</th>
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
