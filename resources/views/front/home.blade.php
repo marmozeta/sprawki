@@ -38,9 +38,9 @@
 
 			<div class="row">
 
-        <div id="fh5co-board" data-columns>
+        <div id="fh5co-board" class="grid">
             @foreach($elements as $element) 
-        	<div class="item col-md-3 {{ $element->tags }}">
+        	<div class="item {{ $element->tags }}">
         		<div class="animate-box">
                                 @if($menu->is_social)
                                     <span class="icon-corner"><i class="fa-solid fa-quote-right"></i></span>

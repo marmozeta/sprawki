@@ -102,6 +102,7 @@
 
 #fh5co-board .item {
     padding: 0;
+    width: 22%;
 }
 
 .animate-box img {
@@ -153,3 +154,25 @@ span.date {
                         color: #000;
                         font-size: 13px;
 		}
+              
+                
+                  @media screen and (max-width: 992px) {
+                    
+                           #fh5co-board .item {
+    width: 46%;
+}
+
+.navbar {
+    display: none;
+}
+                }     
+                
+                @media screen and (max-width: 640px) {
+                    
+                           #fh5co-board .item {
+    width: 95%;
+}
+
+                }    
+                
+         

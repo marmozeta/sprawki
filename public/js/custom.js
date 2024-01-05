@@ -4,14 +4,17 @@
 });
 */
 $(document).ready(function() {
-  var $container = $("#fh5co-board"); // the container with all the elements to filter inside
+  var $container = $(".grid"); // the container with all the elements to filter inside
   var filters = {}; //should be outside the scope of the filtering function
 
   /* --- read the documentation on isotope.metafizzy.co for more options --- */
   var $grid = $container.isotope({
-    itemSelector: ".item", // the elements to filter
+    layoutMode: 'fitRows',
+    itemSelector: '.item',
     percentPosition: true,
-    layoutMode: 'fitRows' // true if you use percentage widths
+    fitRows: {
+      gutter: 10
+    }
   });
 
   // save some classes for later usage
