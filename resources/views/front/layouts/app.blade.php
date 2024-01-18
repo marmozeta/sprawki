@@ -23,21 +23,20 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-         <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
-
-
-
-	<link rel="stylesheet" href="{{asset('css/animate.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=PT+Sans+Narrow:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('css/animate.css')}}">
 	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
 	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 	<link rel="stylesheet" href="{{asset('css/salvattore.css')}}">
-	<link rel="stylesheet" href="{{asset('css/style.css')}}">
-	<link rel="stylesheet" href="{{asset('css/app.css')}}">
+	<link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240118">
 	<script src="{{asset('js/modernizr-2.6.2.min.js')}}"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-
+        @yield('styles')
 	</head>
 	<body>
 		
@@ -50,11 +49,11 @@
 	@include('front.layouts.partials.footer')    
 
 	<!-- jQuery -->
-	<script src="{{asset('js/jquery.min.js')}}"></script>
+	<script src="{{ asset('admin/js/jquery.min.js') }}"></script>
 	<!-- jQuery Easing -->
 	<script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
 	<!-- Bootstrap -->
-	<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>  
 	<!-- Waypoints -->
 	<script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 	<!-- Magnific Popup -->
@@ -67,5 +66,6 @@
 	<!-- Main JS -->
 	<script src="{{asset('js/main.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
+        @yield('scripts')
     </body>
 </html>

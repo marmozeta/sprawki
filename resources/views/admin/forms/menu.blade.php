@@ -51,6 +51,46 @@
                                             <option value="0" {{ (old('in_menu', $menu->in_menu ?? '')==0)?'selected':'' }}>nie</option>
                                         </select>
                                     </div>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="is_shop" role="switch" id="is_shop" {{ (old('is_shop', $menu->is_shop ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="is_shop">Ustaw jako sklep</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="is_social" role="switch" id="is_social" {{ (old('is_social', $menu->is_social ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="is_social">Ustaw jako społeczność</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="linked_elements" role="switch" id="linked_elements" {{ (old('linked_elements', $menu->linked_elements ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="linked_elements">Elementy jako linki</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="has_likes" role="switch" id="has_likes" {{ (old('has_likes', $menu->has_likes ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="has_likes">Polubienia</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="has_comments" role="switch" id="has_comments" {{ (old('has_comments', $menu->has_comments ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="has_comments">Komentarze</label>
+                                            </div>
+                                        </div>
+                                    <div class="col-2">
+                                        <div class="form-group mb-3">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="has_arguments" role="switch" id="has_arguments" {{ (old('has_arguments', $menu->has_arguments ?? '')==1)?'checked':''}} >
+                                                <label class="form-check-label" for="has_arguments">Argumenty</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </div>
                                     <div>
                                         
                                 <label class="form-label pt-2">Atrybuty *</label>

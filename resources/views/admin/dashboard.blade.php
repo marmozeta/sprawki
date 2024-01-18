@@ -456,3 +456,15 @@
             <!-- footer -->
             <!-- ============================================================== -->
 @endsection
+
+
+@section('scripts')
+  <!--This page JavaScript -->
+    <script src="{{ asset('admin/js/d3.min.js') }}"></script>
+    <script src="{{ asset('admin/js/c3.min.js') }}"></script>
+    <script src="{{ asset('admin/js/chartist.min.js') }}"></script>
+    <script src="{{ asset('admin/js/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery-jvectormap-2.0.2.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery-jvectormap-world-mill-en.js') }}"></script>
+    <script src="{{ asset('admin/js/dashboard1.min.js') }}"></script>
+ @endsection

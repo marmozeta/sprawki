@@ -145,7 +145,7 @@
                                         class="svg-icon me-2 ms-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>-->
-                                <a class="dropdown-item" href="{{ route('logout.perform') }}"><i data-feather="power"
+                                <a class="dropdown-item" href="{{ route('admin.logout.perform') }}"><i data-feather="power"
                                         class="svg-icon me-2 ms-1"></i>
                                     Wyloguj się</a>
                                 <div class="dropdown-divider"></div>

@@ -9,3 +9,17 @@
 img {
 	max-width: 100%;
 }
+
+.dropzone .dz-preview {
+    margin: 14px !important;
+}
+
+.dropzone-check {
+    width: 30px; 
+    height: 30px;
+    border: 2px solid #c22027;
+}
+
+.dropzone-check:not(:checked) {
+    background: #fff;
+}

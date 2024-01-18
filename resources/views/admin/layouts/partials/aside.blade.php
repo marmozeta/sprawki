@@ -4,7 +4,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.dashboard') }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.dashboard') }}"
                                 aria-expanded="false"><i data-feather="home" class="feather-icon"></i><span
                                     class="hide-menu">Tablica</span></a></li>
                         <li class="list-divider"></li>
@@ -16,7 +16,7 @@
                                 </span></a>
                         </li>
                         @foreach ($menus as $menu)
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{ route('admin.element', $menu->slug) }}"
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.element', $menu->slug) }}"
                                 aria-expanded="false"><i class="{{ ($menu->icon) ? $menu->icon : 'fa fa-list'}}"></i><span
                                     class="hide-menu">{{ $menu->name }}</span></a></li>
                         @endforeach
@@ -32,6 +32,12 @@
                                 aria-expanded="false"><i data-feather="shopping-cart" class="feather-icon"></i><span
                                     class="hide-menu">Sklep - kategorie
                                 </span></a>
+                        </li>
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Media</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.media') }}"
+                                aria-expanded="false"><i data-feather="camera" class="feather-icon"></i><span
+                                    class="hide-menu">Biblioteka mediów </span></a>
                         </li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Użytkownicy</span></li>

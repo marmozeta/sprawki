@@ -7,22 +7,31 @@
 }
 
 .menu {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-family: "Oswald", sans-serif;
+    font-size: 18px;
     display: flex;
     column-gap: 37px;
     align-items: center;
-    justify-content: end;
-    margin: 0;
+    justify-content: start;
+    margin: 0 0 0 -30px;
+    text-transform: uppercase;
+    font-weight: 200;
 }
 
 .menu li:first-child {
     list-style-type: none;
 }
 
+.menu li a.active {
+    color: #ef5353;
+}
+
 .menu a {
     color: #fff;   
-    font-variant: petite-caps;
+}
+
+.menu a span {
+    font-size: 24px;
 }
 
 #fh5co-header .navbar-brand {
@@ -38,9 +47,34 @@
     padding-bottom: 1em;
 }
 
-#fh5co-board .item .fh5co-desc {
+#fh5co-board .item {
+    margin: 0;
+}
+
+#fh5co-board .item .fh5co-desc{
     width: 100%;
     font-family: Oswald;
+    font-size: 15px;
+    font-variant: petite-caps;
+    padding: 0 5px 15px 15px;
+    line-height: 1.2em;
+}
+
+#fh5co-board .item .fh5co-desc .price {
+    font-size: 20px;
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+}
+
+#fh5co-board .item .fh5co-desc .title {
+    height: 40px;
+    align-items: center;
+    display: flex;
+}
+
+#fh5co-board .item .fh5co-desc .icons {
+    font-size: 14px;
 }
 
 #fh5co-header {
@@ -57,10 +91,11 @@
 }
 
 #filter-bar .filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5em 0;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 0.5em 0;
+  column-gap: 80px;
 }
 
 #filter-bar .filters ul {
@@ -93,29 +128,31 @@
     font-size: 15px;
     font-family: Oswald;
     line-height: 15px;
-    margin: 0;
+    margin: 0 -70px 0 0;
 }
 
 #fh5co-board {
     margin-top: 1em;
 }
 
-#fh5co-board .item {
-    padding: 0;
-    width: 22%;
-}
-
-.animate-box img {
+.default .animate-box img, .shop .animate-box img {
     height: 200px;
 }
 
 .animate-box div.caffle {
-    height: 200px;
     font-family: Oswald;  
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+
+.default .animate-box div.caffle, .shop .animate-box .caffle {
+    height: 200px;
+}
+
+.social .animate-box .caffle {
+    height: 170px;
 }
 
 span.date {
@@ -158,21 +195,227 @@ span.date {
                 
                   @media screen and (max-width: 992px) {
                     
-                           #fh5co-board .item {
-    width: 46%;
-}
+                   
 
 .navbar, #filter-bar {
     display: none;
 }
                 }     
                 
-                @media screen and (max-width: 640px) {
-                    
-                           #fh5co-board .item {
-    width: 95%;
+              
+          
+h1.element_title {
+    font-family: Oswald;
+    font-variant: petite-caps;  
+}
+         
+.divide {
+    position: relative;
+    overflow: hidden;
+    margin: 35px 0 25px 0;
+    color: #ef5353 !important;
+    width: 100%;
 }
 
-                }    
-                
-         
+.divide:after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    top: 11px;
+    left: 35px;
+    height: 0;
+    border-top: 2px solid #ef5353;
+}
+
+
+.divide i {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    font-size: 18px!important;
+    text-align: center;
+    
+}
+           
+h4.teaser {
+    font-family: Oswald;
+    line-height: 1.65em;
+    font-weight: 300;
+}
+
+h3.categories {
+    font-family: Oswald;
+    font-variant: petite-caps;
+}
+
+button.btn-number {
+    padding: 6px 10px;
+    background: #e5e5e5;
+    border: none;
+    margin-bottom: 0;
+}
+
+.input-number {
+    height: 32px;
+    text-align: center;
+}
+
+.shop .btn-primary {
+    height: 32px;
+}
+
+h3.price {
+   font-family: Oswald;  
+   color: #ef5353;
+}
+
+.item .input-number {
+    background: #fff;
+    border-color: #fff;
+}
+
+.add_to_cart  {
+    height: 32px;
+    position: relative;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart:before {
+    content:attr(data-totalitems);
+    font-size:12px;
+    font-weight:600;
+    position:absolute;
+    top:-12px;
+    right:-12px;
+    background:#ef5353;
+    line-height:24px;
+    padding:0 5px;
+    height:24px;
+    min-width:24px;
+    color:white;
+    text-align:center;
+    border-radius:24px;
+  }
+  
+  .cart.shake {
+    animation: shakeCart .4s ease-in-out forwards;
+  }
+  
+  @keyframes shakeCart {
+  25% {
+    transform:translateX(6px)
+  }
+  50% {
+    transform:translateX(-4px);
+  }
+  75% {
+    transform:translateX(2px);
+  }
+  100% {
+    transform:translateX(0);
+  }
+}
+
+#to-cart {
+    font-size:12px;
+    font-weight:600;
+    position:fixed;
+    z-index: 99999999999999;
+    margin-left: 18px;
+    margin-top: 5px;
+    background:#ef5353;
+    line-height:24px;
+    padding:0 5px;
+    height:24px;
+    min-width:24px;
+    color:white;
+    text-align:center;
+    border-radius:24px;
+    transition: all 0.5s;
+    display: none;
+}
+
+.product_title {
+    font-family: Oswald;
+    font-weight: 400;
+    font-variant: petite-caps;
+}
+
+.subtitle {
+    font-family: Oswald;
+    font-weight: 400;
+    font-variant: petite-caps; 
+    color: #fff;
+    margin: 0 0 30px 0;
+}
+
+.cart_view .img-thumbnail {
+    max-width: 150px;
+}
+
+.cart_view .price {
+    font-size: 20px;
+    font-family: Oswald;
+    font-weight: 500;
+    color: #ef5353;
+}
+
+.qty {
+    font-family: Oswald;
+    font-size: 15px;
+    font-variant: petite-caps; 
+    line-height: 20px;
+    margin-right: 10px;
+    color: #333;
+}
+
+#checkout_button {
+  letter-spacing: normal !important;
+  font-size: 15px;
+  font-family: Oswald;
+  line-height: 15px;
+  margin: 0;
+  width: 100%;
+}
+
+#subtotal, #tax, #total {
+    font-family: Oswald;
+}
+
+#register_button {
+  letter-spacing: normal !important;
+  font-size: 15px;
+  font-family: Oswald;
+  line-height: 15px;
+  width: 100%;
+}
+
+.form-check-label {
+    font-weight: normal !important;
+}
+
+.checkout_view .img-thumbnail {
+    max-width: 100px;
+}
+
+.checkout_view .price {
+    font-size: 20px;
+    font-family: Oswald;
+    font-weight: 500;
+    color: #ef5353;
+    text-align: right;
+}
+
+#process_button {
+  letter-spacing: normal !important;
+  font-size: 15px;
+  font-family: Oswald;
+  line-height: 15px;
+  margin: 0;
+  width: 100%;
+  background: #ef5353;
+}

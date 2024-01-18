@@ -56,7 +56,7 @@
                                             @foreach ($elements as $element)
                                                 <tr>
                                                     <td>{{ $element->element_id }}</td>
-                                                    <td>{{ $element->title }}</td>
+                                                    <td style="white-space: break-spaces;">{{ $element->title }}</td>
                                                     <td>{{ $element->image}}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->updated_at) }}</td>

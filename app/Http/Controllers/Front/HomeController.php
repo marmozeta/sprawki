@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Element;
 use App\Models\Tag;
 use App\Models\Menu;
+use App\Models\Category;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeController extends Controller
 {
@@ -19,6 +21,29 @@ class HomeController extends Controller
         $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'tag');
         $tags_region = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'region');
         $tags_tags = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'space');
-        return view('front.home', array('menu' => $menu, 'elements' => $elements, 'tags_tags' => $tags_tags, 'tags_region' => $tags_region, 'tags_space' => $tags_space));
+        
+        $view = ($menu->is_social) ? 'social' : 'home'; 
+        return view('front.'.$view, array('menu' => $menu, 'elements' => $elements, 'tags_tags' => $tags_tags, 'tags_region' => $tags_region, 'tags_space' => $tags_space));
+    }
+    
+    public function show($slug, $element_id, $element_slug)
+    {
+        $menu = Menu::where('slug', $slug)->first();
+        
+        $elementModel = new Element;
+        $element = $elementModel->getElement($element_id);
+        
+        $catModel = new Category;
+        $product_categories = $catModel->getElementCategories($element_id);
+        
+        $tagModel = new Tag;
+        $product_tags = $tagModel->getElementTags($element_id);
+        
+        return view('front.element', array(
+                                        'menu' => $menu, 
+                                        'element' => $element, 
+                                        'product_categories' => $product_categories, 
+                                        'product_tags' => $product_tags
+                                    ));
     }
 }

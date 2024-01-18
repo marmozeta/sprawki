@@ -36,11 +36,13 @@ class Element extends Model
     
     public function getElement($element_id) {
         return DB::table('elements')
-            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories'))
+            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send'))
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
             ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
             ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
+            ->leftJoin('element_media_uploads', 'elements.element_id', '=', 'element_media_uploads.element_element_id')
+            ->leftJoin('media_uploads', 'element_media_uploads.media_upload_id', '=', 'media_uploads.id')
             ->where('elements.element_id', $element_id)
             ->whereNull('elements.deleted_at')
             ->first();

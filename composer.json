@@ -9,13 +9,17 @@
         "encore/laravel-admin": "^1.8",
         "guzzlehttp/guzzle": "^7.2",
         "iamtong/laravel-admin-grid-sortable": "^1.0",
+        "jackiedo/cart": "^3.0",
         "laravel-admin-ext/grid-sortable": "^1.1",
         "laravel/framework": "^10.32.1",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
+        "mindscms/laravelshoppingcart": "^2.1",
         "symfony/http-client": "^6.4",
-        "symfony/mailgun-mailer": "^6.4"
+        "symfony/mailgun-mailer": "^6.4",
+        "symfony/postmark-mailer": "^6.4",
+        "tpay-com/tpay-openapi-php": "^1.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

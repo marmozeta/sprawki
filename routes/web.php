@@ -15,12 +15,13 @@ use App\Admin\Controllers\MenuController;
 */
 
 Route::namespace('App\Http\Controllers\Admin')->group(function () { 
+    
     Route::get('/admin/login', 'LoginController@show')->name('admin.login');
     Route::post('/admin/login', 'LoginController@login')->name('admin.login.perform');
-    
-    Route::get('/admin/logout', 'LoginController@logout')->name('logout.perform');  
+    Route::get('/admin/logout', 'LoginController@logout')->name('admin.logout.perform');  
     
     Route::get('admin', 'DashboardController@index')->name('admin.dashboard')->middleware('auth'); 
+    
     //menu
     Route::get('admin/menu', 'MenuController@index')->name('admin.menu')->middleware('auth'); 
     Route::get('admin/menu/create', 'MenuController@create')->name('admin.forms.menu')->middleware('auth'); 
@@ -28,6 +29,14 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/menu/update/{id}', 'MenuController@update')->name('admin.forms.menu.update')->middleware('auth'); 
     Route::get('admin/menu/edit/{id}', 'MenuController@edit')->name('admin.forms.menu.edit')->middleware('auth'); 
     Route::get('admin/menu/remove/{id}', 'MenuController@remove')->name('admin.forms.menu.remove')->middleware('auth'); 
+    
+        
+    //biblioteka mediów
+    Route::get('admin/media', 'MediaUploadController@index')->name('admin.media')->middleware('auth');
+    Route::get('admin/media/create','MediaUploadController@fileCreate')->name('admin.forms.media')->middleware('auth');
+    Route::post('admin/media/store','MediaUploadController@fileStore')->name('admin.forms.media.store')->middleware('auth');;
+    Route::post('admin/media/remove','MediaUploadController@fileDestroy')->name('admin.forms.media.remove')->middleware('auth');;
+    Route::any('admin/media/fileslist','MediaUploadController@files_list')->name('admin.media.fileslist')->middleware('auth');
     
     //tagi
     Route::get('admin/tag', 'TagController@index')->name('admin.tag')->middleware('auth'); 
@@ -85,11 +94,25 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('auth'); 
     Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('auth'); 
     Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('auth'); 
-    
-    
 });
 
 Route::namespace('App\Http\Controllers\Front')->group(function () { 
+    Route::get('/login', 'LoginController@show')->name('login');
+    Route::post('/login', 'LoginController@login')->name('login.perform');
+    Route::get('/logout', 'LoginController@logout')->name('logout.perform');  
+    
     Route::get('/', function () { return redirect()->to('/sprawki');});
-    Route::get('/{slug}', 'HomeController@index')->name('home');
+    Route::get('sklep/koszyk', 'CartController@cart')->name('front.cart');
+    Route::get('sklep/podsumowanie', 'CartController@checkout')->name('front.checkout');
+    Route::get('sklep/zamowienie/podziekowanie/{order_id}', 'CartController@thank_you')->name('front.thank_you');
+    Route::get('sklep/metody', 'TpayController@get_link')->name('tpay.form');
+    Route::get('{slug}', 'HomeController@index')->name('front.home');
+    Route::get('{slug}/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
+    
+    Route::post('cart/add_to_cart', 'CartController@add_to_cart')->name('cart.add_to_cart');
+    Route::post('cart/update_quantity', 'CartController@update_quantity')->name('cart.update_quantity');
+    Route::post('cart/remove_product', 'CartController@remove_product')->name('cart.remove_product');
+
+    Route::post('cart/process', 'CartController@process')->name('front.process');
+    Route::get('cart/transaction_receive/{order_id}/{tr_id}/{status}/{error}', 'CartController@transaction_receive')->name('front.transaction_receive');
 });

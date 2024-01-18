@@ -182,3 +182,151 @@ function getComboFilter(filters) {
   var comboFilter = comboFilters.join(", ");
   return comboFilter;
 }
+
+
+//plugin bootstrap minus and plus
+//http://jsfiddle.net/laelitenetwork/puJ6G/
+$('.btn-number').click(function(e){
+    e.preventDefault();
+    
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $(this).parent().parent().find("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+            
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            } 
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+$('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+$('.input-number').change(function() {
+    
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    
+    
+});
+$(".input-number").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) || 
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    
+    
+$('.add_to_cart').on('click', function(e) { 
+    var button = $(this);
+    $('#to-cart').css('top', button.offset().top).css('left', button.offset().left);
+    $('#to-cart').show();
+    var quantity = $(this).parent().parent().find('input[name="quantity"]').val();
+    $.ajax({
+    type: "POST",
+    url: 'cart/add_to_cart',
+    data: { element_id: $(this).attr('data-element-id'), 
+        quantity: quantity,
+        _token: $('input[name="_token"]').val()
+        }
+    }).done(function( msg ) {
+        var sum = parseInt($('#cart').attr('data-totalitems'))+parseInt(quantity);
+       $('#to-cart').css('top', $('#cart').offset().top).css('left', $('#cart').offset().left);
+       
+       $('#cart').attr('data-totalitems', sum).addClass('shake');
+        setTimeout(function(){
+            $('#cart').removeClass('shake');
+             $('#to-cart').hide();
+          },500);
+    });
+    return false;
+});
+
+$('.update_quantity').on('click', function(e) { 
+    var button = $(this);
+    var quantity = button.parent().find('input[name="quantity"]').val();
+    $.ajax({
+    type: "POST",
+    url: '/cart/update_quantity',
+    data: { row_id: button.attr('data-row-id'), 
+        quantity: quantity,
+        _token: $('input[name="_token"]').val()
+        }
+    }).done(function( msg ) {
+       $('#cart').attr('data-totalitems', msg[0]);
+       if(quantity > 0) {
+        button.parent().parent().find('.price').html(msg[1]+' zł');
+       }
+       else {
+           button.parent().parent().remove();
+       }
+       $('#subtotal').html(msg[2]+' zł');
+       $('#tax').html(msg[3]+' zł');
+       $('#total').html(msg[4]+' zł');
+    });
+    return false;
+});
+
+$('.remove_product').on('click', function(e) { 
+    var button = $(this);
+    $.ajax({
+    type: "POST",
+    url: '/cart/remove_product',
+    data: { row_id: button.attr('data-row-id'),
+        _token: $('input[name="_token"]').val()
+        }
+    }).done(function( msg ) {
+       button.parent().parent().remove();
+       $('#cart').attr('data-totalitems', msg[0]);
+       $('#subtotal').html(msg[2]+' zł');
+       $('#tax').html(msg[3]+' zł');
+       $('#total').html(msg[4]+' zł');
+    });
+    return false;
+});
+
+ $(function () {
+        $('[data-bs-toggle="modal"]').modal()
+    })

@@ -13,6 +13,8 @@ use App\Models\Category;
 use App\Models\ElementCategory;
 use App\Models\MenuAttribute;
 use Illuminate\Support\Str;
+use App\Models\ElementMediaUpload;
+use App\Models\MediaUpload;
  
 class ElementController extends Controller
 {
@@ -53,7 +55,8 @@ class ElementController extends Controller
         
         $element = new Element;
         $element->title = $request->title;
-        $element->slug = Str::slug($request->name, "-");
+        $element->slug = Str::slug($request->title, "-");
+        $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->is_new = (int)$request->is_new;
@@ -67,6 +70,7 @@ class ElementController extends Controller
         $element->discount = (float)$request->discount;
         $element->in_sale = (int)$request->in_sale;
         $element->publish_date = $request->publish_date;
+        $element->youtube = $request->youtube;
         $element->save();
         $element_id = $element->element_id;
         
@@ -102,6 +106,20 @@ class ElementController extends Controller
                }
            }
        }
+       
+       //usuwamy i dodajemy pliki medialne
+       ElementMediaUpload::where('element_element_id', $id)->delete();
+       
+       if(!empty($request->files_to_send)) {
+           $files_to_send = explode(',', $request->files_to_send);
+           foreach($files_to_send as $media_filename) {
+                $media = MediaUpload::where('filename', $media_filename)->first();
+                $media_add = new ElementMediaUpload;  
+                $media_add->element_element_id = $id;
+                $media_add->media_upload_id = $media->id;
+                $media_add->save();     
+           }
+       }
 
        return redirect('/admin/element/'.$slug);
     }
@@ -112,7 +130,8 @@ class ElementController extends Controller
         
         $element = Element::find($id);
         $element->title = $request->title;
-        $element->slug = Str::slug($request->name, "-");
+        $element->slug = Str::slug($request->title, "-");
+        $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->is_new = (int)$request->is_new;
@@ -126,6 +145,7 @@ class ElementController extends Controller
         $element->discount = (float)$request->discount;
         $element->in_sale = (int)$request->in_sale;
         $element->publish_date = $request->publish_date;
+        $element->youtube = $request->youtube;
         $element->save();
         
         //najpierw usuwamy dotychczasowe tagi
@@ -155,7 +175,7 @@ class ElementController extends Controller
        }
        
        //najpierw usuwamy dotychczasowe kategorie
-        ElementCategory::where('element_element_id', $id)->delete();
+       ElementCategory::where('element_element_id', $id)->delete();
        
        if(!empty($request->product_categories)) {
            foreach($request->product_categories as $category=>$state) {
@@ -165,6 +185,20 @@ class ElementController extends Controller
                     $cat_add->category_cat_id = $category;
                     $cat_add->save();
                }
+           }
+       }
+       
+       //usuwamy i dodajemy pliki medialne
+       ElementMediaUpload::where('element_element_id', $id)->delete();
+       
+       if(!empty($request->files_to_send)) {
+           $files_to_send = explode(',', $request->files_to_send);
+           foreach($files_to_send as $media_filename) {
+                $media = MediaUpload::where('filename', $media_filename)->first();
+                $media_add = new ElementMediaUpload;  
+                $media_add->element_element_id = $id;
+                $media_add->media_upload_id = $media->id;
+                $media_add->save();     
            }
        }
 

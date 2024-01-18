@@ -20,4 +20,12 @@ class Category extends Model
             ->whereNull('menus.deleted_at')
             ->get();
     }
+    
+    public function getElementCategories($element_id) {
+        return DB::table('categories')
+            ->join('element_categories', 'categories.cat_id', '=', 'element_categories.category_cat_id')
+            ->where('element_categories.element_element_id', $element_id)
+            ->where('categories.active', 1)
+            ->get();
+    }
 }
