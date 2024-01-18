@@ -108,7 +108,7 @@ class ElementController extends Controller
        }
        
        //usuwamy i dodajemy pliki medialne
-       ElementMediaUpload::where('element_element_id', $id)->delete();
+       ElementMediaUpload::where('element_element_id', $element_id)->delete();
        
        if(!empty($request->files_to_send)) {
            $files_to_send = explode(',', $request->files_to_send);
