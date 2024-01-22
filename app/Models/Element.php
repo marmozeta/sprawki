@@ -16,6 +16,7 @@ class Element extends Model
     
     public function getBySlug($slug) {
         return DB::table('elements')
+            ->select('elements.*')    
             ->join('menus', 'elements.menu_id', '=', 'menus.menu_id')
             ->where('menus.slug', $slug)
             ->whereNull('elements.deleted_at')

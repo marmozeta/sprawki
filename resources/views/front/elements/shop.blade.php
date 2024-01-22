@@ -24,7 +24,7 @@
                 </h5> 
             @endif
             <div class="divide"><i class="fa-solid fa-store"></i></div>
-            <h4 class="teaser text-justify"> Aenean fermentum arcu ut consequat aliquam. Sed sagittis sit amet ligula vel posuere. Proin ligula tellus, ultrices vel ex nec, semper lacinia metus. Sed ligula nisi, gravida eu turpis quis, porta convallis neque. Aenean ac orci id metus fermentum congue. </h4>
+            <h4 class="teaser text-justify">{{ $element->teaser }}</h4>
             <h3 class="price">Cena: {{ number_format($element->price, 2, ',', ' ') }} zł</h3>
             <div class="row mt-5">
             <div class="col-4" style="margin-left: 12px;">
@@ -34,7 +34,7 @@
                   <span class="glyphicon glyphicon-minus"></span>
               </button>
           </span>
-          <input type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+          <input type="text" name="quantity" class="form-control input-number" value="1" min="1" max="99999">
           <span class="input-group-btn">
               <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
                   <span class="glyphicon glyphicon-plus"></span>
@@ -42,7 +42,7 @@
           </span>
             </div></div>
             <div class="col-6">
-            <button class="btn btn-primary btn-sm filter-button text-bold">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
+            <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
             </div></div></div>
         
     </div>

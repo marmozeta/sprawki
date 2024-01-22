@@ -59,8 +59,8 @@ class ElementController extends Controller
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
-        $element->is_new = (int)$request->is_new;
-        $element->is_hot = (int)$request->is_hot;
+        $element->is_new = ($request->is_new == 'on');
+        $element->is_hot = ($request->is_hot == 'on');
         $element->user_id = 1;
         $element->menu_id = $menu->menu_id;
         $element->author = $request->author;
@@ -68,7 +68,7 @@ class ElementController extends Controller
         $element->vat = (float)$request->vat;
         $element->stock_quantity = (int)$request->stock_quantity;
         $element->discount = (float)$request->discount;
-        $element->in_sale = (int)$request->in_sale;
+        $element->in_sale = ($request->in_sale == 'on');
         $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();
@@ -115,7 +115,7 @@ class ElementController extends Controller
            foreach($files_to_send as $media_filename) {
                 $media = MediaUpload::where('filename', $media_filename)->first();
                 $media_add = new ElementMediaUpload;  
-                $media_add->element_element_id = $id;
+                $media_add->element_element_id = $element_id;
                 $media_add->media_upload_id = $media->id;
                 $media_add->save();     
            }
@@ -134,8 +134,8 @@ class ElementController extends Controller
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
-        $element->is_new = (int)$request->is_new;
-        $element->is_hot = (int)$request->is_hot;
+        $element->is_new = ($request->is_new == 'on');
+        $element->is_hot = ($request->is_hot == 'on');
         $element->user_id = 1;
         $element->menu_id = $menu->menu_id;
         $element->author = $request->author;
@@ -143,7 +143,7 @@ class ElementController extends Controller
         $element->vat = (float)$request->vat;
         $element->stock_quantity = (int)$request->stock_quantity;
         $element->discount = (float)$request->discount;
-        $element->in_sale = (int)$request->in_sale;
+        $element->in_sale = ($request->in_sale == 'on');
         $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();

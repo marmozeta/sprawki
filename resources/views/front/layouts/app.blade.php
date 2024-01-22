@@ -65,7 +65,7 @@
 
 	<!-- Main JS -->
 	<script src="{{asset('js/main.js')}}"></script>
-	<script src="{{asset('js/custom.js')}}"></script>
+	<script src="{{asset('js/custom.js')}}?v=20240119"></script>
         @yield('scripts')
     </body>
 </html>

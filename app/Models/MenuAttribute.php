@@ -41,6 +41,7 @@ class MenuAttribute extends Model
             ->join('menus', 'menus.menu_id', '=', 'menu_attributes.menu_id')
             ->where('menus.slug', $slug)
             ->whereNull('menus.deleted_at')
+            ->orderBy('attributes.ordinal_number', 'ASC')
             ->get();
     }
 }

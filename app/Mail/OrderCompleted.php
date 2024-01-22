@@ -57,7 +57,7 @@ class OrderCompleted extends Mailable
         
         if(!empty($media)) {
             foreach($media as $med) {
-                $tab[] = Attachment::fromPath(public_path('images').'/'.$med->filename);
+                $tab[] = Attachment::fromPath(public_path('media').'/'.$med->filename);
             }
         }
         

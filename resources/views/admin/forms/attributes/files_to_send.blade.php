@@ -2,7 +2,7 @@
     <label class="form-label">Pliki do wysłania @if($attr->required) * @endif</label>
     <div>
         <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#filesModal">Wybierz pliki z biblioteki</a></td>  
-        <input type="hidden" name="files_to_send" value="{{ $element->files_to_send }}" />
+        <input type="hidden" name="files_to_send" value="{{ old('files_to_send', $element->files_to_send ?? '') }}" />
         <br/><br/>
         @if(!empty($element->files_to_send))
             Załączone pliki:<br/>

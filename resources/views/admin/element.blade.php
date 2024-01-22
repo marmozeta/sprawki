@@ -10,7 +10,7 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html" class="text-muted">Tablica</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}" class="text-muted">Tablica</a></li>
                                     <li class="breadcrumb-item text-muted active" aria-current="page">Elementy</li>
                                 </ol>
                             </nav>
@@ -57,7 +57,11 @@
                                                 <tr>
                                                     <td>{{ $element->element_id }}</td>
                                                     <td style="white-space: break-spaces;">{{ $element->title }}</td>
-                                                    <td>{{ $element->image}}</td>
+                                                    <td>
+                                                        @if(!empty($element->image))
+                                                            <img src="{{ asset('images/elements') }}/{{ $element->image }}" width="150" class="img-thumbnail" />
+                                                        @endif
+                                                    </td>
                                                     <td>{{ Carbon\Carbon::parse($element->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->updated_at) }}</td>
                                                     <td class="text-center"><a href="{{ route('admin.forms.element.edit', ['slug' => $menu->slug, 'id' => $element->element_id]) }}"><i class="fa fa-edit"></i></a></td>

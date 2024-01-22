@@ -94,25 +94,26 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('auth'); 
     Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('auth'); 
     Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('auth'); 
+    
 });
 
 Route::namespace('App\Http\Controllers\Front')->group(function () { 
     Route::get('/login', 'LoginController@show')->name('login');
     Route::post('/login', 'LoginController@login')->name('login.perform');
     Route::get('/logout', 'LoginController@logout')->name('logout.perform');  
-    
+
     Route::get('/', function () { return redirect()->to('/sprawki');});
     Route::get('sklep/koszyk', 'CartController@cart')->name('front.cart');
     Route::get('sklep/podsumowanie', 'CartController@checkout')->name('front.checkout');
     Route::get('sklep/zamowienie/podziekowanie/{order_id}', 'CartController@thank_you')->name('front.thank_you');
     Route::get('sklep/metody', 'TpayController@get_link')->name('tpay.form');
-    Route::get('{slug}', 'HomeController@index')->name('front.home');
-    Route::get('{slug}/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
-    
     Route::post('cart/add_to_cart', 'CartController@add_to_cart')->name('cart.add_to_cart');
     Route::post('cart/update_quantity', 'CartController@update_quantity')->name('cart.update_quantity');
     Route::post('cart/remove_product', 'CartController@remove_product')->name('cart.remove_product');
-
     Route::post('cart/process', 'CartController@process')->name('front.process');
     Route::get('cart/transaction_receive/{order_id}/{tr_id}/{status}/{error}', 'CartController@transaction_receive')->name('front.transaction_receive');
-});
+  
+    Route::get('{slug}', 'HomeController@index')->name('front.home');
+    Route::get('{slug}/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
+    
+    });

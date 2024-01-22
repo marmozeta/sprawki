@@ -230,13 +230,13 @@ $('.input-number').change(function() {
     if(valueCurrent >= minValue) {
         $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
     } else {
-        alert('Sorry, the minimum value was reached');
+        alert('Ilość nie może być mniejsza niż ilość minimalna ('+minValue+')');
         $(this).val($(this).data('oldValue'));
     }
     if(valueCurrent <= maxValue) {
         $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
     } else {
-        alert('Sorry, the maximum value was reached');
+        alert('Ilość nie może być większa niż ilość maksymalna ('+maxValue+')');
         $(this).val($(this).data('oldValue'));
     }
     
@@ -266,7 +266,7 @@ $('.add_to_cart').on('click', function(e) {
     var quantity = $(this).parent().parent().find('input[name="quantity"]').val();
     $.ajax({
     type: "POST",
-    url: 'cart/add_to_cart',
+    url: '/cart/add_to_cart',
     data: { element_id: $(this).attr('data-element-id'), 
         quantity: quantity,
         _token: $('input[name="_token"]').val()

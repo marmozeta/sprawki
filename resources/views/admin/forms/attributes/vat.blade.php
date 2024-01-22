@@ -1,4 +1,8 @@
 <div class="form-group mb-3 col-6">
     <label class="form-label">Podatek VAT (%) @if($attr->required) * @endif</label>
-    <input type="number" class="form-control" name="vat" value="{{ old('vat', $element->vat ?? '') }}" placeholder="" @if($attr->required) required @endif/>
+    <select class="form-control" name="vat" @if($attr->required) required @endif>
+        <option value="23" {{ (old('vat', $element->vat ?? '')==23)?'selected':'' }}>23%</option>
+        <option value="8" {{ (old('vat', $element->vat ?? '')==8)?'selected':'' }}>8%</option>
+        <option value="0" {{ (old('vat', $element->vat ?? '')==0)?'selected':'' }}>0%</option>
+    </select>
 </div>
