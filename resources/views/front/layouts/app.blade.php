@@ -31,7 +31,8 @@
 	<link rel="stylesheet" href="{{asset('css/icomoon.css')}}">
 	<link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
 	<link rel="stylesheet" href="{{asset('css/salvattore.css')}}">
-	<link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')}}">   
+        <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240118">
 	<script src="{{asset('js/modernizr-2.6.2.min.js')}}"></script>
@@ -58,10 +59,13 @@
 	<script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
 	<!-- Magnific Popup -->
 	<script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+	<script src="{{asset('js/bootstrap-autocomplete.min.js')}}"></script>
 	<!-- Salvattore -->
 	<script src="{{asset('js/salvattore.min.js')}}"></script>
         
 	<script src="https://unpkg.com/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
+        <script src="https://unpkg.com/@yaireo/tagify"></script>
+        <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
 
 	<!-- Main JS -->
 	<script src="{{asset('js/main.js')}}"></script>

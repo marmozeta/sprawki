@@ -1,8 +1,7 @@
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative">
-            <div class="auth-box row">
+            <div class="auth-box px-5">
                 <div class="col-12 bg-white">
-                    <div class="p-3">
-                        <h2 class="mt-3 text-center text-dark">Logowanie</h2>
+                    <div class="p-0">
                          <form method="POST" action="{{ route('login.perform') }}" class="mt-4">
                             @csrf
                             <div class="row">

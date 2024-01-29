@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "mindscms/laravelshoppingcart": "^2.1",
+        "musonza/chat": "^6.2",
         "symfony/http-client": "^6.4",
         "symfony/mailgun-mailer": "^6.4",
         "symfony/postmark-mailer": "^6.4",

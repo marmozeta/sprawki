@@ -102,7 +102,6 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('/login', 'LoginController@login')->name('login.perform');
     Route::get('/logout', 'LoginController@logout')->name('logout.perform');  
 
-    Route::get('/', function () { return redirect()->to('/sprawki');});
     Route::get('sklep/koszyk', 'CartController@cart')->name('front.cart');
     Route::get('sklep/podsumowanie', 'CartController@checkout')->name('front.checkout');
     Route::get('sklep/zamowienie/podziekowanie/{order_id}', 'CartController@thank_you')->name('front.thank_you');
@@ -112,7 +111,17 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('cart/remove_product', 'CartController@remove_product')->name('cart.remove_product');
     Route::post('cart/process', 'CartController@process')->name('front.process');
     Route::get('cart/transaction_receive/{order_id}/{tr_id}/{status}/{error}', 'CartController@transaction_receive')->name('front.transaction_receive');
-  
+      
+    Route::post('social/post/save', 'SocialController@save_post')->name('social.post.save');
+    Route::post('social/media/store','SocialController@fileStore')->name('social.media.store')->middleware('auth');
+    Route::post('social/media/remove','SocialController@fileDestroy')->name('social.media.remove')->middleware('auth');
+    Route::post('social/comment/save', 'SocialController@save_comment')->name('social.comment.save');
+    Route::post('social/like/save', 'SocialController@save_like')->name('social.like.save');
+    
+    Route::get('wiadomosci', 'ChatController@index')->name('front.chat');
+    Route::post('chat/participants/get', 'ChatController@get_participants')->name('front.participants.get');
+    
+    Route::get('/', function () { return redirect()->to('/sprawki');});
     Route::get('{slug}', 'HomeController@index')->name('front.home');
     Route::get('{slug}/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
     

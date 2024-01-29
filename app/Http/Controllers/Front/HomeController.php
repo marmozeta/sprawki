@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\Menu;
 use App\Models\Category;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,7 @@ class HomeController extends Controller
     {
         $menu = Menu::where('slug', $slug)->first();
         $elementModel = new Element;
-        $elements = $elementModel->getByMenuId($menu->menu_id);
+        $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0);
         $tagsModel = new Tag;
         $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'tag');
         $tags_region = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'region');

@@ -40,7 +40,11 @@
 					<!--<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn" style="background: #cc1d23; padding: 2px 5px; border-radius: 2px;">Menu <i class="fa fa-bars"></i></a>-->
 					
                                         <a href="#" class="fh5co-menu-btn" style="margin-right: 14px;"><i class="fa fa-search"></i></a>
-					<a href="#" class="fh5co-menu-btn" style="margin-right: 7px;"><i class="fa fa-user"></i></a>
+					@if(Auth::check())
+                                            <a href="{{ route('admin.dashboard') }}" class="fh5co-menu-btn" style="margin-right: 7px;"><i class="fa fa-user"></i></a>
+                                        @else
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="fh5co-menu-btn" style="margin-right: 7px;"><i class="fa fa-user"></i></a>
+                                        @endif
                                         <a href="{{ route('front.cart') }}" id="cart" data-totalitems="{{ Cart::count() }}" class="cart fh5co-menu-btn" style="margin-right: 7px;"><i class="fa fa-shopping-cart"></i></a> 
                                         <div id="to-cart"><i class="fa-solid fa-box"></i></div>   
                             </div>

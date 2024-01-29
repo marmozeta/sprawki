@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Cmgmyr\Messenger\Traits\Messagable;
+use Illuminate\Database\Eloquent\Model;
+use Musonza\Chat\Traits\Messageable;
 
 class User extends Authenticatable
 {
     
-    use Messagable;
+    use Messageable;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
