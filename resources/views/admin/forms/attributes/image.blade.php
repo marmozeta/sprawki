@@ -129,7 +129,7 @@ $(document).on('click', 'input[name="plik"]', function() {
 				options.classList.remove('d-none');
 				// init cropper
 				cropper = new Cropper(img);
-                                cropper.setAspectRatio(1.5);
+                                cropper.setAspectRatio(1.777777);
                                 $('.left-box').removeClass('d-none');
 });
 
@@ -138,8 +138,8 @@ save.addEventListener('click',(e)=>{
   e.preventDefault();
   // get result to data uri
   let imgSrc = cropper.getCroppedCanvas({
-		width: 1800,
-                height: 1200
+		width: 1280,
+                height: 720
 	}).toBlob((blob) => {
         const formData = new FormData();
 

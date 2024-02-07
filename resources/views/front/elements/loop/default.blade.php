@@ -6,7 +6,7 @@
                                     @if(!empty($element->image))
                                     <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}">
                                     @else
-                                    <div class="caffle" style="height: 200px;">
+                                    <div class="caffle" style="height: 158px;">
                                      
                                         {{ substr(strip_tags($element->description), 0, 200) }}@if(strlen($element->description) > 200) ... @endif</div>
                                     @endif

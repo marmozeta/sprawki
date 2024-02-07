@@ -58,6 +58,7 @@
     text-transform: uppercase;
     padding: 0 5px 15px 15px;
     line-height: 1.2em;
+    height: 115px;
 }
 
 #fh5co-board .item .fh5co-desc .price {
@@ -136,7 +137,7 @@
 }
 
 .default .animate-box img, .shop .animate-box img {
-    height: 200px;
+    height: 158px;
 }
 
 .animate-box div.caffle {
