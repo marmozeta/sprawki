@@ -27,6 +27,7 @@
             <h4 class="teaser text-justify">{{ $element->teaser }}</h4>
             <h3 class="price">Cena: {{ number_format($element->price, 2, ',', ' ') }} zł</h3>
             <div class="row mt-5">
+                @if(!$element->is_virtual)
             <div class="col-4" style="margin-left: 12px;">
             <div class="input-group">
           <span class="input-group-btn">
@@ -41,6 +42,9 @@
               </button>
           </span>
             </div></div>
+                @else
+                <input type="hidden" name="quantity" value="1" />
+                @endif
             <div class="col-6">
             <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
             </div></div></div>
