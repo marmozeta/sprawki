@@ -4,16 +4,16 @@
 	        		
                                     <div class="caffle" style="height: 158px;">
                                         @if(!empty($element->image))
-                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="40" height="30">
+                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="40" height="22.5">
                                       @endif
-                                        {{ substr(strip_tags($element->description), 0, 200) }}@if(strlen($element->description) > 200) ... @endif</div>
+                                        {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif</div>
                                   
                                   
         		</a>
         		<div class="fh5co-desc">
                              <div class="row d-flex px-4 mt-1"> 
                                  <div class="col-8 title">
-                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 50) }}@if(strlen($element->title) > 50) ... @endif</a>
+                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 40) }}@if(strlen($element->title) > 40) ... @endif</a>
                                  </div>
                                  <div class="col-4 price">{{ number_format($element->price*(1+$element->vat/100), 2, ',', ' ') }} zł</div>
                              </div>
