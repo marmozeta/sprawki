@@ -69,6 +69,7 @@ class ElementController extends Controller
         $element->stock_quantity = (int)$request->stock_quantity;
         $element->discount = (float)$request->discount;
         $element->in_sale = ($request->in_sale == 'on');
+        $element->is_virtual = ($request->is_virtual == 'on');
         $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();
@@ -144,6 +145,7 @@ class ElementController extends Controller
         $element->stock_quantity = (int)$request->stock_quantity;
         $element->discount = (float)$request->discount;
         $element->in_sale = ($request->in_sale == 'on');
+        $element->is_virtual = ($request->is_virtual == 'on');
         $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();

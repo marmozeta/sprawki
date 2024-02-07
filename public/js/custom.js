@@ -259,7 +259,7 @@ $(".input-number").keydown(function (e) {
     });
     
     
-$('.add_to_cart').on('click', function(e) { 
+$('.add_to_cart').on('click', function(e) {
     var button = $(this);
     $('#to-cart').css('top', button.offset().top).css('left', button.offset().left);
     $('#to-cart').show();

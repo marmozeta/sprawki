@@ -22,7 +22,9 @@
                                  <div class="col-4 price">{{ number_format($element->price*(1+$element->vat/100), 2, ',', ' ') }} zł</div>
                              </div>
                                  <div class="row d-flex px-4 mt-3"> 
+                                         @if(!$element->is_virtual)
                                      <div class="col-8">
+                                     
             <div class="input-group">
           <span class="input-group-btn">
               <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quantity">
@@ -35,13 +37,23 @@
                   <span class="glyphicon glyphicon-plus"></span>
               </button>
           </span>
-            </div>   </div>
-                   <div class="col-4">
+            </div>  
+                                     </div>
+                   <div class="col-4" style="text-align: right; padding-right: 10px;">
                  <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">
                      <i class="fa-solid fa-cart-shopping"></i>
                  </button>
              
               </div>
+                                         @else
+                                         <div class="col-12">
+                 <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart w-100 mr-2" data-element-id="{{ $element->element_id }}">
+                     <i class="fa-solid fa-cart-shopping"></i>
+                 </button>
+             
+                                     <input type="hidden" name="quantity" value="1" />
+                                         </div>
+                                     @endif
                                
                             </div>
                         
