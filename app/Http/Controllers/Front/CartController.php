@@ -16,7 +16,25 @@ class CartController extends Controller
 {
         
     public function cart() {
-        return view('front.cart');
+        $tax = 0;
+        
+        foreach(Cart::content() as $row) {
+            $product_id = $row->id;
+            $quantity = $row->qty;
+            $product = Element::find($product_id);
+            $price = $row->price;
+            $vat = $product->vat;
+            $price_from_db = $product->price;
+            $row_id = $row->rowId;
+            
+            if($price <> $price_from_db) {
+                Cart::update((string)$row_id, ['price' => $price_from_db]);
+            }
+            
+            $tax += round(($price_from_db/(100+$vat)*$vat)*$quantity, 2);
+        }
+
+        return view('front.cart', array('tax' => $tax));
     }
     
     public function checkout() {

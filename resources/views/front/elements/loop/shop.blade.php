@@ -15,7 +15,7 @@
                                  <div class="col-8 title">
                                      <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 40) }}@if(strlen($element->title) > 40) ... @endif</a>
                                  </div>
-                                 <div class="col-4 price">{{ number_format($element->price*(1+$element->vat/100), 2, ',', ' ') }} zł</div>
+                                 <div class="col-4 price">{{ number_format($element->price, 2, ',', ' ') }} zł</div>
                              </div>
                                  <div class="row d-flex px-4 mt-1"> 
                                          @if(!$element->is_virtual)

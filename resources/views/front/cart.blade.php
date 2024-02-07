@@ -45,13 +45,9 @@
                         </div>
                     </div>
                     <div class="row d-flex">
-   			<div class="col-7">Produkty</div>
-   			<div class="col-5 text-right" id="subtotal"><?php echo Cart::subtotal(); ?> zł</div>
-                        <div class="col-12"><hr/></div>
-                    </div>
-                    <div class="row">
-   			<div class="col-7">Podatek VAT</div>
-   			<div class="col-5 text-right" id="tax"><?php echo Cart::tax(); ?> zł</div>
+   			<div class="col-6">Produkty</div>
+                        <div class="col-6 text-right" id="subtotal"><?php echo Cart::subtotal(); ?> zł<br/>
+                            <small>(w tym podatek VAT <?=$tax;?> zł)</small></div>
                         <div class="col-12"><hr/></div>
                     </div>
                     <div class="row" style="font-size: 20px; color: #333; font-weight: bold;">
