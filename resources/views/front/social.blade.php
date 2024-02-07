@@ -18,7 +18,7 @@
         <div id="fh5co-board" class="row">
             @foreach($elements as $element) 
             
-                    @include('front.elements.loop.social')  
+                    @include('front.elements.loop.default')  
                
             @endforeach
         </div>

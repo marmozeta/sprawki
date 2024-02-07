@@ -1,25 +1,26 @@
 <div class="col-3 my-3 {{ $element->tags }}">
     <div class="item default">
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
-                               
-	        		<!--<a href="{{ asset('images/elements/'.$element->image) }}" class="image-popup fh5co-board-img" title="{{ $element->title }}">-->
-                                    @if(!empty($element->image))
-                                    <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}">
-                                    @else
-                                    <div class="caffle" style="height: 158px;">
-                                     
-                                        {{ substr(strip_tags($element->description), 0, 200) }}@if(strlen($element->description) > 200) ... @endif</div>
-                                    @endif
-                                    <!--<span class="icon-corner"><i class="fa fa-video" style="color: #fff;"></i></span>-->
-                                    
-                                    
-                                    <!--</a>-->
+                              
+                                    <div class="caffle">
+                                      @if(!empty($element->image))
+                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="40" height="30">
+                                      @endif
+                                      <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at) }} @endif</span>
+                       
+                                        {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif
+                                    </div>
+                                  
         		</a>
-        		<div class="fh5co-desc">
+        		<div class="fh5co-desc d-flex flex-wrap">
                             <div class="col-12 title">
                                 <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ $element->title }}</a>
                             </div>
-                           <div class='icons mt-3'>
+                            <div class="col-8 mt-2">
+                                <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="25">&nbsp;
+                                <small style="text-transform: none;">@marmozeta</small>
+                            </div>
+                           <div class='col-4 icons justify-content-end mt-3'>
                                 @if(Auth::check())
                                     <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span></a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" data-bs-element-id="{{ $element->element_id}}" data-bs-redirect="{{ Request::path() }}" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }}</a>

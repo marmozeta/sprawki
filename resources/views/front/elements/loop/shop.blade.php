@@ -15,13 +15,13 @@
                                     <!--</a>-->
         		</a>
         		<div class="fh5co-desc">
-                             <div class="row d-flex px-4 mt-3"> 
+                             <div class="row d-flex px-4 mt-1"> 
                                  <div class="col-8 title">
                                      <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 50) }}@if(strlen($element->title) > 50) ... @endif</a>
                                  </div>
                                  <div class="col-4 price">{{ number_format($element->price*(1+$element->vat/100), 2, ',', ' ') }} zł</div>
                              </div>
-                                 <div class="row d-flex px-4 mt-3"> 
+                                 <div class="row d-flex px-4 mt-1"> 
                                          @if(!$element->is_virtual)
                                      <div class="col-8">
                                      

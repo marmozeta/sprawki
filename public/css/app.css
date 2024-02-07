@@ -58,7 +58,7 @@
     text-transform: uppercase;
     padding: 0 15px 15px 15px;
     line-height: 1.2em;
-    height: 115px;
+    height: 90px;
 }
 
 #fh5co-board .item .fh5co-desc .price {
@@ -69,7 +69,7 @@
 }
 
 #fh5co-board .item .fh5co-desc .title {
-    height: 40px;
+    height: 50px;
     align-items: center;
     display: flex;
 }
@@ -136,24 +136,22 @@
     margin-top: 1em;
 }
 
-.default .animate-box img, .shop .animate-box img {
-    height: 158px;
-}
-
 .animate-box div.caffle {
     font-family: Oswald;  
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 50px 10px 10px 10px;
 }
 
-.default .animate-box div.caffle, .shop .animate-box .caffle {
-    height: 200px;
+.animate-box .caffle {
+    height: 180px;
 }
 
-.social .animate-box .caffle {
-    height: 170px;
+.animate-box img {
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 span.date {
@@ -184,13 +182,13 @@ span.date {
                     column-gap: 15px;
                 }
                 
-                span.user-name {
+                span.publish_date {
 			position: absolute;
-			top: 15px;
-			right: 25px;
-                        font-family: Oswald;
-                        color: #000;
-                        font-size: 13px;
+  top: 5px;
+  right: 11px;
+  font-family: Oswald;
+  color: #000;
+  font-size: 12px;
 		}
               
                 
