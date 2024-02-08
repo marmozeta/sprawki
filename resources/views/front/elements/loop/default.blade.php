@@ -2,23 +2,29 @@
     <div class="item default">
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
                               
-                                    <div class="caffle">
+                                    <div class="caffle d-flex">
+                                         <div class="top_left col-8">
+                                      <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
+                                        <div class="country">@if(!empty($element->country)) {!! $element->country !!} @endif</div>
+                                        </div>
+                                        <div class="top_right col-4">
                                       @if(!empty($element->image))
-                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="40" height="22.5">
+                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="80" height="45">
                                       @endif
-                                      <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at) }} @endif</span>
-                       
+                                        </div>
+                                       
+                                        <div class="description col-12">
                                         {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif
-                                    </div>
+                                    </div>  </div>
                                   
         		</a>
         		<div class="fh5co-desc d-flex flex-wrap">
                             <div class="col-12 title">
                                 <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 40) }}@if(strlen($element->title) > 40) ... @endif</a>
                             </div>
-                            <div class="col-8 mt-2">
-                                <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="25">&nbsp;
-                                <small style="text-transform: none;">@marmozeta</small>
+                            <div class="col-8 mt-1">
+                                <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30">&nbsp;
+                                <span style="text-transform: none;">@marmozeta</span>
                             </div>
                            <div class='col-4 icons justify-content-end mt-3'>
                                 @if(Auth::check())

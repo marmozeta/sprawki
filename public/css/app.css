@@ -136,22 +136,18 @@
     margin-top: 1em;
 }
 
-.animate-box div.caffle {
+.animate-box div.caffle .description {
     font-family: Oswald;  
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 10px 10px 10px;
+    padding: 0 10px 10px 10px;
+    height: 131px;
 }
 
 .animate-box .caffle {
-    height: 180px;
-}
-
-.animate-box img {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    height: 200px;
+    flex-wrap: wrap;
 }
 
 span.date {
@@ -183,14 +179,29 @@ span.date {
                 }
                 
                 span.publish_date {
-			position: absolute;
-  top: 5px;
-  right: 11px;
+			
   font-family: Oswald;
   color: #000;
   font-size: 12px;
 		}
+                
+                 div.country {
+  font-family: Oswald;
+  color: #000;
+  font-size: 15px;
+		}
               
+                .top_left {
+                    padding: 12px;
+                    text-align: left;
+                    height: 69px;
+                }
+                
+                .top_right {
+                    padding: 12px;
+                    text-align: right;
+                    height: 69px;
+                }
                 
                   @media screen and (max-width: 992px) {
                     

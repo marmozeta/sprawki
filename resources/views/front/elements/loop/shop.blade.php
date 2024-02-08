@@ -2,22 +2,29 @@
     <div class="item shop">
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
 	        		
-                                    <div class="caffle" style="height: 158px;">
-                                        @if(!empty($element->image))
-                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="40" height="22.5">
+                                     <div class="caffle d-flex">
+                                         <div class="top_left col-8">
+                                      </div>
+                                        <div class="top_right col-4">
+                                      @if(!empty($element->image))
+                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="80" height="45">
                                       @endif
-                                        {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif</div>
+                                        </div>
+                                       
+                                        <div class="description col-12">
+                                        {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif
+                                    </div>  </div>
                                   
                                   
         		</a>
         		<div class="fh5co-desc">
-                             <div class="row d-flex px-4 mt-1"> 
+                             <div class="row d-flex px-4 mt-0"> 
                                  <div class="col-8 title">
                                      <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 40) }}@if(strlen($element->title) > 40) ... @endif</a>
                                  </div>
                                  <div class="col-4 price">{{ number_format($element->price, 2, ',', ' ') }} zł</div>
                              </div>
-                                 <div class="row d-flex px-4 mt-1"> 
+                                 <div class="row d-flex px-4 mt-0"> 
                                          @if(!$element->is_virtual)
                                      <div class="col-8">
                                      

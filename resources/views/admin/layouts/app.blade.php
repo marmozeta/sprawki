@@ -87,7 +87,8 @@
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>  
     <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
-    <script> bkLib.onDomLoaded(function() {  new nicEditor().panelInstance('desc');  });</script>
+    <script> bkLib.onDomLoaded(function() {  new nicEditor().panelInstance('desc');  });
+    bkLib.onDomLoaded(function() {  new nicEditor({buttonList: []}).panelInstance('country');  });</script>
     <!-- apps -->
     <!-- apps -->
     <script src="{{ asset('admin/js/app-style-switcher.js') }}"></script>
