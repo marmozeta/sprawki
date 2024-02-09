@@ -59,6 +59,7 @@ class ElementController extends Controller
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
+        $element->icon = $request->icon;
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
@@ -136,6 +137,7 @@ class ElementController extends Controller
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
+        $element->icon = $request->icon;
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');

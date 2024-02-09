@@ -31,7 +31,7 @@
                             <div class="col-md-9">
                                 <ul class="navbar menu">
                                     @foreach($menus_front as $menu)
-                                    <li><a class="{{ ($menu->slug==request()->path()) ? 'active' : ''}}" href="/{{ $menu->slug }}"><span>{{ substr($menu->name, 0, 1) }}</span>{{ substr($menu->name, 1) }}</a></li>
+                                    <li><a class="{{ ($menu->slug==request()->path()) ? 'active' : ''}}" href="/{{ $menu->slug }}">{{ $menu->name }}</a></li>
                                     @endforeach
                                     
                                 </ul>

@@ -7341,7 +7341,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   padding-top: 2em;
   padding-bottom: 3em;
-  background-color: #000;
+  background-color: #272727;
   margin-bottom: 2em;
 }
 @media screen and (max-width: 480px) {
@@ -7546,7 +7546,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 20px;
   float: left;
   line-height: 24px;
-  background: #000;
+  background: #272727;
   color: #fff;
 }
 #fh5co-board .item .fh5co-item-title {

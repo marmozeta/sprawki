@@ -28,9 +28,6 @@
 
 .menu a {
     color: #fff;   
-}
-
-.menu a span {
     font-size: 24px;
 }
 
@@ -56,7 +53,7 @@
     font-family: Oswald;
     font-size: 15px;
     text-transform: uppercase;
-    padding: 0 15px 15px 15px;
+    padding: 15px 15px 0 15px;
     line-height: 1.2em;
     height: 90px;
 }
@@ -65,13 +62,13 @@
     font-size: 20px;
     align-items: center;
     display: flex;
-    font-weight: 500;
 }
 
 #fh5co-board .item .fh5co-desc .title {
-    height: 50px;
+    height: 20px;
     align-items: center;
     display: flex;
+    font-weight: 500;
 }
 
 #fh5co-board .item .fh5co-desc .icons {
@@ -143,6 +140,7 @@
     align-items: center;
     padding: 0 10px 10px 10px;
     height: 131px;
+    font-size: 18px;
 }
 
 .animate-box .caffle {
@@ -189,6 +187,7 @@ span.date {
   font-family: Oswald;
   color: #000;
   font-size: 15px;
+  font-weight: 500;
 		}
               
                 .top_left {
@@ -483,4 +482,34 @@ h3.price {
 
 #fh5co-board .item.social .fh5co-desc .title {
     height: 20px;
+}
+
+.shop.item img {
+    height: 200px;
+}
+
+a[data-totalitems="0"]:before {
+    display: none;
+}
+
+.item .caffle {
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+.item:hover .caffle {
+    border-top: 2px solid #272727;
+    border-left: 2px solid #272727;
+    border-right: 2px solid #272727;
+}
+
+.item:hover a {
+    text-decoration: none !important;
+}
+
+.top_right img {
+    width: 100px;
+    height: 56.25px;
+    border-radius: 5px;
 }

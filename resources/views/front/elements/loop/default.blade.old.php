@@ -9,14 +9,12 @@
                                         </div>
                                         <div class="top_right col-4">
                                       @if(!empty($element->image))
-                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="100" height="56.25">
-                                      @else
-                                      <i class="{{ ($element->icon) ? $element->icon : $menu->icon }} fa-2x"></i>
-                                        @endif
+                                        <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="80" height="45">
+                                      @endif
                                         </div>
                                        
                                         <div class="description col-12">
-                                        {{ substr(strip_tags($element->description), 0, 110) }}@if(strlen($element->description) > 110) ... @endif
+                                        {{ substr(strip_tags($element->description), 0, 180) }}@if(strlen($element->description) > 180) ... @endif
                                     </div>  </div>
                                   
         		</a>
@@ -24,13 +22,18 @@
                             <div class="col-12 title">
                                 <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 40) }}@if(strlen($element->title) > 40) ... @endif</a>
                             </div>
-                            <div class="col-8" style="margin: 5px 0;">
+                            <div class="col-8 mt-1">
                                 <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30">&nbsp;
                                 <span style="text-transform: none;">@marmozeta</span>
                             </div>
                            <div class='col-4 icons justify-content-end mt-3'>
-                                    <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span>
-                                    <span><i class="fa-regular fa-comments"></i> {{ $element->comments }}</span>
+                                @if(Auth::check())
+                                    <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span></a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" data-bs-element-id="{{ $element->element_id}}" data-bs-redirect="{{ Request::path() }}" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }}</a>
+                                @else
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span></a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }}</a>
+                                @endif
                             </div>
                        
                         
