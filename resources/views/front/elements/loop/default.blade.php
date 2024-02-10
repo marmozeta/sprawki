@@ -3,11 +3,11 @@
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
                               
                                     <div class="caffle d-flex">
-                                         <div class="top_left col-8">
+                                         <div class="top_left col-6">
                                       <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
                                         <div class="country">@if(!empty($element->country)) {!! $element->country !!} @endif</div>
                                         </div>
-                                        <div class="top_right col-4">
+                                        <div class="top_right col-6">
                                       @if(!empty($element->image))
                                         <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : substr($element->description, 0, 100) }}" width="100" height="56.25">
                                       @else
