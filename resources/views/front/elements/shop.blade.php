@@ -51,8 +51,8 @@
         
     </div>
     <div class="row">
-        <div class="col-12">
-            <p>{!! $element->description !!}</p>
+        <div class="col-12 mt-3">
+            {!! $element->description !!}
         </div>
     </div>
 </div>
