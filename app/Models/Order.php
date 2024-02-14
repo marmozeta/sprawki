@@ -20,4 +20,17 @@ class Order extends Model
             ->groupBy('orders.id')
             ->get();
     }
+    
+    public function checkUserOrder($user_id, $element_id) {
+        return DB::table('orders')
+            ->select('orders.id')
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->whereNull('orders.deleted_at')
+            ->where('orders.user_id', $user_id)
+            ->where('orders.status', 'TRUE')
+            ->where('orders.error', 'none')
+            ->where('order_items.element_element_id', $element_id)
+            ->groupBy('orders.id')
+            ->exists();
+    }
 }

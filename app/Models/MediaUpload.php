@@ -18,4 +18,11 @@ class MediaUpload extends Model
             ->get();
     }
     
+    public function getMediaForElement($element_id) {
+        return DB::table('media_uploads')
+            ->join('element_media_uploads', 'media_uploads.id', '=', 'element_media_uploads.media_upload_id')
+            ->where('element_media_uploads.element_element_id', '=', $element_id)
+            ->get();
+    }
+    
 }

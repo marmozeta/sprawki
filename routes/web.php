@@ -106,6 +106,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('sklep/podsumowanie', 'CartController@checkout')->name('front.checkout');
     Route::get('sklep/zamowienie/podziekowanie/{order_id}', 'CartController@thank_you')->name('front.thank_you');
     Route::get('sklep/metody', 'TpayController@get_link')->name('tpay.form');
+    Route::get('sklep/pobierz_pliki/{element_id}', 'CartController@get_files')->name('order.get_files');
     Route::post('cart/add_to_cart', 'CartController@add_to_cart')->name('cart.add_to_cart');
     Route::post('cart/update_quantity', 'CartController@update_quantity')->name('cart.update_quantity');
     Route::post('cart/remove_product', 'CartController@remove_product')->name('cart.remove_product');

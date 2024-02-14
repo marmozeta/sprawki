@@ -10,6 +10,7 @@ use App\Models\Menu;
 use App\Models\Category;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class HomeController extends Controller
 {
@@ -40,11 +41,15 @@ class HomeController extends Controller
         $tagModel = new Tag;
         $product_tags = $tagModel->getElementTags($element_id);
         
+        $orderModel = new Order;
+        $is_bought = $orderModel->checkUserOrder(Auth::id(), $element_id);
+        
         return view('front.element', array(
                                         'menu' => $menu, 
                                         'element' => $element, 
                                         'product_categories' => $product_categories, 
-                                        'product_tags' => $product_tags
+                                        'product_tags' => $product_tags,
+                                        'is_bought' => $is_bought
                                     ));
     }
 }

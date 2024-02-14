@@ -46,7 +46,12 @@
                 <input type="hidden" name="quantity" value="1" />
                 @endif
             <div class="col-6" @if($element->is_virtual) style="margin-left: 12px;" @endif>
-            <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
+                @if($is_bought)
+                <a href="{{ route('order.get_files', $element->element_id) }}" class="btn btn-success btn-sm filter-button text-bold" data-element-id="{{ $element->element_id }}">Pobierz <i class="fa-solid fa-download"></i></a>
+                @else
+                    @csrf
+                    <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
+                @endif
             </div></div></div>
         
     </div>

@@ -9,8 +9,11 @@ use App\Models\Element;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Mail\OrderCompleted;
+use App\Models\MediaUpload;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use ZipArchive;
+use Illuminate\Support\Facades\Response;
 
 class CartController extends Controller
 {
@@ -139,5 +142,47 @@ class CartController extends Controller
             Mail::to($order->email)->send(new OrderCompleted($order));
             return "TRUE";
         }
+    }
+    
+    public function get_files(Request $request) {
+        $element = Element::find($request->element_id);
+        
+        $mediaModel = new MediaUpload();
+        $media = $mediaModel->getMediaForElement($request->element_id);
+        if(count($media) > 1) {
+            $zipFileName = $element->slug.'_'.Auth::id().'.zip';
+            unlink(public_path('media').'/'.$zipFileName);
+            $zip = new ZipArchive();
+            
+            if ($zip->open(public_path('media').'/'.$zipFileName, ZipArchive::CREATE) === TRUE) {
+                if(!empty($media)) {
+                    foreach($media as $med) {
+                        $file =  public_path('media').'/'.$med->filename;
+                        $zip->addFile($file, basename($file));
+                    }
+                }
+
+                $zip->close();
+
+            }
+
+            $headers = array(
+                  'Content-Type: application/zip',
+                );
+
+            return Response::download(public_path('media').'/'.$zipFileName, $zipFileName, $headers);
+        }
+        else {
+            $file =  public_path('media').'/'.$media[0]->filename;
+            $content_type = mime_content_type($file);
+            
+             $headers = array(
+                  'Content-Type: '.$content_type,
+                );
+             
+            return Response::download($file, $media[0]->filename, $headers);
+        }
+
+
     }
 }
