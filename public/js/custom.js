@@ -272,14 +272,24 @@ $('.add_to_cart').on('click', function(e) {
         _token: $('input[name="_token"]').val()
         }
     }).done(function( msg ) {
-        var sum = parseInt($('#cart').attr('data-totalitems'))+parseInt(quantity);
-       $('#to-cart').css('top', $('#cart').offset().top).css('left', $('#cart').offset().left);
-       
-       $('#cart').attr('data-totalitems', sum).addClass('shake');
-        setTimeout(function(){
-            $('#cart').removeClass('shake');
-             $('#to-cart').hide();
-          },500);
+        if(msg == 'already_in_cart') {
+            $('#to-cart').hide();
+            alert('Produkt w koszyku');
+        }
+        else if(msg == 'quantity_broken') {
+            $('#to-cart').hide();
+            alert('Nie można zamówić większej ilości tego produktu');
+        }
+        else {
+           var sum = parseInt($('#cart').attr('data-totalitems'))+parseInt(quantity);
+           $('#to-cart').css('top', $('#cart').offset().top).css('left', $('#cart').offset().left);
+
+           $('#cart').attr('data-totalitems', sum).addClass('shake');
+            setTimeout(function(){
+                $('#cart').removeClass('shake');
+                $('#to-cart').hide();
+            },500);
+      }
     });
     return false;
 });

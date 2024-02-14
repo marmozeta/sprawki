@@ -21,7 +21,8 @@ class CartController extends Controller
     public function cart() {
         $tax = 0;
         
-        foreach(Cart::content() as $row) {
+        $cart_content = Cart::content();
+        foreach($cart_content as $rowId => $row) {
             $product_id = $row->id;
             $quantity = $row->qty;
             $product = Element::find($product_id);
@@ -35,9 +36,10 @@ class CartController extends Controller
             }
             
             $tax += round(($price_from_db/(100+$vat)*$vat)*$quantity, 2);
+            $cart_content[$rowId]->is_virtual = $product->is_virtual;
         }
 
-        return view('front.cart', array('tax' => $tax));
+        return view('front.cart', array('tax' => $tax, 'cart_content' => $cart_content));
     }
     
     public function checkout() {
@@ -51,7 +53,22 @@ class CartController extends Controller
     public function add_to_cart(Request $request)
     {
         $element = Element::find($request->element_id);
-        $cart = Cart::add((string)$request->element_id, (string)$element->title, (int)$request->quantity, (float)$element->price, ['image' => $element->image]);
+        $in_cart = false;
+        
+        //sprawdzamy czy produkt jest wirtualny, jeśli tak to czy już jest w koszyku
+        if($element->is_virtual) {
+            foreach(Cart::content() as $cartItem) {
+                if($cartItem->id == $request->element_id) {
+                    $in_cart = true;
+                }
+            };
+        }
+        
+        if(!$in_cart)
+            $cart = Cart::add((string)$request->element_id, (string)$element->title, (int)$request->quantity, (float)$element->price, ['image' => $element->image]);
+        else 
+            $cart = 'already_in_cart';
+        
         return response($cart, 200); 
     }
     
@@ -120,6 +137,11 @@ class CartController extends Controller
         $order = Order::find($order_id);
         Mail::to($order->email)->send(new OrderCompleted($order));
         return view('front.thank_you', array('order' => $order));
+    }
+    
+    public function order_error($order_id) {
+        $order = Order::find($order_id);
+        return view('front.order_error', array('order' => $order));
     }
     
     public function transaction_receive($order_id, $tr_id, $status, $error) {   
