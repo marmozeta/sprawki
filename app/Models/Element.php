@@ -25,9 +25,11 @@ class Element extends Model
     }
     
     public function getByMenuId($menu_id, $user_id) {
-        return Element::selectRaw('GROUP_CONCAT(tags.name SEPARATOR " ") AS tags, elements.*')     
+        return Element::selectRaw('GROUP_CONCAT(tags.name SEPARATOR " ") AS tags, elements.*, GROUP_CONCAT(CONCAT("<i class=\'", categories.icon, "\'></i>", categories.name) SEPARATOR ", ") AS product_categories')     
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
+            ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
+            ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id) as likes'))
             ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.$user_id.') as is_liked'))

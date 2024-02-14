@@ -36,8 +36,12 @@
                                         <label class="form-label">Nazwa kategorii *</label>
                                         <input type="text" class="form-control" name="name" value="{{ old('name', $category->name ?? '') }}" placeholder="" />
                                     </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">Ikona</label>
+                                        <input type="text" class="form-control" name="icon" value="{{ old('icon', $category->icon ?? '') }}" placeholder="" />
+                                    </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="active" role="switch" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="active" role="switch" id="flexSwitchCheckDefault" {{ (old('active', $category->active ?? '')==1)?'checked':''}}>
                                         <label class="form-check-label" for="flexSwitchCheckDefault">Aktywna</label>
                                       </div>
                                     <div class="d-flex justify-content-end">

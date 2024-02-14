@@ -26,11 +26,11 @@ class CategoryController extends Controller
     
     public function store(Request $request): RedirectResponse
     {
-
-        $Category = new Category;
-        $Category->name = $request->name;
-        $Category->active = ($request->active == 'on');
-        $Category->save();
+        $category = new Category;
+        $category->name = $request->name;
+        if(!empty($request->icon)) $category->icon = $request->icon;
+        $category->active = ($request->active == 'on');
+        $category->save();
  
         return redirect('/admin/category');
     }
@@ -38,10 +38,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
  
-        $Category = Category::find($id);
-        $Category->name = $request->name;
-        $Category->active = 1;
-        $Category->save();
+        $category = Category::find($id);
+        $category->name = $request->name;
+        if(!empty($request->icon)) $category->icon = $request->icon;
+        $category->active = 1;
+        $category->save();
  
         return redirect('/admin/category');
     }

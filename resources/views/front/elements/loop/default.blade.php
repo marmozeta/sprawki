@@ -16,13 +16,13 @@
                                         </div>
                                        
                                         <div class="description col-12">
-                                        {{ substr(strip_tags($element->description), 0, 110) }}@if(strlen($element->description) > 110) ... @endif
+                                        {{ mb_substr(strip_tags($element->description), 0, 110) }}@if(strlen($element->description) > 110) ... @endif
                                     </div>  </div>
                                   
         		</a>
         		<div class="fh5co-desc d-flex flex-wrap">
                             <div class="col-12 title">
-                                <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ substr($element->title, 0, 30) }}@if(strlen($element->title) > 30) ... @endif</a>
+                                <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->title, 0, 30) }}@if(strlen($element->title) > 30) ... @endif</a>
                             </div>
                             <div class="col-8" style="margin: 5px 0;">
                                 <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30">&nbsp;

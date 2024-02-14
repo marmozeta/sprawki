@@ -513,3 +513,20 @@ a[data-totalitems="0"]:before {
     height: 56.25px;
     border-radius: 5px;
 }
+
+.shoptitle {
+    font-size: 20px;
+}
+
+.shopsubtitle {
+    height: 22px;
+}
+
+.shopcategory {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.shopcategory i {
+    margin-right: 5px;
+}

@@ -56,6 +56,7 @@ class ElementController extends Controller
         $element = new Element;
         $element->title = $request->title;
         $element->slug = Str::slug($request->title, "-");
+        $element->subtitle = $request->subtitle;
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
@@ -134,6 +135,7 @@ class ElementController extends Controller
         $element = Element::find($id);
         $element->title = $request->title;
         $element->slug = Str::slug($request->title, "-");
+        $element->subtitle = $request->subtitle;
         $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
