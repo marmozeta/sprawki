@@ -16,7 +16,7 @@
                                         </div>
                                        
                                         <div class="description col-12">
-                                        {{ mb_substr(strip_tags($element->description), 0, 110) }}@if(strlen($element->description) > 110) ... @endif
+                                            <p>{{ mb_substr(strip_tags($element->description), 0, 150) }}</p>
                                     </div>  </div>
                                   
         		</a>

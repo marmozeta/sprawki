@@ -138,9 +138,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 10px 10px 10px;
-    height: 131px;
-    font-size: 18px;
+    padding: 10px;
+    height: 80px;
+    font-size: 20px;
+}
+
+.animate-box div.caffle .description p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
 .animate-box .caffle {
