@@ -533,6 +533,7 @@ a[data-totalitems="0"]:before {
     overflow: hidden;
     padding: 0;
     height: 26px;
+    line-height: 26px;
     font-weight: 500;
 }
 
