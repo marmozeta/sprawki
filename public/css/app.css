@@ -67,8 +67,11 @@
 #fh5co-board .item .fh5co-desc .title {
     height: 20px;
     align-items: center;
-    display: flex;
     font-weight: 500;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 #fh5co-board .item .fh5co-desc .icons {
@@ -150,6 +153,7 @@
     overflow: hidden;
     padding: 0;
     margin: 0;
+    color: #272727;
 }
 
 .animate-box .caffle {
@@ -518,17 +522,27 @@ a[data-totalitems="0"]:before {
 }
 
 .top_right img {
-    width: 100px;
-    height: 56.25px;
+    width: 120px;
+    height: 67.5px;
     border-radius: 5px;
 }
 
 .shoptitle {
     font-size: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 0;
 }
 
 .shopsubtitle {
     height: 22px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding: 0;
 }
 
 .shopcategory {

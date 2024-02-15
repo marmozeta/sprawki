@@ -6,8 +6,10 @@
                                     <img src="{{ asset('images/elements/'.$element->image) }}" alt="{{ (!empty($element->title)) ? $element->title : mb_substr($element->description, 0, 100) }}">
                                     @else
                                     <div class="caffle" style="height: 200px;">
-                                  
-                                        {{ mb_substr(strip_tags($element->description), 0, 200) }}@if(strlen($element->description) > 200) ... @endif</div>
+                                  <div class="description col-12" style='margin-top: 60px;'>
+                                            <p>{{ mb_substr(strip_tags($element->description), 0, 150) }}</p>
+                                    </div>
+                                    </div>
                                     @endif
                                     <!--<span class="icon-corner"><i class="fa fa-video" style="color: #fff;"></i></span>-->
                                     
@@ -17,10 +19,10 @@
         		<div class="fh5co-desc">
                              <div class="row d-flex px-4 mt-3 flex-wrap"> 
                                  <div class="col-12 shoptitle text-center">
-                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->title, 0, 25) }}@if(strlen($element->title) > 25) ... @endif</a>
+                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->title, 0, 35) }}</a>
                                  </div>
                                  <div class="col-12 shopsubtitle text-center">
-                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->subtitle, 0, 30) }}@if($element->subtitle && strlen($element->title) > 30) ... @endif</a>
+                                     <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->subtitle, 0, 40) }}</a>
                                  </div>
                              </div>
                         
