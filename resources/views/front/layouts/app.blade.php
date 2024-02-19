@@ -34,7 +34,7 @@
 	<link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')}}">   
         <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
-	<link rel="stylesheet" href="{{asset('css/app.css')}}?202402161">
+	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240219">
 	<script src="{{asset('js/modernizr-2.6.2.min.js')}}"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
         @yield('styles')
@@ -68,8 +68,9 @@
         <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
 
 	<!-- Main JS -->
+        <script src="{{asset('js/custom.js')}}?v=20240215"></script>
 	<script src="{{asset('js/main.js')}}"></script>
-	<script src="{{asset('js/custom.js')}}?v=20240215"></script>
         @yield('scripts')
+        @yield('after_scripts')
     </body>
 </html>
