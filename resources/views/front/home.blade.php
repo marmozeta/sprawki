@@ -5,7 +5,7 @@
     
 		<div class="container">
 
-        <div id="fh5co-board" class="row">
+                    <div id="fh5co-board"><div class="row @if(!$menu->is_shop) iso-grid @endif">
             @csrf
             @foreach($elements as $element) 
                 @if($menu->is_shop)

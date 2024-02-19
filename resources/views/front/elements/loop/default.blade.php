@@ -1,4 +1,4 @@
-<div class="col-3 my-3 {{ $element->tags }}">
+<div class="col-3 my-3 iso-item {{ $element->tags }} ">
     <div class="item default">
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
                               

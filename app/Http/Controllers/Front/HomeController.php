@@ -20,9 +20,9 @@ class HomeController extends Controller
         $elementModel = new Element;
         $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0);
         $tagsModel = new Tag;
-        $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'tag');
+        $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'space');
         $tags_region = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'region');
-        $tags_tags = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'space');
+        $tags_tags = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'tag');
         
         $view = ($menu->is_social) ? 'social' : 'home'; 
         return view('front.'.$view, array('menu' => $menu, 'elements' => $elements, 'tags_tags' => $tags_tags, 'tags_region' => $tags_region, 'tags_space' => $tags_space));

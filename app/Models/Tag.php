@@ -14,7 +14,7 @@ class Tag extends Model
     
     public function getByMenuIdAndGroup($menu_id, $group) {
         return DB::table('tags')
-            ->select(DB::raw('tags.*, LOWER(tags.name) AS slug'))
+            ->select(DB::raw('DISTINCT tags.name, LOWER(tags.name) AS slug'))
             ->join('element_tags', 'tags.tag_id', '=', 'element_tags.tag_tag_id')
             ->join('elements', 'elements.element_id', '=', 'element_tags.element_id')
             ->where('elements.menu_id', $menu_id)

@@ -14,6 +14,25 @@
                 <h1 class="element_title">Wiadomości</h1>
                 <div class="divide"><i class="fa-solid fa-envelope"></i></div>
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <ul>
+                        <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30"> Dawid Mysior</li>
+                        <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30"> Damian Szulc</li>
+                        <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30"> Artur Kośmider</li>
+                    </ul>
+                </div>
+                <div class="col-9">
+                    <div class="">
+                        <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30"> Dawid Mysior
+                    </div>
+                    <div class="my-3 bg-white">
+                        konwersacja
+                        
+                    </div>
+                    <div><textarea class="form-control"></textarea></div>
+                    </div>
+            </div>
             
             
         </section>

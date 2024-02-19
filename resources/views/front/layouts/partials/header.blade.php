@@ -36,7 +36,7 @@
                                     
                                 </ul>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 px-0">
 					<!--<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn" style="background: #cc1d23; padding: 2px 5px; border-radius: 2px;">Menu <i class="fa fa-bars"></i></a>-->
 					
                                         <a href="#" class="fh5co-menu-btn" style="margin-right: 14px;"><i class="fa fa-search"></i></a>

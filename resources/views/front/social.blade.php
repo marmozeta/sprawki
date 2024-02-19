@@ -5,10 +5,7 @@
 @endsection
 
 @section('top_buttons')
-    @if(auth()->check()) <button class="btn btn-primary btn-sm filter-button text-bold" data-bs-toggle="modal" data-bs-target="#newPostModal"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nowy rozmyślunek</button>
-    @else
-    <button class="btn btn-primary btn-sm filter-button text-bold" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fa fa-plus"></i>&nbsp;&nbsp;Nowy rozmyślunek</button>
-    @endif
+    <button class="btn btn-primary btn-sm filter-button text-bold"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</button>
 @endsection
 
 @section('content')
@@ -23,11 +20,16 @@
             @endforeach
         </div>
        
+    @if(auth()->check())
+    <button class="btn btn-primary btn-sm filter-button text-bold" id="newPostButton" data-bs-toggle="modal" data-bs-target="#newPostModal"><i class="fa fa-plus"></i>&nbsp;Nowy<br/>rozmyślunek</button>
+    @else
+    <button class="btn btn-primary btn-sm filter-button text-bold" id="newPostButton" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fa fa-plus"></i>&nbsp;Nowy<br/>rozmyślunek</button>
+    @endif
        </div>
 	
 @endsection
 
-@section('scripts')
+@section('after_scripts')
 @if(auth()->check()) 
 <div class="modal fade" id="newPostModal" tabindex="-1" aria-labelledby="newPostModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -40,7 +42,8 @@
           <div class="item d-flex p-3">
                 <div class="col-9 p-2">
                    <div class="w-100">
-                    <textarea id="social_element" name="desc" class="form-control" style="width: 560px; height: 120px;" placeholder="Opublikuj swój rozmyślunek"></textarea>
+                       <input type="text" class="form-control mb-2" name="title" placeholder="Nazwij swój rozmyślunek" style="height: 36px;" />
+                    <textarea id="social_desc" name="desc" class="form-control" style="width: 560px; height: 80px;" placeholder="Opublikuj swój rozmyślunek"></textarea>
                 </div>
                    <input type="hidden" name="file" />
                    @csrf
@@ -95,7 +98,9 @@
 @endif
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
-<script> bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_element');  });
+<script> 
+bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_desc');  });
+bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_element');  });
 $('.nicEdit-panelContain').parent().width('100%');
 $('.nicEdit-panelContain').parent().next().width('100%');</script>
 <script>

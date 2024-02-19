@@ -4,13 +4,13 @@
 });
 */
 $(document).ready(function() {
-  var $container = $(".grid"); // the container with all the elements to filter inside
+  var $container = $(".iso-grid"); // the container with all the elements to filter inside
   var filters = {}; //should be outside the scope of the filtering function
 
   /* --- read the documentation on isotope.metafizzy.co for more options --- */
   var $grid = $container.isotope({
-    layoutMode: 'fitRows',
-    itemSelector: '.item',
+    layoutMode: 'masonry',
+    itemSelector: '.iso-item',
     percentPosition: true,
     fitRows: {
       gutter: 10
@@ -340,3 +340,7 @@ $('.remove_product').on('click', function(e) {
  $(function () {
         $('[data-bs-toggle="modal"]').modal()
     })
+    
+$('#filter-button').on('click', function() {
+    $('#filter-advanced').slideToggle();
+})
