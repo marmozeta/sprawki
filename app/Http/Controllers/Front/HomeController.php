@@ -16,8 +16,9 @@ use App\Models\ElementArgument;
 
 class HomeController extends Controller
 {
-    public function index($slug)
+    public function index()
     {
+        $slug = request()->path();
         $menu = Menu::where('slug', $slug)->first();
         $elementModel = new Element;
         $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0);
@@ -30,8 +31,12 @@ class HomeController extends Controller
         return view('front.'.$view, array('menu' => $menu, 'elements' => $elements, 'tags_tags' => $tags_tags, 'tags_region' => $tags_region, 'tags_space' => $tags_space));
     }
     
-    public function show($slug, $element_id, $element_slug)
+    public function show($element_id, $element_slug)
     {
+        $path = request()->path();
+        $slug_tab = explode('/', $path);
+        $slug = $slug_tab[0];
+        
         $menu = Menu::where('slug', $slug)->first();
         
         $elementModel = new Element;

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\MenuController;
+use App\Models\Menu;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +125,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('chat/participants/get', 'ChatController@get_participants')->name('front.participants.get');
     
     Route::get('/', function () { return redirect()->to('/sprawki');});
-    Route::get('{slug}', 'HomeController@index')->name('front.home');
-    Route::get('{slug}/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
+    
+    
+    foreach(Menu::all() as $menu) {
+        Route::get('/'.$menu->slug, 'HomeController@index')->name('front.home');
+        Route::get($menu->slug.'/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
+    }
     
     });
