@@ -32,7 +32,7 @@ class Element extends Model
             ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id) as likes'))
-            ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.$user_id.') as is_liked'))
+            ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.(int)$user_id.') as is_liked'))
             ->where('elements.menu_id', $menu_id)
             ->whereNull('elements.deleted_at')
             ->orderBy('elements.created_at', 'DESC')  
