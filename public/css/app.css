@@ -249,6 +249,9 @@ h1.element_title {
     border-top: 2px solid #ef5353;
 }
 
+.divide.long:after {
+    width: 100%;
+}
 
 .divide i {
     position: relative;
@@ -493,6 +496,13 @@ h3.price {
     display: flex;
 }
 
+#newCommentModal .item.default.comment {
+    padding: 15px;
+    font-family: Oswald;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
 #fh5co-board .item.social .fh5co-desc .title {
     height: 20px;
 }
@@ -614,4 +624,73 @@ a[data-totalitems="0"]:before {
     font-family: Oswald;
     line-height: 15px;
     padding: 8px 20px 10px 20px;
+}
+
+.content {
+    font-size: 20px;
+    color: #272727;
+    line-height: 1.5em;
+    text-align: justify;
+    margin-top: 30px;
+}
+
+.bottom_buttons {
+    background: #272727;
+    padding: 15px 0;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    column-gap: 30px;
+}
+
+.bottom_buttons a {
+    color: #fff;
+}
+
+.comment_line {
+    padding: 15px 0 5px 0;
+    background: #fff;
+    border-bottom: 3px solid #f5f6f7;
+}
+
+.comment_date {
+    font-size: 12px;
+    line-height: 15px;
+    color: #272727;
+    text-align: center;
+}
+
+.comment_user {
+    font-family: Oswald;
+    font-weight: 400;
+    color: #272727;
+}
+
+.comment_content {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: Open Sans;
+    color: #272727;
+}
+
+.argument_line {
+    padding: 15px 10px 20px 10px;
+    background: #fff;
+    border-bottom: 3px solid #f5f6f7;
+}
+
+.argument_number {
+    font-family: Oswald;
+    color: #ef5353;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.argument_desc {
+    font-size: 15px;
+    line-height: 20px;
+    font-family: Open Sans;
+    color: #272727;
 }

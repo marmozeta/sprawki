@@ -18,4 +18,12 @@ class Comment extends Model
             ->whereNull('comments.deleted_at')
             ->get();
     }
+    
+    public function getCommentsByElement($element_id) {
+        return DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->whereNull('comments.deleted_at')
+            ->where('element_id', $element_id)
+            ->get();
+    }
 }

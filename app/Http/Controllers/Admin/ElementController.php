@@ -37,7 +37,7 @@ class ElementController extends Controller
     public function edit($slug, $id) {
         $menu = Menu::where('slug', $slug)->first();
         $elementModel = new Element;
-        $element = $elementModel->getElement($id);
+        $element = $elementModel->getElementForEdit($id);
         $element->product_categories = explode(',', $element->product_categories);
         
         
@@ -55,7 +55,7 @@ class ElementController extends Controller
         
         $element = new Element;
         $element->title = $request->title;
-        $element->slug = Str::slug($request->title, "-");
+        $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
         $element->teaser = $request->teaser;
         $element->image = $request->image;
@@ -134,7 +134,7 @@ class ElementController extends Controller
         
         $element = Element::find($id);
         $element->title = $request->title;
-        $element->slug = Str::slug($request->title, "-");
+        $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
         $element->teaser = $request->teaser;
         $element->image = $request->image;

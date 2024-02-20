@@ -11,6 +11,8 @@ use App\Models\Category;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
+use App\Models\Comment;
+use App\Models\ElementArgument;
 
 class HomeController extends Controller
 {
@@ -33,7 +35,7 @@ class HomeController extends Controller
         $menu = Menu::where('slug', $slug)->first();
         
         $elementModel = new Element;
-        $element = $elementModel->getElement($element_id);
+        $element = $elementModel->getElement($element_id, (Auth::check()) ? Auth::user()->id : 0);
         
         $catModel = new Category;
         $product_categories = $catModel->getElementCategories($element_id);
@@ -44,12 +46,20 @@ class HomeController extends Controller
         $orderModel = new Order;
         $is_bought = $orderModel->checkUserOrder(Auth::id(), $element_id);
         
+        $commentModel = new Comment;
+        $comments = $commentModel->getCommentsByElement($element_id);
+                
+        $argumentModel = new ElementArgument;
+        $arguments = $argumentModel->getArgumentsByElement($element_id);
+        
         return view('front.element', array(
                                         'menu' => $menu, 
                                         'element' => $element, 
                                         'product_categories' => $product_categories, 
                                         'product_tags' => $product_tags,
-                                        'is_bought' => $is_bought
+                                        'is_bought' => $is_bought,
+                                        'comments' => $comments,
+                                        'arguments' => $arguments
                                     ));
     }
 }
