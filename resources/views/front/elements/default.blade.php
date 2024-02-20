@@ -17,7 +17,7 @@
     </div>
     <div class="row content">
         <div class="col-8 offset-2 mt-3">
-            <div class="container-fluid px-5">
+            <div class="container-fluid" style="padding: 0 7rem;">
                 {!! $element->description !!}
             </div>
         </div>
