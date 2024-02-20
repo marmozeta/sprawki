@@ -17,6 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/images/*
 /public/images/elements/*
 /public/media/*
-/public/*
+/public/transaction_receive.php
