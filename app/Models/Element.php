@@ -58,7 +58,7 @@ class Element extends Model
     
     public function getElement($element_id, $user_id) {
         return DB::table('elements')
-            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send'))
+            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send, 1 AS is_liked'))
             //->select(DB::raw('COUNT(comments.comm_id) AS comments'))
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
@@ -69,7 +69,7 @@ class Element extends Model
            // ->leftJoin('comments', 'comments.element_id', '=', 'elements.element_id')  
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id) as likes'))
-            ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.$user_id.') as is_liked'))     
+           // ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.$user_id.') as is_liked'))     
             ->where('elements.element_id', $element_id)
             ->whereNull('elements.deleted_at')
             ->first();
