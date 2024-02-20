@@ -117,7 +117,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('social/post/save', 'SocialController@save_post')->name('social.post.save');
     Route::post('social/media/store','SocialController@fileStore')->name('social.media.store')->middleware('auth');
     Route::post('social/media/remove','SocialController@fileDestroy')->name('social.media.remove')->middleware('auth');
-    Route::post('social/comment/save', 'SocialController@save_comment')->name('social.comment.save');
+    Route::post('social/comment/save', 'SocialController@save_comment')->name('social.comment.save')->middleware('auth');
     Route::post('social/like/save', 'SocialController@save_like')->name('social.like.save');
     
     Route::get('wiadomosci', 'ChatController@index')->name('front.chat');

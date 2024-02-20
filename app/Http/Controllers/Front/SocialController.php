@@ -64,12 +64,14 @@ class SocialController extends Controller
     
     public function save_like(Request $request)
     {
-        $issetLike = Like::where('element_element_id', $request->element_id)->where('user_id', Auth::user()->id)->first();
+        if(Auth::check()) {
+            $issetLike = Like::where('element_element_id', $request->element_id)->where('user_id', Auth::user()->id)->first();
+        }
         
         if(empty($issetLike)) {
             $like = new Like;
             $like->element_element_id = $request->element_id;
-            $like->user_id = Auth::user()->id;
+            if(Auth::check()) $like->user_id = Auth::user()->id;
             $like->save();
             $data = 1;
         }

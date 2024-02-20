@@ -25,9 +25,14 @@
     <div class="row">
         <div class="col-8 offset-2 d-flex justify-content-center mt-5" style="column-gap: 20px;">
             <div class="container-fluid mx-5 bottom_buttons">
-                <a href="#" class="toggle_like" data-element-id="{{ $element->element_id }}"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span>
-               <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal"><span><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</span></a>          
-               @if(!$arguments->isEmpty()) <a href="#argumenty"><span><i class="fa-solid fa-hand-point-up"></i> {{ count($arguments) }} Zobacz argumenty</span></a> @endif   
+                
+                <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
+                @if(Auth::check())
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                @else
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                @endif
+                @if(!$arguments->isEmpty()) <a href="#argumenty"><span><i class="fa-solid fa-hand-point-up"></i> {{ count($arguments) }} Zobacz argumenty</span></a> @endif   
                 </div>
         </div>
     </div>
