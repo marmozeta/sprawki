@@ -9,8 +9,8 @@
             <img class="img-fluid rounded" src="{{ asset('images/elements/'.$element->image) }}" />
         </div>
         @elseif(!empty($element->youtube))
-        <div class="col-8 image my-4">
-            <iframe class="mx-5 rounded" id="ytplayer" type="text/html" width="100%" height="480" src="{{ $element->youtube }}" frameborder="0"></iframe>
+        <div class="col-8 offset-2 image my-4">
+            <iframe class="rounded" id="ytplayer" type="text/html" width="100%" height="480" src="{{ $element->youtube }}" frameborder="0"></iframe>
         </div>
         @endif
         
