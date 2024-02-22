@@ -64,7 +64,7 @@ class ElementController extends Controller
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
-        $element->user_id = 1;
+        $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
         $element->author = $request->author;
         $element->price = (float)$request->price;

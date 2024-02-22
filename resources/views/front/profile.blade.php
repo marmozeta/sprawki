@@ -110,7 +110,7 @@
         <div class="row">
             <div class="col-6 offset-3 justify-content-center mt-5" style="column-gap: 20px;">
                 <h3 class="w-100 text-center" id="polubienia">Polubienia</h3>
-                <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
+                <div class="divide long"><i class="fa-regular fa-heart"></i></div>       
                     @foreach($likes as $like)
                      <div class="row like_line bg-white py-3">
                          <div class="col-1">

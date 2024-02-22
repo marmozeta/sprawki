@@ -710,6 +710,7 @@ a[data-totalitems="0"]:before {
 #profile .bg_picture {
     height: 291px;
     background-size: 100% auto;
+    background-color: #ddd;
 }
 
 #profile .avatar_image {
