@@ -80,7 +80,7 @@
                          </div>
                          
                      <div class="col-12 text-right" style="font-size: 0.8em;">
-                        <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">0</span> Polub</span>
+                        <span><i class="fa-regular fa-heart"></i> <span class="count">0</span> Polub</span>
                         <span class="mx-3"><i class="fa-regular fa-comments"></i> Odpowiedz</span>
                      </div>
                           </div>
@@ -98,7 +98,7 @@
                                 {{ $comment->comment }}
                             </div>
                         <div class="col-12 text-right" style="font-size: 0.8em;">
-                           <span class="mx-3"><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">0</span> Polub</span>
+                           <span class="mx-3"><i class="fa-regular fa-heart"></i> <span class="count">0</span> Polub</span>
                         </div>
                          </div>
                           </div>
