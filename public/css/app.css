@@ -749,31 +749,34 @@ a[data-totalitems="0"]:before {
     border-bottom: 3px solid #f5f6f7;
 }
 
-#profile .like_line {
+.like_line {
     color: #272727;
 }
 
-#profile .like_line img {
+.like_line img {
     width: 40px;
     height: 40px;
     object-fit: cover;
 }
 
-#profile .like_line {
-    padding: 10px 0;
+.like_line {
     border-bottom: 3px solid #f5f6f7;
 }
 
-#profile .like_line .in_reply {
+.like_line .in_reply {
     color: #a9a9a9;
 }
 
-#profile .friendly-name {
+.friendly-name {
     color: #272727;
 }
 
 #profile .friendly-name:hover {
     text-decoration: none;
+}
+
+#profile .text-right span {
+    color: rgb(129, 136, 146);
 }
 
 .user-picture {

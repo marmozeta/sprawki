@@ -42,22 +42,7 @@
             <h3 class="w-100 text-center" id="komentarze">Komentarze</h3>
             <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
                 @foreach($comments as $comment)
-                 <div class="row comment_line">
-                    <div class="col-2 comment_date">
-                    {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.Y H:i') }} 
-                    </div>
-                <div class="col-3 comment_user">
-                    <img src="{{ asset('images/users/') }}/{{ $comment->picture }}" alt="user" class="rounded-circle" width="30">&nbsp;
-                               {{ '@'.$comment->friendly_name}}
-                    </div>
-                    <div class="col-7 comment_content">
-                    {{ $comment->comment }}
-                    </div>
-                     <div class="col-12 text-right" style="font-size: 0.8em;">
-                        <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">0</span> Polub</span>
-                        <span class="mx-3"><i class="fa-regular fa-comments"></i> Odpowiedz</span>
-                     </div>
-                      </div>
+                        @include('front.elements.loop.comment') 
                 @endforeach
                    
         </div>
