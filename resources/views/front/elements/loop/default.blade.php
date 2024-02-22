@@ -5,7 +5,7 @@
                                     <div class="caffle d-flex">
                                          <div class="top_left col-6">
                                       <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
-                                        <div class="country">@if(!empty($element->country)) {!! $element->country !!} @endif</div>
+                                        <div class="country">@if(!empty($element->flag)) <span class="fi fi-{{ strtolower($element->flag) }}"></span> @endif @if(!empty($element->country)) {{ $element->country }} @endif</div>
                                         </div>
                                         <div class="top_right col-6">
                                       @if(!empty($element->image))

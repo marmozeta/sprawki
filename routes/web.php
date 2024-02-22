@@ -47,6 +47,7 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/tag/update/{id}', 'TagController@update')->name('admin.forms.tag.update')->middleware('auth'); 
     Route::get('admin/tag/edit/{id}', 'TagController@edit')->name('admin.forms.tag.edit')->middleware('auth'); 
     Route::get('admin/tag/remove/{id}', 'TagController@remove')->name('admin.forms.tag.remove')->middleware('auth'); 
+    Route::get('admin/tag/get/{slug_group}', 'TagController@get_tags')->name('admin.get_tags')->middleware('auth'); 
     
     //typy
     Route::get('admin/type', 'TypeController@index')->name('admin.type')->middleware('auth'); 
@@ -54,7 +55,8 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/type/store', 'TypeController@store')->name('admin.forms.type.store')->middleware('auth'); 
     Route::post('admin/type/update/{id}', 'TypeController@update')->name('admin.forms.type.update')->middleware('auth'); 
     Route::get('admin/type/edit/{id}', 'TypeController@edit')->name('admin.forms.type.edit')->middleware('auth'); 
-    Route::get('admin/type/remove/{id}', 'TypeController@remove')->name('admin.forms.type.remove')->middleware('auth'); 
+    Route::get('admin/type/remove/{id}', 'TypeController@remove')->name('admin.forms.type.remove')->middleware('auth');
+    
     
     //elementy
     Route::get('admin/element/{slug}', 'ElementController@index')->name('admin.element')->middleware('auth'); 
@@ -96,6 +98,9 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('auth'); 
     Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('auth'); 
     Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('auth'); 
+    
+    //flagi
+    Route::get('admin/flag/get', 'TagController@get_flags')->name('admin.get_flags')->middleware('auth');
     
 });
 

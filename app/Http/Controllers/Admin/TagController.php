@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use App\Models\Flag;
  
 class TagController extends Controller
 {
@@ -53,5 +54,15 @@ class TagController extends Controller
         $tag->delete();
         
         return redirect('/admin/tag');
+    }
+    
+    public function get_tags($group_slug) {
+        $result = Tag::where('group_slug', $group_slug)->where('active', 1)->get();
+        return response($result, 200); 
+    }
+    
+    public function get_flags() {
+        $result = Flag::all();
+        return response($result, 200); 
     }
 }

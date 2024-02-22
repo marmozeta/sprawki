@@ -57,10 +57,11 @@ class ElementController extends Controller
         $element->title = $request->title;
         $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
-        $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->icon = $request->icon;
+        $flag = json_decode($request->flag);
+        $element->flag = $flag[0]->code;
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
@@ -77,9 +78,53 @@ class ElementController extends Controller
         $element->youtube = $request->youtube;
         $element->save();
         $element_id = $element->element_id;
-        
-        if(!empty($request->tags)) {
-           $tags = json_decode($request->tags);
+       
+       if(!empty($request->tag_tags)) {
+           $tags = json_decode($request->tag_tags);
+           foreach($tags as $tag) {
+               $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
+               if(!empty($cat)) {
+                   $cat_id = $cat->tag_id;
+               }
+               else {
+                   $cat_add = new Tag;
+                   $cat_add->name = $tag->value;
+                   $cat_add->active = 1;
+                   $cat_add->save();
+                   $cat_id = $cat_add->tag_id;
+               }
+
+               $tag_add = new ElementTag;  
+               $tag_add->element_id = $element_id;
+               $tag_add->tag_tag_id = $cat_id;
+               $tag_add->save();
+           }
+       }
+       
+       if(!empty($request->region_tags)) {
+           $tags = json_decode($request->region_tags);
+           foreach($tags as $tag) {
+               $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
+               if(!empty($cat)) {
+                   $cat_id = $cat->tag_id;
+               }
+               else {
+                   $cat_add = new Tag;
+                   $cat_add->name = $tag->value;
+                   $cat_add->active = 1;
+                   $cat_add->save();
+                   $cat_id = $cat_add->tag_id;
+               }
+
+               $tag_add = new ElementTag;  
+               $tag_add->element_id = $element_id;
+               $tag_add->tag_tag_id = $cat_id;
+               $tag_add->save();
+           }
+       }
+       
+       if(!empty($request->space_tags)) {
+           $tags = json_decode($request->space_tags);
            foreach($tags as $tag) {
                $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
                if(!empty($cat)) {
@@ -136,10 +181,11 @@ class ElementController extends Controller
         $element->title = $request->title;
         $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
-        $element->teaser = $request->teaser;
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->icon = $request->icon;
+        $flag = json_decode($request->flag);
+        $element->flag = $flag[0]->code;
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
@@ -160,8 +206,52 @@ class ElementController extends Controller
         ElementTag::where('element_id', $id)->delete();
         
         //a następnie je dodajemy
-        if(!empty($request->tags)) {
-           $tags = json_decode($request->tags);
+        if(!empty($request->tag_tags)) {
+           $tags = json_decode($request->tag_tags);
+           foreach($tags as $tag) {
+               $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
+               if(!empty($cat)) {
+                   $cat_id = $cat->tag_id;
+               }
+               else {
+                   $cat_add = new Tag;
+                   $cat_add->name = $tag->value;
+                   $cat_add->active = 1;
+                   $cat_add->save();
+                   $cat_id = $cat_add->tag_id;
+               }
+
+               $tag_add = new ElementTag;  
+               $tag_add->element_id = $id;
+               $tag_add->tag_tag_id = $cat_id;
+               $tag_add->save();
+           }
+       }
+       
+       if(!empty($request->region_tags)) {
+           $tags = json_decode($request->region_tags);
+           foreach($tags as $tag) {
+               $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
+               if(!empty($cat)) {
+                   $cat_id = $cat->tag_id;
+               }
+               else {
+                   $cat_add = new Tag;
+                   $cat_add->name = $tag->value;
+                   $cat_add->active = 1;
+                   $cat_add->save();
+                   $cat_id = $cat_add->tag_id;
+               }
+
+               $tag_add = new ElementTag;  
+               $tag_add->element_id = $id;
+               $tag_add->tag_tag_id = $cat_id;
+               $tag_add->save();
+           }
+       }
+       
+       if(!empty($request->space_tags)) {
+           $tags = json_decode($request->space_tags);
            foreach($tags as $tag) {
                $cat = Tag::where('name', $tag->value)->where('active', 1)->first();
                if(!empty($cat)) {

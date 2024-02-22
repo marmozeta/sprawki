@@ -43,7 +43,11 @@ class Element extends Model
     
     public function getElementForEdit($element_id) {
         return DB::table('elements')
-            ->select(DB::raw('elements.*, GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send'))
+            ->select(DB::raw('elements.*,
+                    GROUP_CONCAT(CASE WHEN tags.group_slug="tag" THEN tags.name END SEPARATOR ",") AS tag_tags, 
+                    GROUP_CONCAT(CASE WHEN tags.group_slug="space" THEN tags.name END SEPARATOR ",") AS space_tags, 
+                    GROUP_CONCAT(CASE WHEN tags.group_slug="region" THEN tags.name END SEPARATOR ",") AS region_tags, 
+                    GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send'))
             //->select(DB::raw('COUNT(comments.comm_id) AS comments'))
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')

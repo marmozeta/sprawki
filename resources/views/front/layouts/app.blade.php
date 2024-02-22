@@ -33,6 +33,7 @@
 	<link rel="stylesheet" href="{{asset('css/salvattore.css')}}">
 	<link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css')}}">   
         <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240222">
         <link rel="stylesheet" href="{{asset('css/ct-ultimate-gdpr.min.css')}}" />
