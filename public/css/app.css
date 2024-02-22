@@ -1,3 +1,7 @@
+body {
+    font-family: Open Sans;
+}
+
 .btn-circle.btn-sm {
   border-radius: 100%;
   width: 30px;
@@ -664,6 +668,13 @@ a[data-totalitems="0"]:before {
     font-family: Oswald;
     font-weight: 400;
     color: #272727;
+    font-size: 15px;
+}
+
+.comment_user img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
 }
 
 .comment_content {
@@ -671,6 +682,7 @@ a[data-totalitems="0"]:before {
     line-height: 20px;
     font-family: Open Sans;
     color: #272727;
+    align-self: center;
 }
 
 .argument_line {
@@ -693,4 +705,71 @@ a[data-totalitems="0"]:before {
     line-height: 20px;
     font-family: Open Sans;
     color: #272727;
+}
+
+#profile .bg_picture {
+    height: 291px;
+    background-size: 100% auto;
+}
+
+#profile .avatar_image {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    border: 3px solid #fff;
+    margin-top: -75px;
+    margin-left: 10px;
+}
+
+#profile .info a {
+    color: #272727;
+    font-family: Open Sans;
+}
+
+#profile .info a i {
+    color: #ef5353;
+}
+
+#profile h3 {
+    font-family: Oswald;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+#profile h4 {
+    font-family: Oswald;
+    font-weight: 300;
+}
+
+#profile .comment_line {
+    padding: 10px 0;
+    background: #fff;
+    border-bottom: 3px solid #f5f6f7;
+}
+
+#profile .like_line {
+    color: #272727;
+}
+
+#profile .like_line img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+#profile .like_line {
+    padding: 10px 0;
+    border-bottom: 3px solid #f5f6f7;
+}
+
+#profile .like_line .in_reply {
+    color: #a9a9a9;
+}
+
+#profile .friendly-name {
+    color: #272727;
+}
+
+#profile .friendly-name:hover {
+    text-decoration: none;
 }

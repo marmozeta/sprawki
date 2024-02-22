@@ -25,8 +25,8 @@
                                 <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->title, 0, 50) }}</a>
                             </div>
                             <div class="col-8" style="margin: 5px 0;">
-                                <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30">&nbsp;
-                                <span style="text-transform: none;">@marmozeta</span>
+                                <img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="user" class="rounded-circle" width="30">&nbsp;
+                                <span style="text-transform: none;">{{ '@'.$element->friendly_name }}</span>
                             </div>
                            <div class='col-4 icons justify-content-end mt-3'>
                                     <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span>

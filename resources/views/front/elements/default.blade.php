@@ -47,8 +47,8 @@
                     {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.Y H:i') }} 
                     </div>
                 <div class="col-3 comment_user">
-                    <img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="30">&nbsp;
-                               @ {{ $comment->name}}
+                    <img src="{{ asset('images/users/') }}/{{ $comment->picture }}" alt="user" class="rounded-circle" width="30">&nbsp;
+                               {{ '@'.$comment->friendly_name}}
                     </div>
                     <div class="col-7 comment_content">
                     {{ $comment->comment }}

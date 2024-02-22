@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Admin\Controllers\MenuController;
 use App\Models\Menu;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,10 +127,13 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     
     Route::get('/', function () { return redirect()->to('/sprawki');});
     
-    
     foreach(Menu::all() as $menu) {
         Route::get('/'.$menu->slug, 'HomeController@index')->name('front.home');
         Route::get($menu->slug.'/{elementid}-{elementslug}', 'HomeController@show')->name('front.element');
     }
     
-    });
+    foreach(User::all() as $user) {
+        Route::get('/'.$user->friendly_name, 'UserController@profile')->name('front.profile');
+    }
+    
+});
