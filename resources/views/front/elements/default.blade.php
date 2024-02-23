@@ -42,7 +42,7 @@
             <h3 class="w-100 text-center" id="komentarze">Komentarze</h3>
             <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
                 @foreach($comments as $comment)
-                        @include('front.elements.loop.comment') 
+                        @include('front.elements.loop.simply_comment') 
                 @endforeach
                    
         </div>
