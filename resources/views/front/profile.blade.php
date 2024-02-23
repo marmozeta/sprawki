@@ -30,7 +30,9 @@
                 </div>
             </div>
             <div class="col-2 text-right">
-                @if(Auth::check() && $user->id == Auth::user()->id)
+                @if(!Auth::check()) 
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Obserwuj</a>
+                @endif(Auth::check() && $user->id == Auth::user()->id)
                     <a href="#" class="btn btn-primary">Edytuj profil</a>
                 @elseif($logged_in_is_observable)
                     @csrf
@@ -102,6 +104,7 @@
 @endsection
 
 @section('scripts')
+    @if(Auth::check())
     <script>
         $(document).on('click', '#add_to_observe', function() {
             var button = $(this);
@@ -153,4 +156,5 @@
         return false;
     });
     </script>
+    @endif
 @endsection
