@@ -32,7 +32,7 @@
             <div class="col-2 text-right">
                 @if(!Auth::check()) 
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Obserwuj</a>
-                @endif(Auth::check() && $user->id == Auth::user()->id)
+                @elseif(Auth::check() && $user->id == Auth::user()->id)
                     <a href="#" class="btn btn-primary">Edytuj profil</a>
                 @elseif($logged_in_is_observable)
                     @csrf
