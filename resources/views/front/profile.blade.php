@@ -1,10 +1,5 @@
 @extends('front.layouts.app')
 
-
-@section('top_buttons')
-    <button class="btn btn-primary btn-sm filter-button text-bold"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</button>
-@endsection
-
 @section('content')
 <div id="profile" class="container-fluid pt-5">
     <div class="container">
@@ -30,15 +25,19 @@
                 <h3>{{ $user->name }}</h3>
                 <h4>{{ '@'.$user->friendly_name }}</h4>
                 <div class="info d-flex pb-5" style="column-gap: 30px;">
-                    <a><i class="fa-solid fa-users"></i> 13 obserwowanych</a>
-                    <a><i class="fa-regular fa-eye"></i> 1 obserwujący</a>
+                    <a href="/{{ $user->friendly_name }}/obserwowani#obserwowani"><i class="fa-solid fa-users"></i> {{ $observed }} obserwowanych</a>
+                    <a href="/{{ $user->friendly_name }}/obserwowani#obserwujacy"><i class="fa-regular fa-eye"></i> {{ $is_observable }} obserwujący</a>
                 </div>
             </div>
             <div class="col-2 text-right">
                 @if(Auth::check() && $user->id == Auth::user()->id)
                     <a href="#" class="btn btn-primary">Edytuj profil</a>
+                @elseif($logged_in_is_observable)
+                    @csrf
+                    <a href="#" id="is_observed" class="btn btn-primary">Obserwujesz</a>
                 @else
-                    <a href="#" class="btn btn-primary">Obserwuj</a>
+                    @csrf
+                    <a href="#" id="add_to_observe" class="btn btn-primary">Obserwuj</a>
                 @endif
             </div>
         </div>
@@ -100,4 +99,58 @@
     @endif
     </div>     
 </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click', '#add_to_observe', function() {
+            var button = $(this);
+        $.ajax({
+            headers: {
+                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            type: 'POST',
+            url: '{{ url("social/observed/save") }}',
+                    data: {user_id: {{ Auth::user()->id }}, observed_id: {{ $user->id }}},
+                    success: function (data){
+                       if(data == 1) {
+                           button.parent().append('<a href="#" id="is_observed" class="btn btn-primary">Obserwujesz</a>');
+                           button.remove();
+                       }
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }});
+        return false;
+    });
+    
+    $(document).on('mouseover', '#is_observed', function() {
+        $(this).html('Przestań obserwować');
+    });
+    
+    $(document).on('mouseout', '#is_observed', function() {
+        $(this).html('Obserwujesz');
+    });
+    
+    $(document).on('click', '#is_observed', function() {
+            var button = $(this);
+        $.ajax({
+            headers: {
+                 'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            type: 'POST',
+            url: '{{ url("social/observed/remove") }}',
+                    data: {user_id: {{ Auth::user()->id }}, observed_id: {{ $user->id }}},
+                    success: function (data){
+                       if(data == 1) {
+                           button.parent().append('<a href="#" id="add_to_observe" class="btn btn-primary">Obserwuj</a>');
+                           button.remove();
+                       }
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }});
+        return false;
+    });
+    </script>
 @endsection

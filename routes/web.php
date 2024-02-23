@@ -126,6 +126,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('social/media/remove','SocialController@fileDestroy')->name('social.media.remove')->middleware('auth');
     Route::post('social/comment/save', 'SocialController@save_comment')->name('social.comment.save')->middleware('auth');
     Route::post('social/like/save', 'SocialController@save_like')->name('social.like.save');
+    Route::post('social/observed/save', 'SocialController@add_to_observed')->name('social.observed.save');
+    Route::post('social/observed/remove', 'SocialController@remove_from_observed')->name('social.observed.remove');
     
     Route::get('wiadomosci', 'ChatController@index')->name('front.chat');
     Route::post('chat/participants/get', 'ChatController@get_participants')->name('front.participants.get');
@@ -142,6 +144,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     foreach(User::all() as $user) {
         if(!empty($user->friendly_name)) {
             Route::get('/'.$user->friendly_name, 'UserController@profile')->name('front.profile');
+            Route::get('/'.$user->friendly_name.'/obserwowani', 'UserController@observed')->name('front.observed');
         }
     }
     

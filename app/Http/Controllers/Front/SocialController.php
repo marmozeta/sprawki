@@ -8,6 +8,7 @@ use App\Models\Element;
 use App\Models\Menu;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Observed;
 use Illuminate\Support\Facades\Auth;
 
 class SocialController extends Controller
@@ -79,6 +80,22 @@ class SocialController extends Controller
             $issetLike->delete();
             $data = -1;
         }
+        
+        return response($data, 200);
+    }
+    
+    public function add_to_observed(Request $request) {
+        $observed = new Observed;
+        $observed->user_id = $request->user_id;
+        $observed->observed_id = $request->observed_id;
+        $data = $observed->save();
+        
+        return response($data, 200);
+    }
+    
+    public function remove_from_observed(Request $request) {
+        $observed = Observed::where('user_id', $request->user_id)->where('observed_id', $request->observed_id)->first();
+        $data = $observed->delete();
         
         return response($data, 200);
     }

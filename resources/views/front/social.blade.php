@@ -5,7 +5,7 @@
 @endsection
 
 @section('top_buttons')
-    <button class="btn btn-primary btn-sm filter-button text-bold"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</button>
+<a class="btn btn-primary btn-sm filter-button text-bold" href="/{{ Auth::user()->friendly_name }}/obserwowani#obserwowani"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</a>
 @endsection
 
 @section('content')
