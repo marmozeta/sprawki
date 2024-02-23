@@ -5,7 +5,9 @@
 @endsection
 
 @section('top_buttons')
-<a class="btn btn-primary btn-sm filter-button text-bold" href="/{{ Auth::user()->friendly_name }}/obserwowani#obserwowani"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</a>
+    @if(Auth::check())
+        <a class="btn btn-primary btn-sm filter-button text-bold" href="/{{ Auth::user()->friendly_name }}/obserwowani#obserwowani"><i class="fa fa-users"></i>&nbsp;&nbsp; Obserwowani</a>
+    @endif
 @endsection
 
 @section('content')
