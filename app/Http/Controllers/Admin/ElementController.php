@@ -60,8 +60,10 @@ class ElementController extends Controller
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->icon = $request->icon;
-        $flag = json_decode($request->flag);
-        $element->flag = $flag[0]->code;
+        if(!empty($request->flag)) {
+            $flag = json_decode($request->flag);
+            $element->flag = $flag[0]->code;
+        }
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
@@ -184,8 +186,10 @@ class ElementController extends Controller
         $element->image = $request->image;
         $element->description = $request->desc;
         $element->icon = $request->icon;
-        $flag = json_decode($request->flag);
-        $element->flag = $flag[0]->code;
+        if(!empty($request->flag)) {
+            $flag = json_decode($request->flag);
+            $element->flag = $flag[0]->code;
+        }
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
