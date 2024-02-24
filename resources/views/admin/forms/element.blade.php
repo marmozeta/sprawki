@@ -402,10 +402,10 @@
         enabled: 1, // suggest tags after a single character input
         classname : 'extra-properties' // custom class for the suggestions dropdown
     }});
-           }
+          
            
            const flag = tagify.whitelist.find(({ code }) => code === "{{ $element->flag }}");
-           tagify.addTags([flag])
+           tagify.addTags([flag]);}
 </script>
 @endsection
 
