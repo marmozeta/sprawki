@@ -403,9 +403,11 @@
         classname : 'extra-properties' // custom class for the suggestions dropdown
     }});
           
-           
-           const flag = tagify.whitelist.find(({ code }) => code === "{{ $element->flag }}");
-           tagify.addTags([flag]);}
+    @if(isset($element))        
+    const flag = tagify.whitelist.find(({ code }) => code === "{{ $element->flag }}");
+    tagify.addTags([flag]);
+    @endif
+    }
 </script>
 @endsection
 
