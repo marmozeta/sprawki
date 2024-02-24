@@ -20,7 +20,6 @@ class SocialController extends Controller
         $element = new Element;
         $element->title = '';
         $element->slug = '';
-        $element->teaser = '';
         $element->image = $request->file;
         $element->description = $request->desc;
         $element->is_new = 0;
