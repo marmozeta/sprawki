@@ -10,6 +10,7 @@ use App\Models\Comment;
 use App\Models\Like;
 use App\Models\Observed;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class SocialController extends Controller
 {
@@ -19,14 +20,14 @@ class SocialController extends Controller
 
         $element = new Element;
         $element->title = '';
-        $element->slug = '';
+        $element->slug = Str::random();
         $element->image = $request->file;
         $element->description = $request->desc;
         $element->is_new = 0;
         $element->is_hot = 0;
-        $element->user_id = Auth::user()->get('id');
+        $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author = Auth::user()->get('name');
+        $element->author = Auth::user()->name;
         $element->save();
         
         return redirect('/spolecznosc');
