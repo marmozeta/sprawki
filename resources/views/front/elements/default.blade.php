@@ -1,16 +1,33 @@
 <div class="container">
-    <div class="row mt-5">
+    <div class="row">
         <div class="col-8 offset-2 text-center">
-            <h1 class="element_title mt-4 pt-5 text-center">{{ $element->title }}</h1>
+            <h1 class="element_title pt-5 text-center mb-0">{{ $element->title }}</h1>
+            <div class="info d-flex justify-content-center mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
+                <div class="col-4">
+                    <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
+                    <a href="/{{ $element->friendly_name }}" class="text-dark px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
+                </div>
+                <div class="col-4 align-self-center text-dark">
+                    @if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif
+                </div>
+                <div class="col-4 d-flex align-self-center justify-content-end" style="column-gap: 10px;">
+                    <a class="twitter-share-button"
+                       href="https://twitter.com/intent/tweet?title={{ $element->title }}"><i class="fa-brands fa-twitter"></i></a> 
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}&title={{ $element->title }}"><i class="fa-brands fa-linkedin"></i></a>
+                    <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="" data-size="">
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa-brands fa-facebook"></i></a>
+                    </div> 
+                </div>
+            </div>
         </div>
         @if(!empty($element->image))
-        <div class="col-8 offset-2 image my-4">
+        <div class="col-8 offset-2 image mb-2">
             <div class="divide long"><i class="fa-solid fa-video"></i></div>
-            <img class="img-fluid rounded" src="{{ asset('images/elements/'.$element->image) }}" />
+            <img class="img-fluid rounded" src="{{ asset('images/elements/'.$element->image) }}"  style="padding: 0 5em;"/>
         </div>
         @elseif(!empty($element->youtube))
-        <div class="col-8 offset-2 image my-4">
-            <iframe class="rounded" id="ytplayer" type="text/html" width="100%" height="480" src="{{ $element->youtube }}" frameborder="0"></iframe>
+        <div class="col-8 offset-2 image mb-2">
+            <iframe class="rounded" id="ytplayer" type="text/html" width="100%" height="400" src="{{ $element->youtube }}" frameborder="0" style="padding: 0 5em;"></iframe>
         </div>
         @endif
         

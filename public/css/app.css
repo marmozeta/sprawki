@@ -253,6 +253,10 @@ h1.element_title {
     border-top: 2px solid #ef5353;
 }
 
+.divide.long {
+    margin: 20px 0 15px 0;
+}
+
 .divide.long:after {
     width: 100%;
 }
