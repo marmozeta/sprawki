@@ -20,33 +20,52 @@ class Comment extends Model
             ->get();
     }
     
-    public function getCommentsByElement($element_id) {
-        return DB::table('comments AS c')
+    public function getCommentsByElement($element_id, $parent_id, $user_id, $ip) {
+        $result = DB::table('comments AS c')
             ->selectRaw('c.*, users.friendly_name, users.name, users.picture, u2.friendly_name AS owner_friendly_name, 
-                u2.name AS owner_name, u2.picture AS owner_picture, 
-                    CASE WHEN cr.comment IS NOT NULL THEN cr.comment WHEN e.title IS NOT NULL THEN e.title ELSE SUBSTR(e.description, 0, 50) END AS teaser
+                u2.name AS owner_name, u2.picture AS owner_picture
                     ')
             ->join('elements AS e', 'e.element_id', '=', 'c.element_id')
             ->leftJoin('users AS u2', 'e.user_id', '=', 'u2.id')
             ->leftJoin('users', 'c.user_id', '=', 'users.id')
-            ->leftJoin('comments AS cr', 'c.comment_comm_id', '=', 'cr.comm_id')
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id) as likes'))
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = e.element_id AND comments.comment_comm_id = c.comm_id) as comments'))
             ->whereNull('c.deleted_at')
             ->where('c.element_id', $element_id)
-            ->get();
+            ->where('c.comment_comm_id', $parent_id);
+        
+        if(!empty($user_id)) $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.user_id = '.$user_id.') as is_liked'));
+        else $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.ip = "'.$ip.'") as is_liked'));
+
+        return $result->get();
     }
     
-    public function getCommentsByUser($user_id) {
-        return DB::table('comments AS c')
+    public function getCommentsByUser($parent_id, $user_id, $ip, $logged_user) {
+        $result = DB::table('comments AS c')
             ->selectRaw('c.*, users.friendly_name, users.name, users.picture, u2.friendly_name AS owner_friendly_name, 
-                u2.name AS owner_name, u2.picture AS owner_picture, 
-                    CASE WHEN cr.comment IS NOT NULL THEN cr.comment WHEN e.title IS NOT NULL THEN e.title ELSE SUBSTR(e.description, 0, 50) END AS teaser
-                    ')
+                u2.name AS owner_name, u2.picture AS owner_picture, u3.friendly_name AS comment_friendly_name, 
+                u3.name AS comment_name, u3.picture AS comment_picture, 
+                    CASE WHEN cr.comment IS NOT NULL THEN cr.comment WHEN e.title IS NOT NULL THEN e.title ELSE SUBSTR(e.description, 0, 50) END AS teaser')
             ->join('elements AS e', 'e.element_id', '=', 'c.element_id')
             ->leftJoin('users AS u2', 'e.user_id', '=', 'u2.id')
             ->leftJoin('users', 'c.user_id', '=', 'users.id')
             ->leftJoin('comments AS cr', 'c.comment_comm_id', '=', 'cr.comm_id')
+            ->leftJoin('users AS u3', 'cr.user_id', '=', 'users.id')
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0) as owner_likes'))                    
+            ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id) as likes'))           
             ->whereNull('c.deleted_at')
             ->where('c.user_id', $user_id)
-            ->get();
+            ->where('c.comment_comm_id', $parent_id);
+        
+            if(!empty($logged_user)) {
+                $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.user_id = '.$logged_user.') as is_liked'));
+                $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0 AND likes.user_id = '.$logged_user.') as owner_is_liked'));
+            }
+            else {
+                $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.ip = "'.$ip.'") as is_liked'));
+                 $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as owner_is_liked'));
+            }
+
+            return $result->groupBy('c.comm_id')->get();
     }
 }

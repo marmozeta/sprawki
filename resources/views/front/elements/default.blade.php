@@ -59,7 +59,12 @@
             <h3 class="w-100 text-center" id="komentarze">Komentarze</h3>
             <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
                 @foreach($comments as $comment)
-                        @include('front.elements.loop.simply_comment') 
+                    @include('front.elements.loop.simply_comment') 
+                    @if($comment->has_children)
+                        @foreach($comment->children as $comment)
+                            @include('front.elements.loop.simply_comment') 
+                        @endforeach 
+                    @endif
                 @endforeach
                    
         </div>
@@ -78,10 +83,6 @@
                     <div class="col-12 argument_desc">
                     {{ $argument->description }}
                     </div>
-                     <!--<div class="col-12 text-right" style="font-size: 0.8em;">
-                        <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">5</span> Polub</span>
-                        <span class="mx-3"><i class="fa-regular fa-comments"></i> Odpowiedz</span>
-                     </div>-->
                       </div>
                 @endforeach
                    
@@ -99,7 +100,7 @@
         <h5 class="modal-title" id="newCommentModalLabel">Nowy komentarz</h5>
       </div>   
         <p style="margin: 0 auto 5px auto;" class="pt-3">Odpowiadasz na post:</p>
-        <div class="content item default comment">{{ $element->title }}</div>
+        <div class="content item default comment">{{ $element->title }} {!! mb_substr($element->description, 0, 100) !!}</div>
         
         <form action="{{ route('social.comment.save') }}" method="post" class="w-100" id="post-save">
               
@@ -109,6 +110,7 @@
                    <div class="w-100">
                     <textarea id="social_element" name="comment" class="form-control" style="width: 100%; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
                     <input type="hidden" name="element_id" value="{{ $element->element_id }}" />
+                    <input type="hidden" name="comment_id" value="" />
                     <input type="hidden" name="redirect" value="{{ Request::path() }}#komentarze" />
                     </div>
                    @csrf
@@ -128,6 +130,7 @@
 <script>
 $('.toggle_like').on('click', function() {
     var element_id = $(this).attr('data-element-id');
+    var comment_id = $(this).attr('data-comment-id');
     var element = $(this);
     $.ajax({
         headers: {
@@ -135,7 +138,7 @@ $('.toggle_like').on('click', function() {
         },
         type: 'POST',
         url: '{{ url("social/like/save") }}',
-        data: {element_id: element_id},
+        data: { element_id: element_id, comment_id: comment_id },
         success: function (data){
             console.log(data);
             var count = parseInt(element.find('.count').html())+parseInt(data);
@@ -150,5 +153,19 @@ $('.toggle_like').on('click', function() {
     });
     return false;
 })
+
+var newCommentModal = document.getElementById('newCommentModal')
+newCommentModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  
+  var comment_id = jQuery(button).attr('data-comment-id');
+  // If necessary, you could initiate an AJAX request here
+  // and then do the updating in a callback.
+  //
+  var modalDivContent = newCommentModal.querySelector('[name="comment_id"]');
+  jQuery(modalDivContent).val(comment_id);
+});
 </script>
 @endsection

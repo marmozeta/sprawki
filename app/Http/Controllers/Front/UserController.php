@@ -23,7 +23,15 @@ class UserController extends Controller
         $elements = $elementModel->getSocialElementsByUser($user->id);
         
         $commentModel = new Comment;
-        $comments = $commentModel->getCommentsByUser($user->id);
+        $comments = $commentModel->getCommentsByUser(0, $user->id, request()->getClientIp(), Auth::user()->id);
+        foreach($comments as $key=>$comm) {
+            $comments_l2 = $commentModel->getCommentsByUser($comm->comm_id, $user->id, request()->getClientIp(), Auth::user()->id);
+            if(!empty($comments_l2)) {
+                $comments[$key]->has_children = true;
+                $comments[$key]->children = $comments_l2;
+            }
+            else $comments[$key]->has_children = false;
+        }
         
         $menu = Menu::where('is_social', 1)->first();
         

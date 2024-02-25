@@ -1,6 +1,7 @@
 @extends('front.layouts.app')
 
 @section('content')
+@csrf
 <div id="profile" class="container-fluid pt-5">
     <div class="container">
         <div class="row">
@@ -35,10 +36,8 @@
                 @elseif(Auth::check() && $user->id == Auth::user()->id)
                     <a href="#" class="btn btn-primary">Edytuj profil</a>
                 @elseif($logged_in_is_observable)
-                    @csrf
                     <a href="#" id="is_observed" class="btn btn-primary">Obserwujesz</a>
                 @else
-                    @csrf
                     <a href="#" id="add_to_observe" class="btn btn-primary">Obserwuj</a>
                 @endif
             </div>
@@ -155,6 +154,32 @@
                     }});
         return false;
     });
+    
+$('.toggle_like').on('click', function() {
+    var element_id = $(this).attr('data-element-id');
+    var comment_id = $(this).attr('data-comment-id');
+    var element = $(this);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },
+        type: 'POST',
+        url: '{{ url("social/like/save") }}',
+        data: { element_id: element_id, comment_id: comment_id },
+        success: function (data){
+            console.log(data);
+            var count = parseInt(element.find('.count').html())+parseInt(data);
+            element.find('.count').html(count);
+            if(parseInt(data) == 1) element.find('i').removeClass('fa-regular').addClass('fa-solid');
+            else element.find('i').removeClass('fa-solid').addClass('fa-regular');
+            console.log("Like saved!!");
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+    return false;
+})
     </script>
     @endif
 @endsection

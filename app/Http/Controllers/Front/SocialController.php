@@ -58,6 +58,7 @@ class SocialController extends Controller
         $comment->element_id = $request->element_id;
         $comment->user_id = Auth::user()->id;
         $comment->comment = $request->comment;
+        if(!empty($request->comment_id)) $comment->comment_comm_id = $request->comment_id;
         $comment->save();
         
         return redirect('/'.$request->redirect);
@@ -66,13 +67,28 @@ class SocialController extends Controller
     public function save_like(Request $request)
     {
         if(Auth::check()) {
-            $issetLike = Like::where('element_element_id', $request->element_id)->where('user_id', Auth::user()->id)->first();
+            if(!empty($request->comment_id)) {
+                $issetLike = Like::where('comment_comm_id', $request->comment_id)->where('user_id', Auth::user()->id)->first();
+            }
+            else {
+                $issetLike = Like::where('element_element_id', $request->element_id)->where('user_id', Auth::user()->id)->first();
+            }
+        }
+        else {
+            if(!empty($request->comment_id)) {
+                $issetLike = Like::where('comment_comm_id', $request->comment_id)->where('ip', $request->getClientIp())->first();
+            }
+            else {
+                $issetLike = Like::where('element_element_id', $request->element_id)->where('ip', $request->getClientIp())->first();
+            }
         }
         
         if(empty($issetLike)) {
             $like = new Like;
             $like->element_element_id = $request->element_id;
+            if(!empty($request->comment_id)) $like->comment_comm_id = $request->comment_id;
             if(Auth::check()) $like->user_id = Auth::user()->id;
+            $like->ip = $request->getClientIp();
             $like->save();
             $data = 1;
         }

@@ -40,7 +40,7 @@ class HomeController extends Controller
         $menu = Menu::where('slug', $slug)->first();
         
         $elementModel = new Element;
-        $element = $elementModel->getElement($element_id, (Auth::check()) ? Auth::user()->id : 0);
+        $element = $elementModel->getElement($element_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
         
         $catModel = new Category;
         $product_categories = $catModel->getElementCategories($element_id);
@@ -52,7 +52,15 @@ class HomeController extends Controller
         $is_bought = $orderModel->checkUserOrder(Auth::id(), $element_id);
         
         $commentModel = new Comment;
-        $comments = $commentModel->getCommentsByElement($element_id);
+        $comments = $commentModel->getCommentsByElement($element_id, 0, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+        foreach($comments as $key=>$comm) {
+                $comments_l2 = $commentModel->getCommentsByElement($element_id, $comm->comm_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+                if(!empty($comments_l2)) {
+                    $comments[$key]->has_children = true;
+                    $comments[$key]->children = $comments_l2;
+                }
+                else $comments[$key]->has_children = false;
+        }
                 
         $argumentModel = new ElementArgument;
         $arguments = $argumentModel->getArgumentsByElement($element_id);
