@@ -15,6 +15,7 @@ use App\Models\MenuAttribute;
 use Illuminate\Support\Str;
 use App\Models\ElementMediaUpload;
 use App\Models\MediaUpload;
+use Illuminate\Support\Facades\Auth;
  
 class ElementController extends Controller
 {
