@@ -758,8 +758,8 @@ a[data-totalitems="0"]:before {
 }
 
 .like_line img {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     object-fit: cover;
 }
 
@@ -784,8 +784,8 @@ a[data-totalitems="0"]:before {
 }
 
 .user-picture {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
     object-fit: cover;
 }
 
