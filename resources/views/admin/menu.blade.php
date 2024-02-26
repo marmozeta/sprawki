@@ -61,7 +61,9 @@
                                                     <td>{{ Carbon\Carbon::parse($menu->created_at) }}</td>
                                                     <td class="text-center"><a href="{{ route('admin.forms.menu.edit', ['id' => $menu->menu_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.menu.remove', ['id' => $menu->menu_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @if(!$menu->is_constant)
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.menu.remove', ['id' => $menu->menu_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>
