@@ -788,3 +788,25 @@ a[data-totalitems="0"]:before {
     height: 40px;
     object-fit: cover;
 }
+
+.dropdown-menu {
+    padding: 0;
+    border-radius: 0;
+}
+
+.dropdown-menu.show {
+    top: 5px !important;
+    left: 5px !important;
+}
+
+.dropdown-menu li a {
+    font-family: Oswald;
+    padding: 10px 20px;
+    border-bottom: 2px solid #eee;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.dropdown-menu li:last-child a {
+    border-bottom: 0;
+}

@@ -43,8 +43,7 @@
 					@if(Auth::check())
                                             <a href="#" class="fh5co-menu-btn" style="margin-right: 7px;" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i></a>
                                           <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="/{{ Auth::user()->friendly_name }}">Profil</a></li>
-                                            <li><a class="dropdown-item" href="#">Wiadomości</a></li>
+                                            <li><a class="dropdown-item" href="/{{ Auth::user()->friendly_name }}">Profil</a></li>
                                             <li><a class="dropdown-item" href="#">Moje zakupy</a></li>
                                             <li><a class="dropdown-item" href="{{ route('logout.perform') }}">Wyloguj</a></li>
                                           </ul>
