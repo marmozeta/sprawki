@@ -24,7 +24,6 @@
                 </h5> 
             @endif
             <div class="divide"><i class="fa-solid fa-store"></i></div>
-            <h4 class="teaser text-justify">{{ $element->teaser }}</h4>
             <h3 class="price">Cena: {{ number_format($element->price, 2, ',', ' ') }} zł</h3>
             <div class="row mt-5">
                 @if(!$element->is_virtual)
