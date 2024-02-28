@@ -19,7 +19,7 @@ class SocialController extends Controller
         $menu = Menu::where('is_social', 1)->first();
 
         $element = new Element;
-        $element->title = '';
+        $element->title = $request->title;
         $element->slug = Str::random();
         $element->image = $request->file;
         $element->description = $request->desc;
