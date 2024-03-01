@@ -11,7 +11,7 @@
 		<div class="result"></div>
 	</div>
 	<!--rightbox-->
-	<div class="box-2 img-result {{(!isset($element->image))?'d-none':''}} col-4 px-0">
+	<div class="box-2 img-result {{(!isset($element->image))?'d-none':''}} col-4 px-0" style="margin-left: 15px;">
 		<!-- result of crop -->
 		<img class="cropped" src="/public/images/elements/{{ old('image', $element->image ?? '') }}" alt="">
                 @if(isset($element->image))
