@@ -29,3 +29,20 @@ img {
     border-bottom: none !important;
     background: transparent !important;
 }
+
+.result {
+    position: relative;
+}
+
+.result #removeImgButton {
+    background: #c22027;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}

@@ -115,22 +115,27 @@
     cropper = '';
 
 $(document).on('click', 'input[name="plik"]', function() {
-   var img_src = '/public/media/'+$(this).parent().parent().find('.dz-filename span').html();
+    var img_src = '/public/media/'+$(this).parent().parent().find('.dz-filename span').html();
 
-   let img = document.createElement('img');
-				img.id = 'image';
-				img.src = img_src
-				// clean result before
-				result.innerHTML = '';
-				// append new image
-        result.appendChild(img);
-				// show save btn and options
-				save.classList.remove('d-none');
-				options.classList.remove('d-none');
-				// init cropper
-				cropper = new Cropper(img);
-                                cropper.setAspectRatio(1.777777);
-                                $('.left-box').removeClass('d-none');
+    let img = document.createElement('img');
+    img.id = 'image';
+    img.src = img_src
+    result.innerHTML = '';
+    result.appendChild(img);
+    
+    let removeButton = document.createElement('i');
+    removeButton.classList.add('fa');
+    removeButton.classList.add('fa-remove');
+    removeButton.id = 'removeImgButton';
+    result.appendChild(removeButton);
+                                
+    // show save btn and options
+    save.classList.remove('d-none');
+    options.classList.remove('d-none');
+    // init cropper
+    cropper = new Cropper(img);
+    cropper.setAspectRatio(1.777777);
+    $('.left-box').removeClass('d-none');
 });
 
 
@@ -165,6 +170,12 @@ save.addEventListener('click',(e)=>{
   // remove hide class of img
   cropped.classList.remove('d-none');
   img_result.classList.remove('d-none');
+});
+
+$(document).on('click', '#removeImgButton', function() {
+   $(this).parent().find('img').remove();
+   cropper.destroy();
+   $(this).remove();
 });
 </script>
 @endsection
