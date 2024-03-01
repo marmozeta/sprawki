@@ -170,12 +170,15 @@ save.addEventListener('click',(e)=>{
   // remove hide class of img
   cropped.classList.remove('d-none');
   img_result.classList.remove('d-none');
+  $('.removeUploadedImg').hide();
 });
 
 $(document).on('click', '#removeImgButton', function() {
    $(this).parent().find('img').remove();
    cropper.destroy();
+   $(this).parent().parent().parent().parent().find('.cropped').attr('src', '');
    $(this).remove();
+   $('input[name=\'image\']').val('');
 });
 </script>
 @endsection
