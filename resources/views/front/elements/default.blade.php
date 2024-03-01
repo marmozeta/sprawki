@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-8 offset-2 text-center">
             <h1 class="element_title pt-5 text-center mb-0">{{ $element->title }}</h1>
-            <div class="info d-flex justify-content-center mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
+            <div class="info d-flex justify-content-center mt-5 mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
                 <div class="col-4">
                     <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
                     <a href="/{{ $element->friendly_name }}" class="text-dark px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
@@ -11,12 +11,11 @@
                     @if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif
                 </div>
                 <div class="col-4 d-flex align-self-center justify-content-end" style="column-gap: 10px;">
-                    <a class="twitter-share-button"
-                       href="https://twitter.com/intent/tweet?title={{ $element->title }}"><i class="fa-brands fa-twitter"></i></a> 
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}&title={{ $element->title }}"><i class="fa-brands fa-linkedin"></i></a>
-                    <div class="fb-share-button" data-href="{{ url()->current() }}" data-layout="" data-size="">
-                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa-brands fa-facebook"></i></a>
-                    </div> 
+                    <a target="_blank" class="twitter-share-button"
+                       href="https://twitter.com/intent/tweet?title={{ $element->text_for_social }}"><i class="fa-brands fa-x-twitter"></i></a> 
+                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}&title={{ $element->text_for_social }}"><i class="fa-brands fa-linkedin"></i></a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa-brands fa-facebook"></i></a> 
+                    <a href="#" id="copyText" data-link="{{ url()->current() }}"><i class="fa-solid fa-link"></i></a>
                 </div>
             </div>
         </div>
@@ -166,6 +165,12 @@ newCommentModal.addEventListener('show.bs.modal', function (event) {
   //
   var modalDivContent = newCommentModal.querySelector('[name="comment_id"]');
   jQuery(modalDivContent).val(comment_id);
+});
+
+$('#copyText').on('click', function() {
+  var copyText = $(this).attr('data-link');
+  navigator.clipboard.writeText(copyText);
+  alert("Skopiowano link!");
 });
 </script>
 @endsection

@@ -42,6 +42,8 @@ class HomeController extends Controller
         
         $elementModel = new Element;
         $element = $elementModel->getElement($element_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+        $intro = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare tempus vestibulum. Etiam suscipit nisi sed mi pharetra, at egestas metus vestibulum. Mauris sed metus consectetur, faucibus est a, elementum quam. Cras sit amet nunc ut leo ornare facilisis ut a arcu. Aliquam ex eros, consectetur et massa a, vehicula pellentesque dolor. Nulla mollis nisi quis purus ornare efficitur. Duis eleifend odio vitae aliquet dictum. Donec quis metus in ipsum laoreet lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis viverra dignissim ante eu lacinia. Nam eu ultrices nisl. Aenean a vestibulum elit. Nullam non neque sed augue aliquet volutpat. Pellentesque volutpat, erat a tempus rhoncus, lorem dui ornare felis, ac lobortis nulla justo in tellus. Vivamus finibus magna augue, vel iaculis nisl lobortis vitae. Quisque id sodales eros.";
+        $element->text_for_social = $intro.$element->title;
         
         $catModel = new Category;
         $product_categories = $catModel->getElementCategories($element_id);
