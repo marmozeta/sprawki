@@ -33,7 +33,9 @@ class UserController extends Controller
             else $comments[$key]->has_children = false;
         }
         
-        $menu = Menu::where('is_social', 1)->first();
+        $menu_to_slug = Menu::where('is_social', 1)->first();
+        $menuModel = new Menu;
+        $menu = $menuModel->getMenuBySlug($menu_to_slug->slug);
         
         $likesModel = new Like;
         $likes = $likesModel->getLikesByUser($user->id);

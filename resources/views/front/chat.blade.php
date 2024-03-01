@@ -30,7 +30,7 @@
                       @endforeach
                     </div>
                     <div class="my-3 bg-white">
-                        {{ $messages }}
+                        
                         
                     </div>
                     <div><textarea class="form-control"></textarea></div>

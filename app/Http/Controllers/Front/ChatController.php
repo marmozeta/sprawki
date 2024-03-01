@@ -44,11 +44,9 @@ class ChatController extends Controller
         $conversation_id = (int)$hash_tab[0];
         $conversation = Chat::conversations()->getById($conversation_id);
         $participants = $conversation->getParticipants();
-        print_r($participants);exit;
         $messages = Chat::conversation($conversation)->setParticipant($auth_user)->getMessages();
-        
         $message = Chat::message('Hello')
-            ->from($participants->where('messegeable_id', 1)->first())
+            ->from($participants->where('id', Auth::user()->id)->first())
             ->to($conversation)
             ->send();
         
