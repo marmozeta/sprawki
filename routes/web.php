@@ -102,6 +102,10 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     //flagi
     Route::get('admin/flag/get', 'TagController@get_flags')->name('admin.get_flags')->middleware('auth');
     
+    //menu
+    Route::get('admin/settings/hot', 'SettingController@hot')->name('admin.settings.hot')->middleware('auth'); 
+    Route::post('admin/settings/hot/update', 'SettingController@hot_update')->name('admin.settings.hot.update')->middleware('auth'); 
+    
 });
 
 Route::namespace('App\Http\Controllers\Front')->group(function () { 

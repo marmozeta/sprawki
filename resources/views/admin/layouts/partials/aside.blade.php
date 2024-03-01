@@ -55,6 +55,12 @@
                                 aria-expanded="false"><i data-feather="shopping-bag" class="feather-icon"></i><span
                                     class="hide-menu">Sprzedaż </span></a>
                         </li>
+                        <li class="list-divider"></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Ustawienia</span></li>
+                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.settings.hot') }}"
+                                aria-expanded="false"><i data-feather="coffee" class="feather-icon"></i><span
+                                    class="hide-menu">Czy gorący </span></a>
+                        </li>
                      
                     </ul>
                 </nav>
