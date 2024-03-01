@@ -30,11 +30,11 @@ img {
     background: transparent !important;
 }
 
-.result {
+.result, .img-result {
     position: relative;
 }
 
-.result #removeImgButton {
+.result #removeImgButton, .removeUploadedImg i {
     background: #c22027;
     position: absolute;
     top: 0;

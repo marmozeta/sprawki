@@ -11,11 +11,11 @@
 		<div class="result"></div>
 	</div>
 	<!--rightbox-->
-	<div class="box-2 img-result {{(!isset($element->image))?'d-none':''}} col-4">
+	<div class="box-2 img-result {{(!isset($element->image))?'d-none':''}} col-4 px-0">
 		<!-- result of crop -->
 		<img class="cropped" src="/public/images/elements/{{ old('image', $element->image ?? '') }}" alt="">
                 @if(isset($element->image))
-                <a href='#' onClick="$(this).parent().find('.cropped').attr('src', '');$(this).remove();$('input[name=\'image\']').val('');"><i class="fa fa-remove"></i></a>
+                <a href='#' class="removeUploadedImg" onClick="$(this).parent().find('.cropped').attr('src', '');$(this).remove();$('input[name=\'image\']').val('');"><i class="fa fa-remove"></i></a>
                 @endif
 	</div>
 	<!-- input file -->
