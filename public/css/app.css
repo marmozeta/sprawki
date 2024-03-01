@@ -810,3 +810,78 @@ a[data-totalitems="0"]:before {
 .dropdown-menu li:last-child a {
     border-bottom: 0;
 }
+
+#chat .persons {
+    list-style-type: none;
+    padding: 0;
+}
+
+#chat .persons li {
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: #272727;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}    
+
+#chat .persons li div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#chat .persons li span {   
+    font-family: Oswald;
+    font-weight: 400;
+    width: 100%;
+    font-size: 15px;
+}
+
+#chat .persons li small {
+    font-family: Open Sans;
+    font-weight: 300;
+    width: 100%;
+}
+#chat .persons li.active {
+    border: 2px solid #272727;
+}
+
+#chat .recipient_area {
+    background: #fff;
+    padding: 15px;
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.tagify__dropdown__item {
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+}
+
+.tagify__dropdown__item__avatar-wrap img, .tagify__tag__avatar-wrap img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.tagify__tag {
+    background: #e5e5e5;
+}
+
+.tagify__tag-text {
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.tagify__tag > div::before {
+    box-shadow: 0 0 0 1.6em var(--tag-bg) inset;
+}
+
+.tagify__tag__removeBtn:hover+div::before {
+  box-shadow:0 0 0 1.6em  var(--tag-remove-bg,rgba(211,148,148,.3)) inset!important;
+}

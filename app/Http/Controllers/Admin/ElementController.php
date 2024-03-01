@@ -56,6 +56,7 @@ class ElementController extends Controller
         
         $element = new Element;
         $element->title = $request->title;
+        $element->toptitle = $request->toptitle;
         $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
         $element->image = $request->image;
@@ -182,6 +183,7 @@ class ElementController extends Controller
         
         $element = Element::find($id);
         $element->title = $request->title;
+        $element->toptitle = $request->toptitle;
         $element->slug = ($menu->is_social) ? Str::random() : Str::slug($request->title, "-");
         $element->subtitle = $request->subtitle;
         $element->image = $request->image;

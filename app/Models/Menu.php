@@ -23,4 +23,15 @@ class Menu extends Model
             ->whereNull('menus.deleted_at')
             ->get();
     }
+    
+    public function getMenuBySlug($slug) {
+        $result = DB::table('menus')
+            ->select(DB::raw('menus.*, GROUP_CONCAT(attributes.slug SEPARATOR ",") AS attrs_list'))
+            ->leftJoin('menu_attributes', 'menus.menu_id', '=', 'menu_attributes.menu_id')
+            ->leftJoin('attributes', 'attributes.attr_id', '=', 'menu_attributes.attribute_id')
+            ->where('menus.slug', '=', $slug)
+             ->first();
+        $result->attrs_list = explode(',', $result->attrs_list);
+        return $result;
+    }
 }

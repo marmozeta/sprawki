@@ -5,7 +5,16 @@
                                     <div class="caffle d-flex justify-content-between">
                                          <div class="top_left">
                                       <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
-                                        <div class="country">@if(!empty($element->flag)) <span class="fi fi-{{ strtolower($element->flag) }}"></span> @endif @if(!empty($element->country)) {{ $element->country }} @endif</div>
+                                      <div class="country">
+                                            @if(in_array('country', $menu->attrs_list))
+                                                @if(!empty($element->flag)) <span class="fi fi-{{ strtolower($element->flag) }}"></span> @endif 
+                                                @if(!empty($element->country)) {{ $element->country }} @endif
+                                            @elseif(in_array('toptitle', $menu->attrs_list))
+                                                @if(!empty($element->toptitle)) {{ $element->toptitle }} @endif
+                                            @else
+                                                {{ $element->title }}
+                                            @endif
+                                        </div>
                                         </div>
                                         <div class="top_right">
                                       @if(!empty($element->image))

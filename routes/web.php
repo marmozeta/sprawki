@@ -130,7 +130,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('social/observed/remove', 'SocialController@remove_from_observed')->name('social.observed.remove');
     
     Route::get('wiadomosci', 'ChatController@index')->name('front.chat');
+    Route::get('wiadomosci/{hash}', 'ChatController@chat')->name('front.chat.show');
     Route::post('chat/participants/get', 'ChatController@get_participants')->name('front.participants.get');
+    Route::post('chat/messenger/new', 'ChatController@new_chat')->name('front.messenger.new');
     
     Route::get('/', function () { return redirect()->to('/sprawki');});
     

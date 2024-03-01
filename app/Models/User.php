@@ -13,8 +13,7 @@ use Musonza\Chat\Traits\Messageable;
 class User extends Authenticatable
 {
     
-    use Messageable;
-    use HasApiTokens, HasFactory, Notifiable;
+    use Messageable, HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

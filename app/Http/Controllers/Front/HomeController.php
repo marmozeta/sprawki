@@ -19,7 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $slug = request()->path();
-        $menu = Menu::where('slug', $slug)->first();
+        $menuModel = new Menu;
+        $menu = $menuModel->getMenuBySlug($slug);
         $elementModel = new Element;
         $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0);
         $tagsModel = new Tag;
