@@ -40,15 +40,13 @@
         <!-- ============================================================== -->
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative">
             <div class="auth-box row">
-                <div class="col-lg-7 col-md-5 modal-bg-img" style="background-image: url({{ asset('images/login/iStock-1355135275.jpg') }});">
-                </div>
-                <div class="col-lg-5 col-md-7 bg-white">
+                <div class="col-6 offset-3 bg-white">
                     <div class="p-3">
                         <div class="text-center">
                             <br/>
                         </div>
                         <h2 class="mt-3 text-center text-dark">Logowanie</h2>
-                         <form method="POST" action="{{ route('admin.login.perform') }}" class="mt-4">
+                         <form method="POST" action="{{ route('login.perform') }}" class="mt-4">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
