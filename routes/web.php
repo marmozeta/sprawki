@@ -18,93 +18,95 @@ use App\Models\User;
 
 Route::namespace('App\Http\Controllers\Admin')->group(function () { 
     
+    Route::get('/admin/auth/login', 'LoginController@show')->name('admin.auth.login');
     Route::get('/admin/login', 'LoginController@show')->name('admin.login');
     Route::post('/admin/login', 'LoginController@login')->name('admin.login.perform');
+    Route::post('/admin/auth/login', 'LoginController@login')->name('admin.auth.login.perform');
     Route::get('/admin/logout', 'LoginController@logout')->name('admin.logout.perform');  
     
-    Route::get('admin', 'DashboardController@index')->name('admin.dashboard')->middleware('admin'); 
+    Route::get('admin', 'DashboardController@index')->name('admin.dashboard')->middleware('isadmin'); 
     
     //menu
-    Route::get('admin/menu', 'MenuController@index')->name('admin.menu')->middleware('admin'); 
-    Route::get('admin/menu/create', 'MenuController@create')->name('admin.forms.menu')->middleware('admin'); 
-    Route::post('admin/menu/store', 'MenuController@store')->name('admin.forms.menu.store')->middleware('admin'); 
-    Route::post('admin/menu/update/{id}', 'MenuController@update')->name('admin.forms.menu.update')->middleware('admin'); 
-    Route::get('admin/menu/edit/{id}', 'MenuController@edit')->name('admin.forms.menu.edit')->middleware('admin'); 
-    Route::get('admin/menu/remove/{id}', 'MenuController@remove')->name('admin.forms.menu.remove')->middleware('admin'); 
+    Route::get('admin/menu', 'MenuController@index')->name('admin.menu')->middleware('isadmin'); 
+    Route::get('admin/menu/create', 'MenuController@create')->name('admin.forms.menu')->middleware('isadmin'); 
+    Route::post('admin/menu/store', 'MenuController@store')->name('admin.forms.menu.store')->middleware('isadmin'); 
+    Route::post('admin/menu/update/{id}', 'MenuController@update')->name('admin.forms.menu.update')->middleware('isadmin'); 
+    Route::get('admin/menu/edit/{id}', 'MenuController@edit')->name('admin.forms.menu.edit')->middleware('isadmin'); 
+    Route::get('admin/menu/remove/{id}', 'MenuController@remove')->name('admin.forms.menu.remove')->middleware('isadmin'); 
     
         
     //biblioteka mediów
-    Route::get('admin/media', 'MediaUploadController@index')->name('admin.media')->middleware('admin');
-    Route::get('admin/media/create','MediaUploadController@fileCreate')->name('admin.forms.media')->middleware('admin');
-    Route::post('admin/media/store','MediaUploadController@fileStore')->name('admin.forms.media.store')->middleware('admin');
-    Route::post('admin/media/remove','MediaUploadController@fileDestroy')->name('admin.forms.media.remove')->middleware('admin');
-    Route::any('admin/media/fileslist','MediaUploadController@files_list')->name('admin.media.fileslist')->middleware('admin');
+    Route::get('admin/media', 'MediaUploadController@index')->name('admin.media')->middleware('isadmin');
+    Route::get('admin/media/create','MediaUploadController@fileCreate')->name('admin.forms.media')->middleware('isadmin');
+    Route::post('admin/media/store','MediaUploadController@fileStore')->name('admin.forms.media.store')->middleware('isadmin');
+    Route::post('admin/media/remove','MediaUploadController@fileDestroy')->name('admin.forms.media.remove')->middleware('isadmin');
+    Route::any('admin/media/fileslist','MediaUploadController@files_list')->name('admin.media.fileslist')->middleware('isadmin');
     
     //tagi
-    Route::get('admin/tag', 'TagController@index')->name('admin.tag')->middleware('admin'); 
-    Route::get('admin/tag/create', 'TagController@create')->name('admin.forms.tag')->middleware('admin'); 
-    Route::post('admin/tag/store', 'TagController@store')->name('admin.forms.tag.store')->middleware('admin'); 
-    Route::post('admin/tag/update/{id}', 'TagController@update')->name('admin.forms.tag.update')->middleware('admin'); 
-    Route::get('admin/tag/edit/{id}', 'TagController@edit')->name('admin.forms.tag.edit')->middleware('admin'); 
-    Route::get('admin/tag/remove/{id}', 'TagController@remove')->name('admin.forms.tag.remove')->middleware('admin'); 
-    Route::get('admin/tag/get/{slug_group}', 'TagController@get_tags')->name('admin.get_tags')->middleware('admin'); 
+    Route::get('admin/tag', 'TagController@index')->name('admin.tag')->middleware('isadmin'); 
+    Route::get('admin/tag/create', 'TagController@create')->name('admin.forms.tag')->middleware('isadmin'); 
+    Route::post('admin/tag/store', 'TagController@store')->name('admin.forms.tag.store')->middleware('isadmin'); 
+    Route::post('admin/tag/update/{id}', 'TagController@update')->name('admin.forms.tag.update')->middleware('isadmin'); 
+    Route::get('admin/tag/edit/{id}', 'TagController@edit')->name('admin.forms.tag.edit')->middleware('isadmin'); 
+    Route::get('admin/tag/remove/{id}', 'TagController@remove')->name('admin.forms.tag.remove')->middleware('isadmin'); 
+    Route::get('admin/tag/get/{slug_group}', 'TagController@get_tags')->name('admin.get_tags')->middleware('isadmin'); 
     
     //typy
-    Route::get('admin/type', 'TypeController@index')->name('admin.type')->middleware('admin'); 
-    Route::get('admin/type/create', 'TypeController@create')->name('admin.forms.type')->middleware('admin'); 
-    Route::post('admin/type/store', 'TypeController@store')->name('admin.forms.type.store')->middleware('admin'); 
-    Route::post('admin/type/update/{id}', 'TypeController@update')->name('admin.forms.type.update')->middleware('admin'); 
-    Route::get('admin/type/edit/{id}', 'TypeController@edit')->name('admin.forms.type.edit')->middleware('admin'); 
-    Route::get('admin/type/remove/{id}', 'TypeController@remove')->name('admin.forms.type.remove')->middleware('admin');
+    Route::get('admin/type', 'TypeController@index')->name('admin.type')->middleware('isadmin'); 
+    Route::get('admin/type/create', 'TypeController@create')->name('admin.forms.type')->middleware('isadmin'); 
+    Route::post('admin/type/store', 'TypeController@store')->name('admin.forms.type.store')->middleware('isadmin'); 
+    Route::post('admin/type/update/{id}', 'TypeController@update')->name('admin.forms.type.update')->middleware('isadmin'); 
+    Route::get('admin/type/edit/{id}', 'TypeController@edit')->name('admin.forms.type.edit')->middleware('isadmin'); 
+    Route::get('admin/type/remove/{id}', 'TypeController@remove')->name('admin.forms.type.remove')->middleware('isadmin');
     
     
     //elementy
-    Route::get('admin/element/{slug}', 'ElementController@index')->name('admin.element')->middleware('admin'); 
-    Route::get('admin/element/create/{slug}', 'ElementController@create')->name('admin.forms.element')->middleware('admin'); 
-    Route::post('admin/element/store/{slug}', 'ElementController@store')->name('admin.forms.element.store')->middleware('admin'); 
-    Route::post('admin/element/update/{slug}/{id}', 'ElementController@update')->name('admin.forms.element.update')->middleware('admin'); 
-    Route::get('admin/element/edit/{slug}/{id}', 'ElementController@edit')->name('admin.forms.element.edit')->middleware('admin'); 
-    Route::get('admin/element/remove/{slug}/{id}', 'ElementController@remove')->name('admin.forms.element.remove')->middleware('admin'); 
-    Route::post('admin/element/upload_file', 'ElementController@upload_file')->name('admin.element.upload_file')->middleware('admin'); 
+    Route::get('admin/element/{slug}', 'ElementController@index')->name('admin.element')->middleware('isadmin'); 
+    Route::get('admin/element/create/{slug}', 'ElementController@create')->name('admin.forms.element')->middleware('isadmin'); 
+    Route::post('admin/element/store/{slug}', 'ElementController@store')->name('admin.forms.element.store')->middleware('isadmin'); 
+    Route::post('admin/element/update/{slug}/{id}', 'ElementController@update')->name('admin.forms.element.update')->middleware('isadmin'); 
+    Route::get('admin/element/edit/{slug}/{id}', 'ElementController@edit')->name('admin.forms.element.edit')->middleware('isadmin'); 
+    Route::get('admin/element/remove/{slug}/{id}', 'ElementController@remove')->name('admin.forms.element.remove')->middleware('isadmin'); 
+    Route::post('admin/element/upload_file', 'ElementController@upload_file')->name('admin.element.upload_file')->middleware('isadmin'); 
     
     //użytkownicy
-    Route::get('admin/user', 'UserController@index')->name('admin.user')->middleware('admin'); 
-    Route::get('admin/user/create', 'UserController@create')->name('admin.forms.user')->middleware('admin'); 
-    Route::post('admin/user/store', 'UserController@store')->name('admin.forms.user.store')->middleware('admin'); 
-    Route::post('admin/user/update/{id}', 'UserController@update')->name('admin.forms.user.update')->middleware('admin'); 
-    Route::get('admin/user/edit/{id}', 'UserController@edit')->name('admin.forms.user.edit')->middleware('admin'); 
-    Route::get('admin/user/remove/{id}', 'UserController@remove')->name('admin.forms.user.remove')->middleware('admin'); 
+    Route::get('admin/user', 'UserController@index')->name('admin.user')->middleware('isadmin'); 
+    Route::get('admin/user/create', 'UserController@create')->name('admin.forms.user')->middleware('isadmin'); 
+    Route::post('admin/user/store', 'UserController@store')->name('admin.forms.user.store')->middleware('isadmin'); 
+    Route::post('admin/user/update/{id}', 'UserController@update')->name('admin.forms.user.update')->middleware('isadmin'); 
+    Route::get('admin/user/edit/{id}', 'UserController@edit')->name('admin.forms.user.edit')->middleware('isadmin'); 
+    Route::get('admin/user/remove/{id}', 'UserController@remove')->name('admin.forms.user.remove')->middleware('isadmin'); 
  
     //komentarze
-    Route::get('admin/comment', 'CommentController@index')->name('admin.comment')->middleware('admin'); 
-    Route::get('admin/comment/create', 'CommentController@create')->name('admin.forms.comment')->middleware('admin'); 
-    Route::post('admin/comment/store', 'CommentController@store')->name('admin.forms.comment.store')->middleware('admin'); 
-    Route::post('admin/comment/update/{id}', 'CommentController@update')->name('admin.forms.comment.update')->middleware('admin'); 
-    Route::get('admin/comment/edit/{id}', 'CommentController@edit')->name('admin.forms.comment.edit')->middleware('admin'); 
-    Route::get('admin/comment/remove/{id}', 'CommentController@remove')->name('admin.forms.comment.remove')->middleware('admin'); 
+    Route::get('admin/comment', 'CommentController@index')->name('admin.comment')->middleware('isadmin'); 
+    Route::get('admin/comment/create', 'CommentController@create')->name('admin.forms.comment')->middleware('isadmin'); 
+    Route::post('admin/comment/store', 'CommentController@store')->name('admin.forms.comment.store')->middleware('isadmin'); 
+    Route::post('admin/comment/update/{id}', 'CommentController@update')->name('admin.forms.comment.update')->middleware('isadmin'); 
+    Route::get('admin/comment/edit/{id}', 'CommentController@edit')->name('admin.forms.comment.edit')->middleware('isadmin'); 
+    Route::get('admin/comment/remove/{id}', 'CommentController@remove')->name('admin.forms.comment.remove')->middleware('isadmin'); 
         
     //zamówienia
-    Route::get('admin/order', 'OrderController@index')->name('admin.order')->middleware('admin'); 
-    Route::get('admin/order/create', 'OrderController@create')->name('admin.forms.order')->middleware('admin'); 
-    Route::post('admin/order/store', 'OrderController@store')->name('admin.forms.order.store')->middleware('admin'); 
-    Route::post('admin/order/update/{id}', 'OrderController@update')->name('admin.forms.order.update')->middleware('admin'); 
-    Route::get('admin/order/edit/{id}', 'OrderController@edit')->name('admin.forms.order.edit')->middleware('admin'); 
-    Route::get('admin/order/remove/{id}', 'OrderController@remove')->name('admin.forms.order.remove')->middleware('admin'); 
+    Route::get('admin/order', 'OrderController@index')->name('admin.order')->middleware('isadmin'); 
+    Route::get('admin/order/create', 'OrderController@create')->name('admin.forms.order')->middleware('isadmin'); 
+    Route::post('admin/order/store', 'OrderController@store')->name('admin.forms.order.store')->middleware('isadmin'); 
+    Route::post('admin/order/update/{id}', 'OrderController@update')->name('admin.forms.order.update')->middleware('isadmin'); 
+    Route::get('admin/order/edit/{id}', 'OrderController@edit')->name('admin.forms.order.edit')->middleware('isadmin'); 
+    Route::get('admin/order/remove/{id}', 'OrderController@remove')->name('admin.forms.order.remove')->middleware('isadmin'); 
         
     //kategorie produktów
-    Route::get('admin/category', 'CategoryController@index')->name('admin.category')->middleware('admin'); 
-    Route::get('admin/category/create', 'CategoryController@create')->name('admin.forms.category')->middleware('admin'); 
-    Route::post('admin/category/store', 'CategoryController@store')->name('admin.forms.category.store')->middleware('admin'); 
-    Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('admin'); 
-    Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('admin'); 
-    Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('admin'); 
+    Route::get('admin/category', 'CategoryController@index')->name('admin.category')->middleware('isadmin'); 
+    Route::get('admin/category/create', 'CategoryController@create')->name('admin.forms.category')->middleware('isadmin'); 
+    Route::post('admin/category/store', 'CategoryController@store')->name('admin.forms.category.store')->middleware('isadmin'); 
+    Route::post('admin/category/update/{id}', 'CategoryController@update')->name('admin.forms.category.update')->middleware('isadmin'); 
+    Route::get('admin/category/edit/{id}', 'CategoryController@edit')->name('admin.forms.category.edit')->middleware('isadmin'); 
+    Route::get('admin/category/remove/{id}', 'CategoryController@remove')->name('admin.forms.category.remove')->middleware('isadmin'); 
     
     //flagi
-    Route::get('admin/flag/get', 'TagController@get_flags')->name('admin.get_flags')->middleware('admin');
+    Route::get('admin/flag/get', 'TagController@get_flags')->name('admin.get_flags')->middleware('isadmin');
     
     //menu
-    Route::get('admin/settings/hot', 'SettingController@hot')->name('admin.settings.hot')->middleware('admin'); 
-    Route::post('admin/settings/hot/update', 'SettingController@hot_update')->name('admin.settings.hot.update')->middleware('admin'); 
+    Route::get('admin/settings/hot', 'SettingController@hot')->name('admin.settings.hot')->middleware('isadmin'); 
+    Route::post('admin/settings/hot/update', 'SettingController@hot_update')->name('admin.settings.hot.update')->middleware('isadmin'); 
     
 });
 

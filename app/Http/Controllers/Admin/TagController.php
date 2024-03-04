@@ -10,6 +10,11 @@ use App\Models\Flag;
  
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+    
     public function index()
     {
         $tags = Tag::all();

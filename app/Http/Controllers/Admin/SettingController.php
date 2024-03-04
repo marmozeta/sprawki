@@ -8,6 +8,11 @@ use App\Models\Setting;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+    
     public function hot() {
         $settings = Setting::where('group', 'hot')->get();
         return view('admin.settings.hot', ['settings' => $settings]);

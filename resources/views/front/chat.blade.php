@@ -26,12 +26,18 @@
                 <div class="col-9">
                     <div class="recipient_area">
                         @foreach($participants as $participant)
-                        <img src="/public/images/users/{{ $participant->picture }}" alt="user" class="rounded-circle" width="30"> {{ $participant->name }}     
+                        <img src="/public/images/users/{{ $participant->picture }}" alt="user" class="rounded-circle user-picture" width="30"> {{ $participant->name }}     
                       @endforeach
                     </div>
                     <div class="my-3 bg-white">
-                        
-                        
+                        @foreach($messages as $message)
+                        <div>
+                            <img src="/public/images/users/{{ $message->sender->picture }}" alt="user" class="rounded-circle user-picture" width="30">
+                            {{ $message->sender->name }}
+                            <br/>
+                            {{ $message->body }}
+                        </div>
+                        @endforeach
                     </div>
                     <div><textarea class="form-control"></textarea></div>
                     </div>

@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Auth;
  
 class ElementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+        
     public function index($slug)
     {
         $menu = Menu::where('slug', $slug)->first();

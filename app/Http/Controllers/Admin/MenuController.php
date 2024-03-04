@@ -12,6 +12,11 @@ use Illuminate\Support\Str;
  
 class MenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+        
     public function index()
     {
         $menus = new Menu();

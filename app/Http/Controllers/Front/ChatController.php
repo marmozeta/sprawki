@@ -39,16 +39,15 @@ class ChatController extends Controller
     public function chat($hash) {
         
         $auth_user = User::find(Auth::user()->id);
-        
         $hash_tab = explode('_', base64_decode($hash));
         $conversation_id = (int)$hash_tab[0];
         $conversation = Chat::conversations()->getById($conversation_id);
         $participants = $conversation->getParticipants();
-        $messages = Chat::conversation($conversation)->setParticipant($auth_user)->getMessages();
-        $message = Chat::message('Hello')
-            ->from($participants->where('id', Auth::user()->id)->first())
+        $messages = Chat::conversation($conversation)->setParticipant($auth_user->first())->getMessages();
+      /*  $message = Chat::message('Nowa wiadomość')
+            ->from($participants->last())
             ->to($conversation)
-            ->send();
+            ->send();*/
         
         return view('front.chat', array('conversation' => $conversation, 'participants' => $participants, 'messages' => $messages));   
     }

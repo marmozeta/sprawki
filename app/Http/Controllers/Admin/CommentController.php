@@ -9,6 +9,11 @@ use App\Models\Comment;
  
 class CommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+        
     public function index()
     {
         $comments = new Comment();

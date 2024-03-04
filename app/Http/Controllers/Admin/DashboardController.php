@@ -8,6 +8,10 @@ use App\Models\Menu;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
     
     public function index()
     {

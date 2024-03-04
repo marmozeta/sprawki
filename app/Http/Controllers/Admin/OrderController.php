@@ -10,6 +10,11 @@ use App\Models\User;
  
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+    
     public function index()
     {
         $orders = new Order();

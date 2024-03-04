@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\Ad;
  
 class AdController extends Controller
-{
+{    
+    public function __construct()
+    {
+        $this->middleware('isadmin');
+    }
+    
     public function index()
     {
         $categories = Ad::all();
