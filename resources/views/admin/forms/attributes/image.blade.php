@@ -56,7 +56,7 @@
             renameFile: function(file) {
                 var dt = new Date();
                 var time = dt.getTime();
-               return time+file.name;
+                return time+file.name;
             },
             acceptedFiles: ".jpeg,.jpg,.png,.gif",
             addRemoveLinks: true,
@@ -86,6 +86,7 @@
             success: function(file, response) 
             {
                 console.log(response);
+                file.previewTemplate.querySelector('.dz-filename').innerHTML = "<span data-dz-name=''>"+response.filename+"</span>";
             },
             error: function(file, response)
             {
