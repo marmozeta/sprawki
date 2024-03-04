@@ -211,6 +211,7 @@ span.date {
                     padding: 12px;
                     text-align: left;
                     height: 69px;
+                    max-width: 80%;
                 }
                 
                 .top_right {
