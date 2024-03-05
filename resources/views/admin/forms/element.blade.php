@@ -410,7 +410,7 @@
     }
 </script>
 @endsection
-
+@section('styles')
 <style>
     .tagify__dropdown.extra-properties .tagify__dropdown__item > img{
     display: inline-block;
@@ -439,3 +439,4 @@
     pointer-events: none;
 }
 </style>
+@endsection

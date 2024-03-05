@@ -105,7 +105,7 @@ ct_$('html').ultimateGDPR({
         prevent_forms_exclude: [], // array of selectors (classes, id), this forms will be excluded from prevent
     },
     configure_mode: {
-        on: false,
+        on: true,
         parametr: '?configure123456',
         dependencies: [ 'assets/css/ct-ultimate-gdpr.min.css', 'https://use.fontawesome.com/releases/v5.0.13/css/all.css'],
         debug: false, // bool: true false, debug mode on/off (showing all 3rd party cookies urls, blockes urls names of all local cookies and names of blocked local cookies )

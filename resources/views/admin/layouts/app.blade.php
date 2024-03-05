@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+
+<html dir="ltr" lang="pl">
 
 <head>
     <meta charset="utf-8">
@@ -23,13 +24,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
     
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
     @yield('styles')
+    <x-head.tinymce-config/>
 </head>
     
 <body>
@@ -85,10 +81,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>  
-    <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
-    <script> bkLib.onDomLoaded(function() {  new nicEditor().panelInstance('desc');  });</script>
-    <!-- apps -->
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>  <!-- apps -->
     <!-- apps -->
     <script src="{{ asset('admin/js/app-style-switcher.js') }}"></script>
     <script src="{{ asset('admin/js/feather.min.js') }}"></script>

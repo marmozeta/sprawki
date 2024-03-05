@@ -51,7 +51,7 @@ tinymce.init({
   ],
   template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
   template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-  height: 600,
+  height: 350,
   image_caption: true,
   quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
   noneditable_noneditable_class: 'mceNonEditable',
@@ -60,7 +60,12 @@ tinymce.init({
   skin: useDarkMode ? 'oxide-dark' : 'oxide',
   content_css: useDarkMode ? 'dark' : 'default',
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-  language: 'pl'
+  language: 'pl',
+   setup: (editor) => {
+        editor.on('change', (e) => {
+            $('#desc').val(tinymce.get('tinymce').getContent());
+        })
+      },
  });
 
 </script>
