@@ -295,8 +295,10 @@ button.btn-number {
     text-align: center;
 }
 
-.shop .btn-primary {
+.shop .btn {
     height: 32px;
+    line-height: 27px;
+    padding-top: 0;
 }
 
 h3.price {

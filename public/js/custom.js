@@ -289,6 +289,9 @@ $('.add_to_cart').on('click', function(e) {
                 $('#cart').removeClass('shake');
                 $('#to-cart').hide();
             },500);
+            $('.add_to_cart').addClass('d-none');
+            $('.go_to_cart').removeClass('d-none');
+            $('.back_to_shop').removeClass('d-none');
       }
     });
     return false;

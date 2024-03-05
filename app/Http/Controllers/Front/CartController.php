@@ -171,7 +171,10 @@ class CartController extends Controller
         
         $mediaModel = new MediaUpload();
         $media = $mediaModel->getMediaForElement($request->element_id);
-        if(count($media) > 1) {
+        if(count($media) == 0) {
+            return back()->withInput();
+        }
+        elseif(count($media) > 1) {
             $zipFileName = $element->slug.'_'.Auth::id().'.zip';
             unlink(public_path('media').'/'.$zipFileName);
             $zip = new ZipArchive();
@@ -204,7 +207,56 @@ class CartController extends Controller
              
             return Response::download($file, $media[0]->filename, $headers);
         }
+    }
+    
+    public function get_files_by_order(Request $request) {
+        $media = array();
+        $mediaModel = new MediaUpload();
+        $order_items = OrderItem::where('order_id', $request->order_id)->get();
+        if(!empty($order_items)) {
+            foreach($order_items as $oi) {       
+                $media_for_element = $mediaModel->getMediaForElement($oi->element_element_id);
+                if(!empty($media_for_element)) {
+                    foreach($media_for_element as $m) {
+                        $media[] = $m;
+                    }   
+                }
+        }}
+          
+        $zipFileName = $request->order_id.'_'.Auth::id().'.zip';
+        if(file_exists(public_path('media').'/'.$zipFileName)) unlink(public_path('media').'/'.$zipFileName);
+        $zip = new ZipArchive();
+        
+        if(count($media) == 0) {
+            return back()->withInput();
+        }
+        elseif(count($media) > 1) {
+            if ($zip->open(public_path('media').'/'.$zipFileName, ZipArchive::CREATE) === TRUE) {
+                if(!empty($media)) {
+                    foreach($media as $med) {
+                        $file =  public_path('media').'/'.$med->filename;
+                        $zip->addFile($file, basename($file));
+                    }
+                }
 
+                $zip->close();
+            }
+            
+            $headers = array(
+                  'Content-Type: application/zip',
+                );
 
+            return Response::download(public_path('media').'/'.$zipFileName, $zipFileName, $headers);
+        }
+        else {
+            $file =  public_path('media').'/'.$media[0]->filename;
+            $content_type = mime_content_type($file);
+            
+             $headers = array(
+                  'Content-Type: '.$content_type,
+                );
+             
+            return Response::download($file, $media[0]->filename, $headers);
+        }
     }
 }
