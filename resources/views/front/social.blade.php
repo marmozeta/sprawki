@@ -71,9 +71,6 @@
       <div class="modal-header">
         <h5 class="modal-title" id="newCommentModalLabel">Nowy komentarz</h5>
       </div>   
-        <p style="margin: 0 auto 5px auto;" class="pt-3">Odpowiadasz na post:</p>
-        <div class="content item social" style="margin: 0 auto; width: 100%;"><div class="animate-box mx-4" style=" background: #eee; border-radius: 10px;"></div></div>
-        
         <form action="{{ route('social.comment.save') }}" method="post" class="w-100" id="post-save">
               
       <div class="modal-body">
@@ -109,7 +106,7 @@ $('.nicEdit-panelContain').parent().next().width('100%');</script>
 Dropzone.options.addMedia =
          {
                url: "{{url('social/media/store')}}",
-            dictDefaultMessage: 'kliknij aby dodać obrazek' ,
+            dictDefaultMessage: 'kliknij aby dodać obrazek [opcjonalnie]' ,
             maxFilesize: 12,
             
                     headers: {

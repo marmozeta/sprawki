@@ -1,7 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2 text-center">
-            <h1 class="element_title pt-5 text-center mb-0">{{ $element->title }}</h1>
+            <h1 class="element_title pt-5 text-center mb-0">{{ $element->title }}
+            @if(Auth::check() && $element->user_id == Auth()->user()->id)
+                <a href="#"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
+            @endif
+            </h1>
             <div class="info d-flex justify-content-center mt-5 mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
                 <div class="col-4">
                     <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
@@ -97,10 +101,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="newCommentModalLabel">Nowy komentarz</h5>
-      </div>   
-        <p style="margin: 0 auto 5px auto;" class="pt-3">Odpowiadasz na post:</p>
-        <div class="content item default comment">{{ $element->title }} {!! mb_substr($element->description, 0, 100) !!}</div>
-        
+      </div>  
         <form action="{{ route('social.comment.save') }}" method="post" class="w-100" id="post-save">
               
       <div class="modal-body">

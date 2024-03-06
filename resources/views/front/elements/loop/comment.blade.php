@@ -3,10 +3,15 @@
                              <a href="/{{ $comment->owner_friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $comment->owner_picture }}" alt="user" class="rounded-circle user-picture" /></a>
                          </div>
                          <div class="col-11">
-                              <div class="col-12">
+                              <div class="col-9">
                                   <a href="/{{ $comment->owner_friendly_name }}"><b>{{ $comment->owner_name }}</b></a> <a href="/{{ $comment->owner_friendly_name }}" class="friendly-name">{{ '@'.$comment->owner_friendly_name }}</a>
                             &nbsp;&#9679;&nbsp; 
                             {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.Y H:i') }} 
+                             </div>
+                             <div class="col-3">
+                                 @if(Auth::check() && $comment->owner_id == Auth()->user()->id)
+                                    <a href="#"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
+                                @endif
                              </div>
                              @if($comment->comment_comm_id > 0)
                               <div class="col-12 in_reply">
@@ -26,12 +31,18 @@
                          <div class="col-1 offset-1 bg-white py-3">
                              <a href="/{{ $comment->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $comment->picture }}" alt="user" class="rounded-circle user-picture" /></a>
                          </div>
-                         <div class="col-10 bg-white py-3">
-                              <div class="col-12">
+                         <div class="col-10 bg-white py-3 d-flex flex-wrap">
+                              <div class="col-10">
                                   <a href="/{{ $comment->friendly_name }}"><b>{{ $comment->name }}</b></a> <a href="/{{ $comment->friendly_name }}" class="friendly-name">{{ '@'.$comment->friendly_name }}</a>
                             &nbsp;&#9679;&nbsp; 
                             {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.Y H:i') }} 
                              </div>
+                            <div class="col-2 text-right">
+                                @if(Auth::check() && $comment->id == Auth()->user()->id)
+                                    <a href="#"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
+                                    <a href="#"><small><i class="fa-solid fa-trash mx-2" style="color: #ef5353;"></i></small></a>
+                                @endif
+                            </div>
                               <div class="col-12">
                                 {{ $comment->comment }}
                             </div>

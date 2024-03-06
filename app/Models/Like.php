@@ -14,7 +14,7 @@ class Like extends Model
     
     public function getLikesByUser($user_id) {
         return DB::table('likes')
-            ->selectRaw('likes.*, u.friendly_name, u.name, u.picture, u2.friendly_name AS owner_friendly_name, 
+            ->selectRaw('likes.*, u.friendly_name, u.name, u.picture, u2.id AS owner_id, u2.friendly_name AS owner_friendly_name, 
                 u2.name AS owner_name, u2.picture AS owner_picture, uc.friendly_name AS comment_friendly_name, uc.name AS comment_name,
                     CASE WHEN c.comment IS NOT NULL THEN c.comment WHEN elements.title IS NOT NULL THEN elements.title ELSE SUBSTR(elements.description, 0, 50) END AS teaser')
             ->join('elements', 'elements.element_id', '=', 'likes.element_element_id')

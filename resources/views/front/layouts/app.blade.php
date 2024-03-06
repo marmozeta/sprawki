@@ -39,7 +39,7 @@
         <link href="https://unpkg.com/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css')}}">
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
-	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240305">
+	<link rel="stylesheet" href="{{asset('css/app.css')}}?20240306">
         <link rel="stylesheet" href="{{asset('css/ct-ultimate-gdpr.min.css')}}" />
 	<script src="{{asset('js/modernizr-2.6.2.min.js')}}"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />

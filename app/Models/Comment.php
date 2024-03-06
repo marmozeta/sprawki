@@ -22,7 +22,7 @@ class Comment extends Model
     
     public function getCommentsByElement($element_id, $parent_id, $user_id, $ip) {
         $result = DB::table('comments AS c')
-            ->selectRaw('c.*, users.friendly_name, users.name, users.picture, u2.friendly_name AS owner_friendly_name, 
+            ->selectRaw('c.*, users.friendly_name, users.id, users.name, users.picture, u2.id AS owner_id, u2.friendly_name AS owner_friendly_name, 
                 u2.name AS owner_name, u2.picture AS owner_picture
                     ')
             ->join('elements AS e', 'e.element_id', '=', 'c.element_id')
@@ -42,7 +42,7 @@ class Comment extends Model
     
     public function getCommentsByUser($parent_id, $user_id, $ip, $logged_user) {
         $result = DB::table('comments AS c')
-            ->selectRaw('c.*, users.friendly_name, users.name, users.picture, u2.friendly_name AS owner_friendly_name, 
+            ->selectRaw('c.*, users.id, users.friendly_name, users.name, users.picture, u2.id AS owner_id, u2.friendly_name AS owner_friendly_name, 
                 u2.name AS owner_name, u2.picture AS owner_picture, u3.friendly_name AS comment_friendly_name, 
                 u3.name AS comment_name, u3.picture AS comment_picture, 
                     CASE WHEN cr.comment IS NOT NULL THEN cr.comment WHEN e.title IS NOT NULL THEN e.title ELSE SUBSTR(e.description, 0, 50) END AS teaser')
