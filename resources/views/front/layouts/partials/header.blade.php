@@ -28,7 +28,7 @@
 	<header id="fh5co-header" role="banner">
 		<div class="container">
 			<div class="row" style="display: flex; align-items: center;">
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <ul class="navbar menu">
                                     @foreach($menus_front as $menu)
                                     <li><a class="{{ ($menu->slug==request()->path()) ? 'active' : ''}}" href="/{{ $menu->slug }}">{{ $menu->name }}</a></li>
@@ -36,7 +36,11 @@
                                     
                                 </ul>
                             </div>
-                            <div class="col-md-3 px-0">
+                            <div class="col-md-2">
+                                <a href="#" class="fh5co-menu-btn bg-white text-dark message" style="margin-right: 14px;" data-totalitems="13"><i class="fa-regular fa-envelope"></i></a>
+                                <a href="#" class="fh5co-menu-btn bg-white text-dark bell" style="margin-right: 14px;" data-totalitems="2"><i class="fa-regular fa-bell"></i></a>
+                         </div>
+                            <div class="col-md-2 px-0">
 					<!--<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn" style="background: #cc1d23; padding: 2px 5px; border-radius: 2px;">Menu <i class="fa fa-bars"></i></a>-->
 					
                                         <a href="#" class="fh5co-menu-btn" style="margin-right: 14px;"><i class="fa fa-search"></i></a>
