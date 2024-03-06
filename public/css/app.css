@@ -570,6 +570,7 @@ a[data-totalitems="0"]:before {
 
 .top_right img {
     width: 120px;
+    max-width: 120px !important;
     height: 67.5px;
     border-radius: 5px;
 }

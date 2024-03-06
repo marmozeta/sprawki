@@ -2,7 +2,8 @@
     <div class="item default">
         		<a href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}" class="animate-box">
                               
-                                    <div class="caffle d-flex justify-content-between">
+                                    <div class="caffle d-flex">
+                                        <div class="w-100 d-flex justify-content-between">
                                          <div class="top_left">
                                       <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
                                       <div class="country">
@@ -23,7 +24,7 @@
                                       <i class="{{ ($element->icon) ? $element->icon : $menu->icon }} fa-2x"></i>
                                         @endif
                                         </div>
-                                       
+                                        </div>
                                         <div class="description col-12">
                                             <p>{{ mb_substr(strip_tags($element->description), 0, 150) }}</p>
                                     </div>  </div>
