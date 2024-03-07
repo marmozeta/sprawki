@@ -129,9 +129,11 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::get('cart/transaction_receive/{order_id}/{tr_id}/{status}/{error}', 'CartController@transaction_receive')->name('front.transaction_receive');
       
     Route::post('social/post/save', 'SocialController@save_post')->name('social.post.save')->middleware('auth');
+    Route::post('social/post/update', 'SocialController@update_post')->name('social.post.update')->middleware('auth');
     Route::post('social/media/store','SocialController@fileStore')->name('social.media.store')->middleware('auth');
     Route::post('social/media/remove','SocialController@fileDestroy')->name('social.media.remove')->middleware('auth');
     Route::post('social/comment/save', 'SocialController@save_comment')->name('social.comment.save')->middleware('auth');
+    Route::get('social/comment/remove/{id}/{redirect}', 'SocialController@remove_comment')->name('social.comment.remove')->middleware('auth');
     Route::post('social/like/save', 'SocialController@save_like')->name('social.like.save');
     Route::post('social/observed/save', 'SocialController@add_to_observed')->name('social.observed.save')->middleware('auth');
     Route::post('social/observed/remove', 'SocialController@remove_from_observed')->name('social.observed.remove')->middleware('auth');

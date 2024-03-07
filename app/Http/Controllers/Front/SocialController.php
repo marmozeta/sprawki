@@ -33,6 +33,21 @@ class SocialController extends Controller
         return redirect('/spolecznosc');
     }
     
+    public function update_post(Request $request)
+    {
+        $menu = Menu::where('is_social', 1)->first();
+
+        $element = Element::find($request->element_id);
+        $element->title = $request->title;
+        $element->image = $request->file;
+        $element->description = $request->desc;
+        $element->is_new = 0;
+        $element->is_hot = 0;
+        $element->save();
+        
+        return redirect('/spolecznosc/'.$element->element_id.'-'.$element->slug);
+    }
+    
     public function fileStore(Request $request)
     {
         $image = $request->file('file');
@@ -60,8 +75,15 @@ class SocialController extends Controller
         $comment->comment = $request->comment;
         if(!empty($request->comment_id)) $comment->comment_comm_id = $request->comment_id;
         $comment->save();
-        
+
         return redirect('/'.$request->redirect);
+    }
+    
+    public function remove_comment($id, $redirect) {
+        $comment = Comment::find($id);
+        $comment->delete();
+        
+        return redirect(base64_decode($redirect));
     }
     
     public function save_like(Request $request)

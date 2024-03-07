@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-8 offset-2 text-center">
             <h1 class="element_title pt-5 text-center mb-0">{{ $element->title }}
-            @if(Auth::check() && $element->user_id == Auth()->user()->id)
-                <a href="#"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
+            @if($menu->is_social && Auth::check() && $element->user_id == Auth()->user()->id)
+                <a href="#" data-bs-toggle="modal" data-bs-target="#editPostModal"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
             @endif
             </h1>
             <div class="info d-flex justify-content-center mt-5 mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-4 d-flex align-self-center justify-content-end" style="column-gap: 10px;">
                     <a target="_blank" class="twitter-share-button"
-                       href="https://twitter.com/intent/tweet?title={{ $element->text_for_social }}"><i class="fa-brands fa-x-twitter"></i></a> 
+                       href="https://twitter.com/intent/tweet?title={{ $element->text_for_social }}&url={{ url()->current() }}"><i class="fa-brands fa-x-twitter"></i></a> 
                     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}&title={{ $element->text_for_social }}"><i class="fa-brands fa-linkedin"></i></a>
                     <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa-brands fa-facebook"></i></a> 
                     <a href="#" id="copyText" data-link="{{ url()->current() }}"><i class="fa-solid fa-link"></i></a>
@@ -48,7 +48,7 @@
                 
                 <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
                 @if(Auth::check())
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-white" data-bs-element-id='{{ $element->element_id }}' data-comment-id='0'><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
                 @else
                     <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
                 @endif
@@ -108,8 +108,8 @@
           <div class="item d-flex p-3">
                 <div class="col-12 p-2">
                    <div class="w-100">
-                    <textarea id="social_element" name="comment" class="form-control" style="width: 100%; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
-                    <input type="hidden" name="element_id" value="{{ $element->element_id }}" />
+                    <textarea id="social_element" name="comment" class="form-control" style="width: 450px; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
+                    <input type="hidden" name="element_id" value="" />
                     <input type="hidden" name="comment_id" value="" />
                     <input type="hidden" name="redirect" value="{{ Request::path() }}#komentarze" />
                     </div>
@@ -154,24 +154,181 @@ $('.toggle_like').on('click', function() {
     return false;
 })
 
-var newCommentModal = document.getElementById('newCommentModal')
-newCommentModal.addEventListener('show.bs.modal', function (event) {
-  // Button that triggered the modal
-  var button = event.relatedTarget
-  // Extract info from data-bs-* attributes
-  
-  var comment_id = jQuery(button).attr('data-comment-id');
-  // If necessary, you could initiate an AJAX request here
-  // and then do the updating in a callback.
-  //
-  var modalDivContent = newCommentModal.querySelector('[name="comment_id"]');
-  jQuery(modalDivContent).val(comment_id);
-});
-
 $('#copyText').on('click', function() {
   var copyText = $(this).attr('data-link');
   navigator.clipboard.writeText(copyText);
   alert("Skopiowano link!");
 });
+
+$(document).on('click', '.removeComment', function() {
+    
+})
+</script>
+@endsection
+
+@section('after_scripts')
+@if($menu->is_social && Auth::check() && $element->user_id == Auth()->user()->id)
+<div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="newPostModalLabel">Edytuj rozmyślunek</h5>
+      </div>   <form action="{{ route('social.post.update') }}" method="post" class="w-100" id="post-save">
+              
+      <div class="modal-body">
+          <div class="item d-flex p-3">
+                <div class="col-9 p-2">
+                   <div class="w-100">
+                       <input type="text" class="form-control mb-2" name="title" placeholder="Nazwij swój rozmyślunek" value="{{ $element->title }}" style="height: 36px;" />
+                    <textarea id="social_desc" name="desc" class="form-control" style="width: 560px; height: 80px;" placeholder="Opublikuj swój rozmyślunek">{{ $element->description }}</textarea>
+                </div>
+                   <input type="hidden" name="file" />
+                   <input type="hidden" name="element_id" value="{{ $element->element_id }}"/>
+                   @csrf
+        
+</div>
+    <div class="col-3 p-2">
+      <div class="dropzone" id="add-media"></div>
+    </div>  
+           
+            </div>
+      </div>
+      <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Zapisz rozmyślunek</button>
+      </div>    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content modal-filled bg-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">UWAGA</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body mx-3">
+          Czy na pewno chcesz usunąć ten komentarz?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+        <a class="btn btn-primary">Tak, usuń</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+<script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
+<script> 
+bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_desc');  });
+bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_element');  });
+$('.nicEdit-panelContain').parent().width('100%');
+$('.nicEdit-panelContain').parent().next().width('100%');</script>
+<script>
+Dropzone.options.addMedia =
+         {
+               url: "{{url('social/media/store')}}",
+            dictDefaultMessage: 'kliknij aby dodać obrazek [opcjonalnie]' ,
+            maxFilesize: 12,
+            
+                    headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            },
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+               return time+file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            removedfile: function(file) 
+            {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            },
+                    type: 'POST',
+                    url: '{{ url("social/media/remove") }}',
+                    data: {filename: name},
+                    success: function (data){
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }});
+                    var fileRef;
+                    return (fileRef = file.previewElement) != null ? 
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+       
+            success: function(file, response) 
+            {
+                $('input[name="file"]').val(response.filename);
+                console.log(response);
+            },
+            error: function(file, response)
+            {
+               return false;
+            }
+};
+
+var newCommentModal = document.getElementById('newCommentModal')
+newCommentModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+  // Extract info from data-bs-* attributes
+  var element_id = button.getAttribute('data-bs-element-id')
+  var comment_id = button.getAttribute('data-comment-id')
+  
+  var modalElementId = newCommentModal.querySelector('[name="element_id"]')
+  modalElementId.value = element_id;
+    
+  var modalCommentId = newCommentModal.querySelector('[name="comment_id"]')
+  modalCommentId.value = comment_id;
+  
+  var modalDesc = newCommentModal.querySelector('[name="desc"]')
+  modalDesc.value = '';
+});
+
+$('.toggle_like').on('click', function() {
+    var element_id = $(this).attr('data-element-id');
+    var element = $(this);
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').val()
+        },
+        type: 'POST',
+        url: '{{ url("social/like/save") }}',
+        data: {element_id: element_id},
+        success: function (data){
+            console.log(data);
+            var count = parseInt(element.find('.count').html())+parseInt(data);
+            element.find('.count').html(count);
+            if(parseInt(data) == 1) element.find('i').removeClass('fa-regular').addClass('fa-solid');
+            else element.find('i').removeClass('fa-solid').addClass('fa-regular');
+            console.log("Like saved!!");
+        },
+        error: function(e) {
+            console.log(e);
+        }
+    });
+    return false;
+})
+
+    var exampleModal = document.getElementById('exampleModal')
+exampleModal.addEventListener('show.bs.modal', function (event) {
+  // Button that triggered the modal
+  var button = event.relatedTarget
+
+  // Extract info from data-bs-* attributes
+  var recipient = button.getAttribute('data-bs-whatever')
+  var modalFooterLink = exampleModal.querySelector('.modal-footer a')
+
+  modalFooterLink.href = recipient;
+})
 </script>
 @endsection
