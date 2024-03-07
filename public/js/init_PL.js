@@ -25,7 +25,7 @@ ct_$('html').ultimateGDPR({
         advenced_button_text: 'Zmień ustawienia', // string, text for advenced button
         grouped_popup: true, // true, false, when true cookies are grouped
         default_group: 'group_2', // string: name, select group that will be selected by default
-        content_before_slider: '<h2>Ustawienia prywatności</h2><div class="ct-ultimate-gdpr-cookie-modal-desc"><p>Zdecyduj, które pliki cookie chcesz zezwolić.</p><p>Możesz zmienić te ustawienia w dowolnym momencie. Może to jednak spowodować, że niektóre funkcje będą niedostępne. Aby uzyskać informacje na temat usuwania plików cookie, skorzystaj z funkcji pomocy przeglądarki.</p> <span>Dowiedz się więcej o plikach cookie, z których korzystamy.</span></div><h3>Za pomocą suwaka można włączać i wyłączać różne rodzaje plików cookie:</h3>',
+        content_before_slider: '<h2>Ustawienia prywatności</h2><div class="ct-ultimate-gdpr-cookie-modal-desc"><p>Aby ta strona działała poprawnie, czasami umieszczamy na urządzeniu małe pliki z danymi zwane plikami cookie. Możesz zaakceptować wszystkie lub dostosować konfigurację (w tym zablokować wszystkie) wedle swojego uznania.</p> <span>Dowiedz się więcej o plikach cookie, z których korzystamy.</span></div><h3>Za pomocą suwaka można włączać i wyłączać różne rodzaje plików cookie:</h3>',
         // string: this content will be displayed before cookies slider, html tags alowed
         accepted_text: 'Ta strona będzie:',
         declined_text: "Ta strona internetowa nie będzie:",
