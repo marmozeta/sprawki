@@ -1,31 +1,11 @@
 @font-face {
-  font-family:"NeueHaasDisplayMediu";
-  src: url("../fonts/NeueHaasDisplayMediu.ttf") format("truetype");
-}
-
-@font-face {
-  font-family:"NeueHaasDisplayBlack";
-  src: url("../fonts/NeueHaasDisplayBlack.ttf") format("truetype");
-}
-
-@font-face {
-  font-family:"NeueHaasDisplayRoman";
-  src: url("../fonts/NeueHaasDisplayRoman.ttf") format("truetype");
-}
-
-@font-face {
-  font-family:"NeueHaasDisplayLight";
-  src: url("../fonts/NeueHaasDisplayLight.ttf") format("truetype");
-}
-
-@font-face {
-  font-family:"NeueHaasDisplayThin";
-  src: url("../fonts/NeueHaasDisplayThin.ttf") format("truetype");
+  font-family: "NeueHaasGroteskDisplayPro55Roman";
+  src: url('../fonts/NeueHaasGroteskDisplayPro55Roman/font.woff2') format('woff2'), url('../fonts/NeueHaasGroteskDisplayPro55Roman/font.woff') format('woff');
 }
 
 
 body {
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
 }
 
 .btn-circle.btn-sm {
@@ -668,7 +648,7 @@ a[data-totalitems="0"]:before {
 
 #filterModal ul li {
     text-transform: uppercase;
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
     font-size: 13px;
 }
 
@@ -750,7 +730,7 @@ a[data-totalitems="0"]:before {
 .comment_content {
     font-size: 15px;
     line-height: 20px;
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
     color: #272727;
     align-self: center;
 }
@@ -773,7 +753,7 @@ a[data-totalitems="0"]:before {
 .argument_desc {
     font-size: 15px;
     line-height: 20px;
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
     color: #272727;
 }
 
@@ -795,7 +775,7 @@ a[data-totalitems="0"]:before {
 
 #profile .info a {
     color: #272727;
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
 }
 
 #profile .info a i {
@@ -906,7 +886,7 @@ a[data-totalitems="0"]:before {
 }
 
 #chat .persons li small {
-    font-family: NeueHaasDisplayRoman;
+    font-family: NeueHaasGroteskDisplayPro55Roman;
     font-weight: 300;
     width: 100%;
 }
