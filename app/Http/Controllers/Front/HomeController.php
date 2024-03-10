@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Comment;
 use App\Models\ElementArgument;
+use App\Models\Setting;
 
 class HomeController extends Controller
 {
@@ -22,14 +23,27 @@ class HomeController extends Controller
         $menuModel = new Menu;
         $menu = $menuModel->getMenuBySlug($slug);
         $elementModel = new Element;
-        $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0);
+        $request_tag = request()->get('tag');
+        $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0, $request_tag);
+        
         $tagsModel = new Tag;
         $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'space');
         $tags_region = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'region');
         $tags_tags = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'tag');
         
+        $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
+        $hot_likes = Setting::where('name', 'like_counter')->first()->value;
+        
         $view = ($menu->is_social) ? 'social' : 'home'; 
-        return view('front.'.$view, array('menu' => $menu, 'elements' => $elements, 'tags_tags' => $tags_tags, 'tags_region' => $tags_region, 'tags_space' => $tags_space));
+        return view('front.'.$view, 
+                array('menu' => $menu, 
+                    'elements' => $elements, 
+                    'tags_tags' => $tags_tags, 
+                    'tags_region' => $tags_region, 
+                    'tags_space' => $tags_space, 
+                    'hot_comments' => $hot_comments, 
+                    'hot_likes' => $hot_likes)
+                );
     }
     
     public function show($element_id, $element_slug)
@@ -54,6 +68,12 @@ class HomeController extends Controller
         $orderModel = new Order;
         $is_bought = $orderModel->checkUserOrder(Auth::id(), $element_id);
         
+        $is_in_cart = false;
+        $cart_content = Cart::content();
+        foreach($cart_content as $row) {
+            if($row->id == $element_id) $is_in_cart = true;
+        }
+        
         $commentModel = new Comment;
         $comments = $commentModel->getCommentsByElement($element_id, 0, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
         foreach($comments as $key=>$comm) {
@@ -68,14 +88,20 @@ class HomeController extends Controller
         $argumentModel = new ElementArgument;
         $arguments = $argumentModel->getArgumentsByElement($element_id);
         
+        $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
+        $hot_likes = Setting::where('name', 'like_counter')->first()->value;
+        
         return view('front.element', array(
                                         'menu' => $menu, 
                                         'element' => $element, 
                                         'product_categories' => $product_categories, 
                                         'product_tags' => $product_tags,
                                         'is_bought' => $is_bought,
+                                        'is_in_cart' => $is_in_cart,
                                         'comments' => $comments,
-                                        'arguments' => $arguments
+                                        'arguments' => $arguments, 
+                                        'hot_comments' => $hot_comments, 
+                                        'hot_likes' => $hot_likes
                                     ));
     }
 }

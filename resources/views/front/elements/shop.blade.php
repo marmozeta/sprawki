@@ -46,13 +46,15 @@
                 @endif
             <div class="col-6" @if($element->is_virtual) style="margin-left: 12px;" @endif>
                 @if($is_bought)
-                <a href="{{ route('order.get_files', $element->element_id) }}" class="btn btn-success btn-sm filter-button text-bold" data-element-id="{{ $element->element_id }}">Pobierz <i class="fa-solid fa-download"></i></a>
+                    <a href="{{ route('order.get_files', $element->element_id) }}" class="btn btn-success btn-sm filter-button text-bold" data-element-id="{{ $element->element_id }}">Pobierz <i class="fa-solid fa-download"></i></a>
+                @elseif($is_in_cart)
+                    <a href="{{ route('front.cart') }}" class="btn btn-primary btn-sm go_to_cart text-bold my-0">Przejdź do koszyka <i class="fa-solid fa-cart-shopping"></i></a>
                 @else
                     @csrf
                     <button class="btn btn-primary btn-sm filter-button text-bold add_to_cart" data-element-id="{{ $element->element_id }}">Dodaj do koszyka <i class="fa-solid fa-cart-shopping"></i></button>
                 @endif
                 <a href="{{ route('front.cart') }}" class="btn btn-primary btn-sm go_to_cart text-bold my-0 d-none">Przejdź do koszyka <i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="/sklep" class="btn btn-dark btn-sm filter-button text-bold back_to_shop my-2 d-none">Powróć do sklepu &nbsp;<i class="fa-solid fa-rotate-left"></i></a>
+                <a href="/sklep" class="btn btn-dark btn-sm filter-button text-bold back_to_shop my-2 @if(!$is_bought && !$is_in_cart) d-none @endif">Powróć do sklepu &nbsp;<i class="fa-solid fa-rotate-left"></i></a>
             </div></div></div>
         
     </div>

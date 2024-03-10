@@ -935,3 +935,11 @@ a[data-totalitems="0"]:before {
 .element-content img {
     max-width: 100%;
 }
+
+.acceptances {
+    font-size: 13px;
+}
+
+.acceptances input[type="checkbox"] {
+    margin-right: 10px;
+}

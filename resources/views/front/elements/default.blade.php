@@ -35,22 +35,29 @@
         @endif
         
     </div>
-    <div class="row content">
+    <div class="row content mb-5">
         <div class="col-8 offset-2 mt-3">
             <div class="container-fluid element-content" style="padding: 0 7rem;">
                 {!! $element->description !!}
             </div>
         </div>
     </div>
+    @if(!$product_tags->isEmpty())
     <div class="row">
-        <div class="col-8 offset-2 d-flex justify-content-center mt-5" style="column-gap: 20px;">
+        <div class="col-8 offset-2 d-flex justify-content-center my-3" style="column-gap: 10px;">
+            Tagi: @foreach($product_tags as $tag) <a href="/{{ $menu->slug }}?tag={{ urlencode($tag->name) }}">{{ $tag->name }}</a> @endforeach
+        </div>
+    </div>
+    @endif
+    <div class="row">
+        <div class="col-8 offset-2 d-flex justify-content-center" style="column-gap: 20px;">
             <div class="container-fluid mx-5 bottom_buttons">
                 
-                <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like text-white"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
+                <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like @if($element->likes >= $hot_likes) text-danger @else text-white @endif"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
                 @if(Auth::check())
-                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-white" data-bs-element-id='{{ $element->element_id }}' data-comment-id='0'><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="@if($element->comments >= $hot_comments) text-danger @else text-white @endif" data-bs-element-id='{{ $element->element_id }}' data-comment-id='0'><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
                 @else
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="@if($element->comments >= $hot_comments) text-danger @else text-white @endif"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
                 @endif
                 @if(!$arguments->isEmpty()) <a href="#argumenty"><span><i class="fa-solid fa-hand-point-up"></i> {{ count($arguments) }} Zobacz argumenty</span></a> @endif   
                 </div>

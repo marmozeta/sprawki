@@ -1,7 +1,6 @@
 <script src="https://cdn.tiny.cloud/1/i6uanfc6fem05bj628hyrzn4388botzrtot9o4m718w9bo5f/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
-var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 tinymce.init({
   selector: 'textarea.tinymce',
   plugins: 'preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
@@ -57,8 +56,8 @@ tinymce.init({
   noneditable_noneditable_class: 'mceNonEditable',
   toolbar_mode: 'sliding',
   contextmenu: 'link image imagetools table',
-  skin: useDarkMode ? 'oxide-dark' : 'oxide',
-  content_css: useDarkMode ? 'dark' : 'default',
+  skin: 'oxide',
+  content_css: 'default',
   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
   language: 'pl',
    setup: (editor) => {

@@ -14,7 +14,10 @@
     </div>
 @endif
 <footer id="fh5co-footer">
-		
+		<div class="container px-3">
+<script>var fmFCFvfbasupwq5=function(e){if(e.data.type==='resize'){document.getElementById('fm-fc-f-vfbasupwq5').style.minHeight=e.data.size+'px'}};window.addEventListener?addEventListener('message',fmFCFvfbasupwq5,!1):attachEvent('onmessage',fmFCFvfbasupwq5);
+</script><iframe id="fm-fc-f-vfbasupwq5" data-height="418" src="https://forms.freshmail.io/f/i3yfv21gaf/vfbasupwq5/index.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" style="min-height: 448px"></iframe>
+</div>
 		<div class="container">
 			<div class="row row-padded">
 				<div class="col-md-12 text-center">
