@@ -11,6 +11,7 @@ use App\Models\Menu;
 use App\Models\Like;
 use App\Models\Observed;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Setting;
 
 class UserController extends Controller
 {
