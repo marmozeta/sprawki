@@ -23,9 +23,9 @@ class UserController extends Controller
         $elements = $elementModel->getSocialElementsByUser($user->id);
         
         $commentModel = new Comment;
-        $comments = $commentModel->getCommentsByUser(0, $user->id, request()->getClientIp(), Auth::user()->id);
+        $comments = $commentModel->getCommentsByUser(0, $user->id, request()->getClientIp(), (Auth::check() ? Auth::user()->id : 0));
         foreach($comments as $key=>$comm) {
-            $comments_l2 = $commentModel->getCommentsByUser($comm->comm_id, $user->id, request()->getClientIp(), Auth::user()->id);
+            $comments_l2 = $commentModel->getCommentsByUser($comm->comm_id, $user->id, request()->getClientIp(), (Auth::check() ? Auth::user()->id : 0));
             if(!empty($comments_l2)) {
                 $comments[$key]->has_children = true;
                 $comments[$key]->children = $comments_l2;
