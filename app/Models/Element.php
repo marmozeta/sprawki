@@ -21,6 +21,7 @@ class Element extends Model
             ->where('menus.slug', $slug)
             ->whereNull('elements.deleted_at')
             ->whereNull('menus.deleted_at')
+            ->orderBy('elements.created_at', 'DESC')
             ->get();
     }
     
