@@ -84,7 +84,7 @@
                     </div>
                         <div class="row pt-5 acceptances">
                              <div class="text-dark"><input type="checkbox" required /> * Akceptuję zasady określone w regulaminie.</div>
-                             <div class="text-dark"><input type="checkbox" required /> * Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie (opcjonalne). Więcej informacji o przetwarzaniu moich danych osobowych.</a>
+                             <div class="text-dark"><input type="checkbox" /> Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie. Więcej informacji o przetwarzaniu moich danych osobowych.</a>
     <div class="text-dark"><input type="checkbox" required /> * Wyrażam zgodę na udostępnienie plików przed 14-dniowym terminem na odstąpienie od umowy zawartej na odległość.</a>
     <div class="text-dark"><input type="checkbox" required /> * Jestem świadomy, że stracę prawo do odstąpienia po dostarczeniu mi plików przed upływem 14 dni na odstąpienie od umowy zawartej na odległość.</a>
 
