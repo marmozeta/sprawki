@@ -8,8 +8,14 @@
             </h1>
             <div class="info d-flex justify-content-center mt-5 mb-0" style="column-gap: 30px; padding-left: 8em; padding-right: 9em;">
                 <div class="col-4">
+                    @if( $element->author_id > 0)
                     <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
                     <a href="/{{ $element->friendly_name }}" class="text-dark px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
+                    @else
+                    <img src="{{ asset('images/users/') }}/person.png" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">&nbsp;
+                    <span class="text-dark px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</span>
+                    
+                    @endif
                 </div>
                 <div class="col-4 align-self-center text-dark">
                     @if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif

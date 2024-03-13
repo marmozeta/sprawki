@@ -35,8 +35,14 @@
                                 <a class="text-white" href="{{ $menu->slug }}/{{$element->element_id}}-{{ $element->slug }}">{{ mb_substr($element->title, 0, 50) }}</a>
                             </div>
                             <div class="col-8 d-flex align-items-center" style="margin: 5px 0;">
-                                <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
-                                <a href="/{{ $element->friendly_name }}" class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
+                                @if($element->author_id > 0)
+                                    <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
+                                    <a href="/{{ $element->friendly_name }}" class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
+                                @else
+                                <img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">&nbsp;
+                                <span class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</span>
+                                
+                                @endif
                             </div>
                            <div class='col-4 icons justify-content-end align-items-center'>
                                     <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart @if($element->likes >= $hot_likes) text-danger @endif"></i> <span class="count">{{ $element->likes }}</span></span>

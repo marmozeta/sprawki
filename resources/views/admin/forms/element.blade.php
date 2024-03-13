@@ -54,6 +54,28 @@
 
 @section('scripts2')
 <script>
+    if($('input[name=author]').length > 0) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+            },
+            type: 'POST',
+            url: '{{ url("/chat/participants/get") }}',
+            success: function (data){
+                var new_data = [];
+                for(var i in data) {
+                    new_data.push(data[i].friendly_name);
+                }
+                var input = document.querySelector('input[name=author]');
+                new Tagify(input,
+                    {whitelist: new_data, enforceWhitelist: false, maxTags: 1});
+            },
+            error: function(e) {
+               console.log(e);
+            }
+        });  
+    }
+    
     if($('input[name=tag_tags]').length > 0) {
         $.ajax({
             headers: {

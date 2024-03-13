@@ -90,7 +90,7 @@ class HomeController extends Controller
         
         $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
         $hot_likes = Setting::where('name', 'like_counter')->first()->value;
-        
+           
         return view('front.element', array(
                                         'menu' => $menu, 
                                         'element' => $element, 

@@ -835,6 +835,7 @@ a[data-totalitems="0"]:before {
     width: 28px;
     height: 28px;
     object-fit: cover;
+    background: #fff;
 }
 
 .dropdown-menu {

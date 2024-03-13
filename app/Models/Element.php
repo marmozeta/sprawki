@@ -26,7 +26,10 @@ class Element extends Model
     }
     
     public function getByMenuId($menu_id, $user_id, $tag = NULL) {
-        $result = Element::selectRaw('GROUP_CONCAT(LOWER(tags.name) SEPARATOR " ") AS tags, elements.*, users.friendly_name, users.picture, GROUP_CONCAT(CONCAT("<i class=\'", categories.icon, "\'></i>", categories.name) SEPARATOR ", ") AS product_categories, 1 AS is_liked')     
+        $result = Element::selectRaw('GROUP_CONCAT(LOWER(tags.name) SEPARATOR " ") AS tags, elements.*, 
+                    CASE WHEN elements.author_id > 0 THEN users.friendly_name ELSE elements.author END AS friendly_name, 
+                    CASE WHEN elements.author_id >0 THEN users.picture ELSE "person.png" END AS picture,
+                GROUP_CONCAT(CONCAT("<i class=\'", categories.icon, "\'></i>", categories.name) SEPARATOR ", ") AS product_categories, 1 AS is_liked')     
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
             ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
@@ -68,7 +71,9 @@ class Element extends Model
     
     public function getElement($element_id, $user_id, $ip) {
         $result = DB::table('elements')
-            ->select(DB::raw('elements.*, u.friendly_name, u.picture,
+            ->select(DB::raw('elements.*, 
+                    CASE WHEN elements.author_id > 0 THEN u.friendly_name ELSE elements.author END AS friendly_name, 
+                    CASE WHEN elements.author_id >0 THEN u.picture ELSE "person.png" END AS picture,
                     GROUP_CONCAT(tags.name SEPARATOR ",") AS tags, 
                     GROUP_CONCAT(categories.cat_id SEPARATOR ",") AS product_categories, 
                     GROUP_CONCAT(DISTINCT media_uploads.filename SEPARATOR ",") AS files_to_send'))
@@ -78,7 +83,7 @@ class Element extends Model
             ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
             ->leftJoin('element_media_uploads', 'elements.element_id', '=', 'element_media_uploads.element_element_id')
             ->leftJoin('media_uploads', 'element_media_uploads.media_upload_id', '=', 'media_uploads.id')
-            ->join('users AS u', 'elements.user_id', '=', 'u.id')
+            ->leftJoin('users AS u', 'elements.author_id', '=', 'u.id')
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0) as likes'))
             ->where('elements.element_id', $element_id)

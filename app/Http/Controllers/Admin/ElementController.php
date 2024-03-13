@@ -16,6 +16,7 @@ use Illuminate\Support\Str;
 use App\Models\ElementMediaUpload;
 use App\Models\MediaUpload;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
  
 class ElementController extends Controller
 {
@@ -76,7 +77,13 @@ class ElementController extends Controller
         $element->is_hot = ($request->is_hot == 'on');
         $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author = $request->author;
+        $element->author_id = 0;
+        if(!empty($request->author)) {
+            $author = json_decode($request->author);
+            $element->author = $author[0]->value;
+            $author_user = User::where('friendly_name', $element->author)->first();
+            if(!empty($author_user)) $element->author_id = $author_user->id;
+        }
         $element->price = (float)$request->price;
         $element->vat = (float)$request->vat;
         $element->stock_quantity = (int)$request->stock_quantity;
@@ -201,9 +208,15 @@ class ElementController extends Controller
         $element->country = $request->country;
         $element->is_new = ($request->is_new == 'on');
         $element->is_hot = ($request->is_hot == 'on');
-        $element->user_id = 1;
+        $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author = $request->author;
+        $element->author_id = 0;
+        if(!empty($request->author)) {
+            $author = json_decode($request->author);
+            $element->author = $author[0]->value;
+            $author_user = User::where('friendly_name', $element->author)->first();
+            if(!empty($author_user)) $element->author_id = $author_user->id;
+        }
         $element->price = (float)$request->price;
         $element->vat = (float)$request->vat;
         $element->stock_quantity = (int)$request->stock_quantity;
