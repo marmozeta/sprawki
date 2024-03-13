@@ -40,11 +40,24 @@ class UserController extends Controller
         $likesModel = new Like;
         $likes = $likesModel->getLikesByUser($user->id);
         
+        $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
+        $hot_likes = Setting::where('name', 'like_counter')->first()->value;
+        
         $observed = Observed::where('user_id', $user->id)->count();
         $is_observable = Observed::where('observed_id', $user->id)->count();
         $logged_in_is_observable = (Auth::check()) ? Observed::where('observed_id', $user->id)->where('user_id', Auth::user()->id)->count() : 0;
         
-        return view('front.profile', array('user' => $user, 'menu' => $menu, 'comments' => $comments, 'elements' => $elements, 'likes' => $likes, 'observed' => $observed, 'is_observable' => $is_observable, 'logged_in_is_observable' => $logged_in_is_observable));
+        return view('front.profile', array(
+            'user' => $user, 
+            'menu' => $menu, 
+            'comments' => $comments, 
+            'elements' => $elements, 
+            'likes' => $likes, 
+            'observed' => $observed, 
+            'is_observable' => $is_observable, 
+            'logged_in_is_observable' => $logged_in_is_observable,
+            'hot_comments' => $hot_comments,
+            'hot_likes' => $hot_likes));
     }
     
     public function observed()
