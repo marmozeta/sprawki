@@ -37,6 +37,7 @@ class Element extends Model
            // ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.(int)$user_id.') as is_liked'))
             ->where('elements.menu_id', $menu_id)
             ->whereNull('elements.deleted_at')
+            ->whereRaw('elements.publish_date <= NOW()')
             ->orderBy('elements.created_at', 'DESC')  
             ->groupBy('elements.element_id');
         
