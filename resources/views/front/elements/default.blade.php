@@ -53,11 +53,11 @@
         <div class="col-8 offset-2 d-flex justify-content-center" style="column-gap: 20px;">
             <div class="container-fluid mx-5 bottom_buttons">
                 
-                <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like @if($element->likes >= $hot_likes) text-danger @else text-white @endif"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
+                <a href="#" data-element-id="{{ $element->element_id }}" class="toggle_like"><span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart @if($element->likes >= $hot_likes) text-danger @else text-white @endif"></i> <span class="count">{{ $element->likes }}</span> Polub</span></a>
                 @if(Auth::check())
-                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="@if($element->comments >= $hot_comments) text-danger @else text-white @endif" data-bs-element-id='{{ $element->element_id }}' data-comment-id='0'><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" data-bs-element-id='{{ $element->element_id }}' data-comment-id='0'><i class="fa-regular fa-comments @if($element->comments >= $hot_comments) text-danger @else text-white @endif"></i> {{ $element->comments }} Skomentuj</a>
                 @else
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="@if($element->comments >= $hot_comments) text-danger @else text-white @endif"><i class="fa-regular fa-comments"></i> {{ $element->comments }} Skomentuj</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white"><i class="fa-regular fa-comments @if($element->comments >= $hot_comments) text-danger @else text-white @endif"></i> {{ $element->comments }} Skomentuj</a>
                 @endif
                 @if(!$arguments->isEmpty()) <a href="#argumenty"><span><i class="fa-solid fa-hand-point-up"></i> {{ count($arguments) }} Zobacz argumenty</span></a> @endif   
                 </div>

@@ -695,10 +695,12 @@ a[data-totalitems="0"]:before {
     display: flex;
     justify-content: center;
     column-gap: 30px;
+    font-family: Oswald;
 }
 
 .bottom_buttons a {
     color: #fff;
+    text-decoration: none;
 }
 
 .comment_line {

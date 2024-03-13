@@ -39,8 +39,8 @@
                                 <a href="/{{ $element->friendly_name }}" class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
                             </div>
                            <div class='col-4 icons justify-content-end align-items-center'>
-                                    <span class="@if($element->likes >= $hot_likes) text-danger @endif"><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $element->likes }}</span></span>
-                                    <span class="@if($element->comments >= $hot_comments) text-danger @endif"><i class="fa-regular fa-comments"></i> {{ $element->comments }}</span>
+                                    <span><i class="{{ ($element->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart @if($element->likes >= $hot_likes) text-danger @endif"></i> <span class="count">{{ $element->likes }}</span></span>
+                                    <span><i class="fa-regular fa-comments @if($element->comments >= $hot_comments) text-danger @endif"></i> {{ $element->comments }}</span>
                             </div>
                        
                         
