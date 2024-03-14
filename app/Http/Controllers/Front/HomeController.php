@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\Comment;
 use App\Models\ElementArgument;
 use App\Models\Setting;
+use App\Models\ElementUserLog;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,7 @@ class HomeController extends Controller
         $menu = $menuModel->getMenuBySlug($slug);
         $elementModel = new Element;
         $request_tag = request()->get('tag');
-        $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0, $request_tag);
+        $elements = $elementModel->getByMenuId($menu->menu_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp(), $request_tag);
         
         $tagsModel = new Tag;
         $tags_space = $tagsModel->getByMenuIdAndGroup($menu->menu_id, 'space');
@@ -51,6 +52,16 @@ class HomeController extends Controller
     
     public function show($element_id, $element_slug)
     {
+        if(Auth::check()) {
+            $is_read = ElementUserLog::where('user_id', Auth::user()->id)->where('element_id', $element_id)->first();
+            if(empty($is_read)) {   
+                $log = new ElementUserLog;
+                $log->user_id = Auth::user()->id;
+                $log->element_id = $element_id;
+                $log->save();
+            }
+        }
+        
         $path = request()->path();
         $slug_tab = explode('/', $path);
         $slug = $slug_tab[0];

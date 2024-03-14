@@ -5,6 +5,9 @@
                                     <div class="caffle d-flex">
                                         <div class="w-100 d-flex justify-content-between">
                                          <div class="top_left">
+                                             @if($element->is_read)
+                                             <i class="fa-solid fa-check-circle text-success"></i>
+                                             @endif
                                       <span class="publish_date">@if(!empty($element->created_at) && $element->created_at!='0000-00-00 00:00:00') {{ Carbon\Carbon::parse($element->created_at)->format('d.m.Y H:i') }} @endif</span>
                                       <div class="country">
                                             @if(is_array($menu->attrs_list) && in_array('country', $menu->attrs_list))

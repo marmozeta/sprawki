@@ -25,11 +25,11 @@ class Element extends Model
             ->get();
     }
     
-    public function getByMenuId($menu_id, $user_id, $tag = NULL) {
+    public function getByMenuId($menu_id, $user_id, $ip, $tag = NULL) {
         $result = Element::selectRaw('GROUP_CONCAT(LOWER(tags.name) SEPARATOR " ") AS tags, elements.*, 
                     CASE WHEN elements.author_id > 0 THEN users.friendly_name ELSE elements.author END AS friendly_name, 
                     CASE WHEN elements.author_id >0 THEN users.picture ELSE "person.png" END AS picture,
-                GROUP_CONCAT(CONCAT("<i class=\'", categories.icon, "\'></i>", categories.name) SEPARATOR ", ") AS product_categories, 1 AS is_liked')     
+                    GROUP_CONCAT(CONCAT("<i class=\'", categories.icon, "\'></i>", categories.name) SEPARATOR ", ") AS product_categories, 1 AS is_liked')     
             ->leftJoin('element_tags', 'elements.element_id', '=', 'element_tags.element_id')
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
             ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
@@ -37,7 +37,6 @@ class Element extends Model
             ->leftJoin('users', 'users.id', '=', 'elements.author_id')
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0) as likes'))
-           // ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.(int)$user_id.') as is_liked'))
             ->where('elements.menu_id', $menu_id)
             ->whereNull('elements.deleted_at')
             ->whereRaw('elements.publish_date <= NOW()')
@@ -46,6 +45,13 @@ class Element extends Model
         
         if(!empty($tag)) $result->where('tags.name', '=', urldecode($tag));
         
+        if(!empty($user_id)) {
+            $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0 AND likes.user_id = '.$user_id.') as is_liked'));
+            $result->addSelect(DB::raw('(SELECT COUNT(*) FROM element_user_logs WHERE element_user_logs.element_id = elements.element_id AND element_user_logs.user_id = '.$user_id.') as is_read'));
+        }
+        else {
+            $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as is_liked'));
+        }
         return $result->get();
     }
     
