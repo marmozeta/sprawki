@@ -42,18 +42,15 @@
               
       <div class="modal-body">
           <div class="item d-flex p-3">
-                <div class="col-9 p-2">
+                <div class="col-12 p-2">
                    <div class="w-100">
                        <input type="text" class="form-control mb-2" name="title" placeholder="Nazwij swój rozmyślunek" style="height: 36px;" />
-                    <textarea id="social_desc" name="desc" class="form-control" style="width: 560px; height: 80px;" placeholder="Opublikuj swój rozmyślunek"></textarea>
+                    <textarea id="social_desc" name="desc" class="form-control" style="width: 748px; height: 80px;" placeholder="Opublikuj swój rozmyślunek"></textarea>
                 </div>
                    <input type="hidden" name="file" />
                    @csrf
         
-</div>
-    <div class="col-3 p-2">
-      <div class="dropzone" id="add-media"></div>
-    </div>  
+</div> 
            
             </div>
       </div>
@@ -103,55 +100,6 @@ bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','un
 $('.nicEdit-panelContain').parent().width('100%');
 $('.nicEdit-panelContain').parent().next().width('100%');</script>
 <script>
-Dropzone.options.addMedia =
-         {
-               url: "{{url('social/media/store')}}",
-            dictDefaultMessage: 'kliknij aby dodać obrazek [opcjonalnie]' ,
-            maxFilesize: 12,
-            
-                    headers: {
-                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                            },
-            renameFile: function(file) {
-                var dt = new Date();
-                var time = dt.getTime();
-               return time+file.name;
-            },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file) 
-            {
-                var name = file.upload.filename;
-                $.ajax({
-                    headers: {
-                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                            },
-                    type: 'POST',
-                    url: '{{ url("social/media/remove") }}',
-                    data: {filename: name},
-                    success: function (data){
-                        console.log("File has been successfully removed!!");
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }});
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-       
-            success: function(file, response) 
-            {
-                $('input[name="file"]').val(response.filename);
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-               return false;
-            }
-};
-
 var newCommentModal = document.getElementById('newCommentModal')
 newCommentModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
