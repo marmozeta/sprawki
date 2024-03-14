@@ -19,13 +19,16 @@
         </div>
         <div class="col-12 text-right" style="font-size: 0.8em;">
             <a href="#" data-element-id="{{ $comment->element_id }}" data-comment-id="{{ $comment->comm_id }}" class="toggle_like text-dark mx-3"><i class="{{ ($comment->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $comment->likes }}</span> Polub</a>
-                @if($comment->comment_comm_id == 0)
-                    @if(Auth::check())
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-dark" data-bs-element-id="{{ $element->element_id }}" data-comment-id="{{ $comment->comm_id }}"><i class="fa-regular fa-comments"></i> {{ $comment->comments }} Odpowiedz</a>
-                    @else
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-dark"><i class="fa-regular fa-comments"></i> {{ $comment->comments }} Odpowiedz</a>
-                    @endif
-                @endif
+            @if(Auth::check())
+                <a href="#" data-bs-toggle="modal" data-bs-target="#newCommentModal" class="text-dark" data-bs-element-id="{{ $element->element_id }}" data-comment-id="{{ $comment->comm_id }}"><i class="fa-regular fa-comments"></i> {{ $comment->comments }} Odpowiedz</a>
+            @else
+                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-dark"><i class="fa-regular fa-comments"></i> {{ $comment->comments }} Odpowiedz</a>
+            @endif
         </div>
     </div>
 </div>
+@if($comment->has_children)
+    @foreach($comment->children as $comment)
+        @include('front.elements.loop.simply_comment') 
+    @endforeach 
+@endif

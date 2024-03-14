@@ -76,11 +76,6 @@
             <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
                 @foreach($comments as $comment)
                     @include('front.elements.loop.simply_comment') 
-                    @if($comment->has_children)
-                        @foreach($comment->children as $comment)
-                            @include('front.elements.loop.simply_comment') 
-                        @endforeach 
-                    @endif
                 @endforeach
                    
         </div>

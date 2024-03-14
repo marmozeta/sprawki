@@ -17,6 +17,9 @@ use App\Models\Setting;
 
 class HomeController extends Controller
 {
+    public function __construct() {
+        $this->commentModel = new Comment;
+    }
     public function index()
     {
         $slug = request()->path();
@@ -74,17 +77,8 @@ class HomeController extends Controller
             if($row->id == $element_id) $is_in_cart = true;
         }
         
-        $commentModel = new Comment;
-        $comments = $commentModel->getCommentsByElement($element_id, 0, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
-        foreach($comments as $key=>$comm) {
-                $comments_l2 = $commentModel->getCommentsByElement($element_id, $comm->comm_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
-                if(!empty($comments_l2)) {
-                    $comments[$key]->has_children = true;
-                    $comments[$key]->children = $comments_l2;
-                }
-                else $comments[$key]->has_children = false;
-        }
-                
+        $comments = $this->_build_comments_tree($element_id, 0);
+         
         $argumentModel = new ElementArgument;
         $arguments = $argumentModel->getArgumentsByElement($element_id);
         
@@ -103,5 +97,18 @@ class HomeController extends Controller
                                         'hot_comments' => $hot_comments, 
                                         'hot_likes' => $hot_likes
                                     ));
+    }
+    
+    private function _build_comments_tree($element_id, $parent_id) {
+        $comments = $this->commentModel->getCommentsByElement($element_id, $parent_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+        foreach($comments as $key=>$comm) {
+                $comments_l2 = $this->commentModel->getCommentsByElement($element_id, $comm->comm_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+                if(!empty($comments_l2)) {
+                    $comments[$key]->has_children = true;
+                    $comments[$key]->children = $this->_build_comments_tree($element_id, $comm->comm_id);
+                }
+                else $comments[$key]->has_children = false;
+        }
+        return $comments;
     }
 }
