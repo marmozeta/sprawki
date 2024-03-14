@@ -946,3 +946,7 @@ a[data-totalitems="0"]:before {
 .acceptances input[type="checkbox"] {
     margin-right: 10px;
 }
+
+.text-grey {
+    color: #ccc;
+}

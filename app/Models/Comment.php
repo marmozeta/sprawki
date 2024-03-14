@@ -34,9 +34,9 @@ class Comment extends Model
             ->where('c.element_id', $element_id)
             ->where('c.comment_comm_id', $parent_id);
         
+        
         if(!empty($user_id)) $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.user_id = '.$user_id.') as is_liked'));
         else $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.ip = "'.$ip.'") as is_liked'));
-
         return $result->get();
     }
     

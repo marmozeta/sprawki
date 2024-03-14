@@ -9,13 +9,17 @@
             {{ Carbon\Carbon::parse($comment->created_at)->format('d.m.Y H:i') }} 
         </div>
         <div class="col-2 text-right">
-            @if(Auth::check() && $comment->id == Auth()->user()->id)
-                <a href="#"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
-                <a href="#" class="removeComment" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('social.comment.remove', ['id' => $comment->comm_id, 'redirect' => base64_encode(url()->current())]) }}"><small><i class="fa-solid fa-trash mx-2" style="color: #ef5353;"></i></small></a>
+            @if(Auth::check() && $comment->id == Auth()->user()->id && !$comment->removed_by_user)
+                <a href="#" data-bs-toggle="modal" data-bs-target="#editCommentModal" data-comment-id="{{ $comment->comm_id }}"><small><i class="fa-solid fa-edit" style="color: #ef5353;"></i></small></a>
+                <a href="#" class="removeComment" data-bs-toggle="modal" data-bs-target="#removeCommentModal" data-bs-whatever="{{ route('social.comment.remove', ['element_id' => $element->element_id, 'id' => $comment->comm_id, 'redirect' => base64_encode(url()->current())]) }}"><small><i class="fa-solid fa-trash mx-2" style="color: #ef5353;"></i></small></a>
             @endif
         </div>
-        <div class="col-12">
-            {{ $comment->comment }}
+        <div class="col-12 comment_text @if($comment->removed_by_user) text-grey @endif">
+            @if($comment->removed_by_user)
+                (komentarz usunięty przez użytkownika)
+            @else
+                {{ $comment->comment }}
+            @endif
         </div>
         <div class="col-12 text-right" style="font-size: 0.8em;">
             <a href="#" data-element-id="{{ $comment->element_id }}" data-comment-id="{{ $comment->comm_id }}" class="toggle_like text-dark mx-3"><i class="{{ ($comment->is_liked) ? 'fa-solid' : 'fa-regular' }} fa-heart"></i> <span class="count">{{ $comment->likes }}</span> Polub</a>

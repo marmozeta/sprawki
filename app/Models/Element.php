@@ -34,7 +34,7 @@ class Element extends Model
             ->leftJoin('tags', 'element_tags.tag_tag_id', '=', 'tags.tag_id')
             ->leftJoin('element_categories', 'elements.element_id', '=', 'element_categories.element_element_id')
             ->leftJoin('categories', 'element_categories.category_cat_id', '=', 'categories.cat_id')
-            ->leftJoin('users', 'users.id', '=', 'elements.user_id')
+            ->leftJoin('users', 'users.id', '=', 'elements.author_id')
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.element_id = elements.element_id) as comments'))
             ->addSelect(DB::raw('(SELECT COUNT(*) FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0) as likes'))
            // ->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.user_id = '.(int)$user_id.') as is_liked'))

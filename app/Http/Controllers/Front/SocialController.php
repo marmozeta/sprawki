@@ -27,7 +27,8 @@ class SocialController extends Controller
         $element->is_hot = 0;
         $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author = Auth::user()->name;
+        $element->author = Auth::user()->friendly_name;
+        $element->author_id = Auth::user()->id;
         $element->save();
         
         return redirect('/spolecznosc');
@@ -41,11 +42,25 @@ class SocialController extends Controller
         $element->title = $request->title;
         $element->image = $request->file;
         $element->description = $request->desc;
-        $element->is_new = 0;
-        $element->is_hot = 0;
         $element->save();
         
         return redirect('/spolecznosc/'.$element->element_id.'-'.$element->slug);
+    }
+    
+    public function remove_post($element_id) {
+        $commentModel = new Comment;
+        $comments = $commentModel->getCommentsByElement($element_id, 0, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+        if(!$comments->isEmpty()) {
+            $element = Element::find($element_id);
+            $element->removed_by_user = 1;
+            $element->save();
+        }
+        else {
+            $element = Element::find($element_id);
+            $element->delete();
+        }
+ 
+        return redirect('/spolecznosc');
     }
     
     public function fileStore(Request $request)
@@ -79,10 +94,29 @@ class SocialController extends Controller
         return redirect('/'.$request->redirect);
     }
     
-    public function remove_comment($id, $redirect) {
-        $comment = Comment::find($id);
-        $comment->delete();
-        
+    
+    public function update_comment(Request $request)
+    {
+        $comment = Comment::find($request->comment_id);
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return redirect('/'.$request->redirect);
+    }
+    
+    public function remove_comment($element_id, $id, $redirect) {
+        $commentModel = new Comment;
+        $comments = $commentModel->getCommentsByElement($element_id, $id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
+        if(!$comments->isEmpty()) {
+            $comment = Comment::find($id);
+            $comment->removed_by_user = 1;
+            $comment->save();
+        }
+        else {
+            $comment = Comment::find($id);
+            $comment->delete();
+        }
+ 
         return redirect(base64_decode($redirect));
     }
     
