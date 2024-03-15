@@ -77,7 +77,7 @@ class ElementController extends Controller
         $element->is_hot = ($request->is_hot == 'on');
         $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author_id = 0;
+        $element->author_id = Auth::user()->id;
         if(!empty($request->author)) {
             $author = json_decode($request->author);
             $element->author = $author[0]->value;
@@ -210,7 +210,7 @@ class ElementController extends Controller
         $element->is_hot = ($request->is_hot == 'on');
         $element->user_id = Auth::user()->id;
         $element->menu_id = $menu->menu_id;
-        $element->author_id = 0;
+        $element->author_id = Auth::user()->id;
         if(!empty($request->author)) {
             $author = json_decode($request->author);
             $element->author = $author[0]->value;
