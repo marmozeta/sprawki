@@ -84,7 +84,7 @@
         </div>
     </div>
     
-    @if(!$ad_element->isEmpty() && $element->menu_id != 9)
+    @if(!empty($ad_element) && $element->menu_id != 9)
     <div class="row">
         <div class="col-12 py-5">
              @include('front.elements.loop.ad') 
