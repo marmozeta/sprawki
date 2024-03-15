@@ -83,6 +83,15 @@
                 </div>
         </div>
     </div>
+    
+    @if($element->menu_id != 9)
+    <div class="row">
+        <div class="col-12 py-5">
+             @include('front.elements.loop.ad') 
+        </div>
+    </div>
+    @endif
+    
     @if(!$comments->isEmpty())
     <div class="row">
         <div class="col-6 offset-3 justify-content-center mt-5" style="column-gap: 20px;">

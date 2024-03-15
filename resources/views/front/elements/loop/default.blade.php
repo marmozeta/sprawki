@@ -39,12 +39,17 @@
                             </div>
                             <div class="col-8 d-flex align-items-center" style="margin: 5px 0;">
                                 @if($element->author_id > 0)
-                                    <a href="/{{ $element->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture"></a>&nbsp;
+                                    <a href="/{{ $element->friendly_name }}">
+                                        @if(!empty($element->picture))
+                                            <img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">
+                                        @else
+                                            <img src="{{ asset('images/users/') }}/person.png" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">
+                                        @endif
+                                    </a>&nbsp;
                                     <a href="/{{ $element->friendly_name }}" class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</a>
                                 @else
-                                <img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">&nbsp;
-                                <span class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</span>
-                                
+                                    <img src="{{ asset('images/users/') }}/{{ $element->picture }}" alt="{{ $element->friendly_name }}" class="rounded-circle user-picture">&nbsp;
+                                    <span class="text-white px-2" style="text-transform: none;">{{ '@'.$element->friendly_name }}</span>
                                 @endif
                             </div>
                            <div class='col-4 icons justify-content-end align-items-center'>

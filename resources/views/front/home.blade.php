@@ -7,16 +7,20 @@
 
                     <div id="fh5co-board"><div class="row @if(!$menu->is_shop) iso-grid @endif">
             @csrf
-            @foreach($elements as $element) 
+            @foreach($elements as $key=>$element) 
                 @if($menu->is_shop)
                     @include('front.elements.loop.shop') 
                 @else
                     @include('front.elements.loop.default') 
                 @endif
+                
+                @if(($key+1)%4==0) 
+                    @include('front.elements.loop.ad') 
+                @endif
             @endforeach
         </div>
        </div>
-	
+	 </div>
 @endsection
 
 <!--

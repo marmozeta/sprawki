@@ -38,6 +38,8 @@ class HomeController extends Controller
         $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
         $hot_likes = Setting::where('name', 'like_counter')->first()->value;
         
+        $ad_element = Element::where('menu_id', 9)->first();
+        
         $view = ($menu->is_social) ? 'social' : 'home'; 
         return view('front.'.$view, 
                 array('menu' => $menu, 
@@ -46,7 +48,8 @@ class HomeController extends Controller
                     'tags_region' => $tags_region, 
                     'tags_space' => $tags_space, 
                     'hot_comments' => $hot_comments, 
-                    'hot_likes' => $hot_likes)
+                    'hot_likes' => $hot_likes,
+                    'ad_element' => $ad_element)
                 );
     }
     
@@ -95,6 +98,8 @@ class HomeController extends Controller
         
         $hot_comments = Setting::where('name', 'comment_counter')->first()->value;
         $hot_likes = Setting::where('name', 'like_counter')->first()->value;
+        
+        $ad_element = Element::where('menu_id', 9)->first();
            
         return view('front.element', array(
                                         'menu' => $menu, 
@@ -106,8 +111,8 @@ class HomeController extends Controller
                                         'comments' => $comments,
                                         'arguments' => $arguments, 
                                         'hot_comments' => $hot_comments, 
-                                        'hot_likes' => $hot_likes
-                                    ));
+                                        'hot_likes' => $hot_likes,
+                                        'ad_element' => $ad_element));
     }
     
     private function _build_comments_tree($element_id, $parent_id) {
