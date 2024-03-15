@@ -1,4 +1,4 @@
-<div class="col-12 my-3 iso-item {{ $ad_element->tags }} ">
+<div class="col-12 my-3 iso-item">
     <div class="item default">
         		<a href="/reklamy/{{$ad_element->element_id}}-{{ $ad_element->slug }}">
                               

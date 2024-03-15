@@ -14,7 +14,7 @@
                     @include('front.elements.loop.default') 
                 @endif
                 
-                @if(($key+1)%4==0) 
+                @if(!$ad_element->isEmpty() && ($key+1)%4==0) 
                     @include('front.elements.loop.ad') 
                 @endif
             @endforeach
