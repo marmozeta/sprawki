@@ -59,3 +59,7 @@ function checkPunc(num) {
     return false;
 }
 
+new DataTable('#zero_config', {language: {
+        url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/pl.json',
+    },});    
+

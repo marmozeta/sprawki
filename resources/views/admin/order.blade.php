@@ -39,13 +39,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="zero_config" class="table border table-striped table-bordered text-nowrap">
+                                    <table id="zero_config" class="table border table-striped table-bordered text-nowrap" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Użytkownik</th>
                                                 <th>Suma</th>
                                                 <th>Data zamówienia</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -68,6 +69,7 @@
                                                 <th>Użytkownik</th>
                                                 <th>Suma</th>
                                                 <th>Data zamówienia</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>

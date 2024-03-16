@@ -40,7 +40,7 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     @if(count($elements)>0)
-                                    <table id="zero_config" class="table border table-striped table-bordered text-nowrap">
+                                    <table id="zero_config" class="table border table-striped table-bordered text-nowrap" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
