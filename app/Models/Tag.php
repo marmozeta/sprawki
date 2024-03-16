@@ -28,6 +28,7 @@ class Tag extends Model
             ->join('element_tags', 'tags.tag_id', '=', 'element_tags.tag_tag_id')
             ->where('element_tags.element_id', $element_id)
             ->where('tags.active', 1)
+            ->where('tags.group_slug', 'tag')
             ->get();
     }
 }
