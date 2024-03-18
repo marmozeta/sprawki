@@ -88,7 +88,7 @@
 	<script src="{{asset('js/init_PL.js')}}"></script>
 
 	<!-- Main JS -->
-        <script src="{{asset('js/custom.js')}}?v=20240215"></script>
+        <script src="{{asset('js/custom.js')}}?v=20240318"></script>
 	<script src="{{asset('js/main.js')}}"></script>
         @yield('scripts')
         @yield('after_scripts')
