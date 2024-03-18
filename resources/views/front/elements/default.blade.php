@@ -277,6 +277,21 @@ $(document).on('click', '.removeComment', function() {
     </div>
   </div>
 </div>
+<script>
+      
+    var removePostModal = document.getElementById('removePostModal')
+    removePostModal.addEventListener('show.bs.modal', function (event) {
+    // Button that triggered the modal
+    var button = event.relatedTarget
+
+    // Extract info from data-bs-* attributes
+    var recipient = button.getAttribute('data-bs-whatever')
+    var modalFooterLink = removePostModal.querySelector('.modal-footer a')
+
+    modalFooterLink.href = recipient;
+  })
+
+    </script>
 @endif
 <div class="modal fade" id="removeCommentModal" tabindex="-1" aria-labelledby="removeCommentModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -407,19 +422,6 @@ $('.toggle_like').on('click', function() {
 
     modalFooterLink.href = recipient;
   })
-  
-    var removePostModal = document.getElementById('removePostModal')
-    removePostModal.addEventListener('show.bs.modal', function (event) {
-    // Button that triggered the modal
-    var button = event.relatedTarget
-
-    // Extract info from data-bs-* attributes
-    var recipient = button.getAttribute('data-bs-whatever')
-    var modalFooterLink = removePostModal.querySelector('.modal-footer a')
-
-    modalFooterLink.href = recipient;
-  })
-
 
 var editCommentModal = document.getElementById('editCommentModal')
 editCommentModal.addEventListener('show.bs.modal', function (event) {
