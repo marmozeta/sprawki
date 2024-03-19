@@ -109,11 +109,11 @@
                         <!-- ============================================================== -->
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
-                                <form>
+                                <form action="{{ route('admin.dashboard.search') }}">
                                     <div class="customize-input">
                                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
-                                            type="search" placeholder="Szukaj" aria-label="Szukaj">
-                                        <i class="form-control-icon" data-feather="search"></i>
+                                               type="search" name="search" placeholder="Szukaj" aria-label="Szukaj" value="@if(!empty(request()->get('search'))){{ request()->get('search') }}@endif" >
+                                        <button><i class="form-control-icon" data-feather="search"></i></button>
                                     </div>
                                 </form>
                             </a>

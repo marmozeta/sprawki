@@ -14,14 +14,17 @@ class Menu extends Model
     
     protected $primaryKey = 'menu_id';
     
-    public function getMenus() {
-        return DB::table('menus')
+    public function getMenus($search = null) {
+        $result = DB::table('menus')
             ->select(DB::raw('menus.*, GROUP_CONCAT(attributes.slug SEPARATOR ", ") AS attrs_list'))
             ->leftJoin('menu_attributes', 'menus.menu_id', '=', 'menu_attributes.menu_id')
             ->leftJoin('attributes', 'attributes.attr_id', '=', 'menu_attributes.attribute_id')
             ->groupBy('menus.menu_id')
-            ->whereNull('menus.deleted_at')
-            ->get();
+            ->whereNull('menus.deleted_at');
+        
+        if(!empty($search)) $result->whereRaw("menus.name LIKE '%{$search}%'");
+        
+        return $result->get();
     }
     
     public function getMenuBySlug($slug) {

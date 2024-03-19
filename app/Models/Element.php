@@ -14,15 +14,17 @@ class Element extends Model
     
     protected $primaryKey = 'element_id';  
     
-    public function getBySlug($slug) {
-        return DB::table('elements')
+    public function getBySlug($slug, $search = null) {
+        $result = DB::table('elements')
             ->select('elements.*')      
             ->join('menus', 'elements.menu_id', '=', 'menus.menu_id')
             ->where('menus.slug', $slug)
             ->whereNull('elements.deleted_at')
             ->whereNull('menus.deleted_at')
-            ->orderBy('elements.created_at', 'DESC')
-            ->get();
+            ->orderBy('elements.created_at', 'DESC');
+        
+        if(!empty($search)) $result->whereRaw("(title LIKE '%{$search}%' OR description LIKE '%{$search}%')");
+        return $result->get();
     }
     
     public function getByMenuId($menu_id, $user_id, $ip, $tag = NULL) {

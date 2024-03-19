@@ -25,6 +25,7 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::get('/admin/logout', 'LoginController@logout')->name('admin.logout.perform');  
     
     Route::get('admin', 'DashboardController@index')->name('admin.dashboard')->middleware('isadmin'); 
+    Route::get('admin/search', 'DashboardController@search')->name('admin.dashboard.search')->middleware('isadmin'); 
     
     //menu
     Route::get('admin/menu', 'MenuController@index')->name('admin.menu')->middleware('isadmin'); 
