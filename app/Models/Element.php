@@ -16,8 +16,9 @@ class Element extends Model
     
     public function getBySlug($slug, $search = null) {
         $result = DB::table('elements')
-            ->select('elements.*')      
+            ->selectRaw('elements.*, CASE WHEN elements.author_id > 0 THEN users.friendly_name ELSE elements.author END AS friendly_name')      
             ->join('menus', 'elements.menu_id', '=', 'menus.menu_id')
+            ->leftJoin('users', 'users.id', '=', 'elements.author_id')
             ->where('menus.slug', $slug)
             ->whereNull('elements.deleted_at')
             ->whereNull('menus.deleted_at')

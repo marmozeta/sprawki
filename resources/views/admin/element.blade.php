@@ -48,6 +48,7 @@
                                                 <th>ID</th>
                                                 <th>Tytuł</th>
                                                 <th>Obrazek</th>
+                                                <th>Autor</th>
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
@@ -64,6 +65,7 @@
                                                             <img src="{{ asset('images/elements') }}/{{ $element->image }}" width="150" class="img-thumbnail" />
                                                         @endif
                                                     </td>
+                                                    <td>@if(!empty($element->friendly_name)) {{ '@'.$element->friendly_name }}@endif</td>
                                                     <td>{{ Carbon\Carbon::parse($element->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->updated_at) }}</td>
                                                     <td class="text-center">
@@ -84,6 +86,7 @@
                                                 <th>ID</th>
                                                 <th>Tytuł</th>
                                                 <th>Obrazek</th>
+                                                <th>Autor</th>
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
