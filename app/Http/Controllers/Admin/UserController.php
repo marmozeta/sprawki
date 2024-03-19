@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Menu;
 use App\Models\RolesPermission;
+use App\Models\UsersRole;
  
 class UserController extends Controller
 {
@@ -25,12 +26,15 @@ class UserController extends Controller
     }
     
     public function create() {
-        return view('admin.forms.user');
+        $roles = Role::all();
+        return view('admin.forms.user', ['roles' => $roles]);
     }
     
     public function edit($id) {
-        $user = User::where('id', $id)->first();
-        return view('admin.forms.user', ['user' => $user]);
+        $roles = Role::all();
+        $roleModel = new Role;
+        $user = $roleModel->getUserWithRole($id);
+        return view('admin.forms.user', ['user' => $user, 'roles' => $roles]);
     }
     
     public function store(Request $request): RedirectResponse
@@ -42,6 +46,11 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->role = $request->role;
         $user->save();
+        
+        $role = new UsersRole;
+        $role->user_id = $user->id;
+        $role->role_id = $request->role;
+        $role->save();
  
         return redirect('/admin/user');
     }
@@ -53,8 +62,14 @@ class UserController extends Controller
         if(!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
-        $user->active = 1;
         $user->save();
+        
+        UsersRole::where('user_id', $id)->delete();
+        
+        $role = new UsersRole;
+        $role->user_id = $user->id;
+        $role->role_id = $request->role;
+        $role->save();
  
         return redirect('/admin/user');
     }
@@ -107,7 +122,7 @@ class UserController extends Controller
             }
         }
         
-        $lista_uprawnien = array('tagi', 'kategorie', 'media', 'uzytkownicy', 'role', 'komentarze', 'sprzedaz');
+        $lista_uprawnien = array('menu', 'tagi', 'kategorie', 'media', 'uzytkownicy', 'komentarze', 'role', 'sprzedaz', 'ustawienia');
         
         foreach($lista_uprawnien as $uprawnienie) {
             if(isset($request->{$uprawnienie}) && $request->{$uprawnienie} == 'on') {
@@ -153,16 +168,14 @@ class UserController extends Controller
             }
         }
         
-        $lista_uprawnien = array('tagi', 'kategorie', 'media', 'uzytkownicy', 'role', 'komentarze', 'sprzedaz');
+        $lista_uprawnien = array('menu', 'tagi', 'kategorie', 'media', 'uzytkownicy', 'komentarze', 'role', 'sprzedaz', 'ustawienia');
         
         foreach($lista_uprawnien as $uprawnienie) {
             if(isset($request->{$uprawnienie}) && $request->{$uprawnienie} == 'on') {
                 if(isset($request->modify[$uprawnienie]) && $request->modify[$uprawnienie]=='on') $perms[] = $uprawnienie.'_modify';
                 if(isset($request->remove[$uprawnienie]) && $request->remove[$uprawnienie]=='on') $perms[] = $uprawnienie.'_remove';
             }
-        }
-        
-        if(isset($request->ustawienia) && $request->ustawienia == 'on') $perms[] = 'ustawienia_modify';
+        }  
         
         if(!empty($perms)) {
             foreach($perms as $perm) {

@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.role') }}">Nowa rola</a>
+                            @if(in_array('role', $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.role') }}">Nowa rola</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -59,9 +61,15 @@
                                                     <td>{{ $role->users }}</td>
                                                     <td>{{ Carbon\Carbon::parse($role->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($role->updated_at) }}</td>
-                                                    <td class="text-center">@if($role->id>1)<a href="{{ route('admin.forms.role.edit', ['id' => $role->id]) }}"><i class="fa fa-edit"></i></a>@endif</td>
                                                     <td class="text-center">
-                                                        @if($role->id>1)<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.role.remove', ['id' => $role->id]) }}"><i class="fa fa-trash"></i></a>@endif
+                                                        @if(in_array('role', $user_permissions['modify']) && $role->id>1)
+                                                            <a href="{{ route('admin.forms.role.edit', ['id' => $role->id]) }}"><i class="fa fa-edit"></i></a>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(in_array('role', $user_permissions['modify']) && $role->id>1)
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.role.remove', ['id' => $role->id]) }}"><i class="fa fa-trash"></i></a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

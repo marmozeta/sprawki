@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.order') }}">Nowe zamówienie</a>
+                            @if(in_array('sprzedaz', $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.order') }}">Nowe zamówienie</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -57,9 +59,16 @@
                                                     <td>{{ $order->user_name }}</td>
                                                     <td>{{ $order->sum }} zł (w tym podatek {{ round($order->vat, 2) }} zł VAT)</td>
                                                     <td>{{ Carbon\Carbon::parse($order->created_at) }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.category.edit', ['id' => $order->id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $order->id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @if(in_array('sprzedaz', $user_permissions['modify']))
+                                                            <a href="{{ route('admin.forms.category.edit', ['id' => $order->id]) }}"><i class="fa fa-edit"></i></a>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(in_array('sprzedaz', $user_permissions['remove']))
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $order->id]) }}"><i class="fa fa-trash"></i></a>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

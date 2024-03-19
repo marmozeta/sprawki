@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.menu') }}">Nowa pozycja menu</a>
+                            @if(in_array('menu', $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.menu') }}">Nowa pozycja menu</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -59,9 +61,12 @@
                                                     <td class="text-wrap">{{ $menu->attrs_list }}</td>
                                                     <td>{{ Carbon\Carbon::parse($menu->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($menu->created_at) }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.menu.edit', ['id' => $menu->menu_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        @if(!$menu->is_constant)
+                                                        @if(in_array('menu', $user_permissions['modify']))
+                                                        <a href="{{ route('admin.forms.menu.edit', ['id' => $menu->menu_id]) }}"><i class="fa fa-edit"></i></a></td>
+                                                        @endif
+                                                    <td class="text-center">
+                                                        @if(in_array('menu', $user_permissions['remove']) && !$menu->is_constant)
                                                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.menu.remove', ['id' => $menu->menu_id]) }}"><i class="fa fa-trash"></i></a></td>
                                                         @endif
                                                 </tr>

@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.category') }}">Nowa kategoria</a>
+                            @if(in_array('kategorie', $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.category') }}">Nowa kategoria</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -69,9 +71,17 @@
                                                     </td>
                                                     <td>{{ $category->created_at->format('d.m.Y H:i') }}</td>
                                                     <td>{{ $category->updated_at->format('d.m.Y H:i') }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.category.edit', ['id' => $category->cat_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $category->cat_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @if(in_array('kategorie', $user_permissions['modify']))
+                                                            <a href="{{ route('admin.forms.category.edit', ['id' => $category->cat_id]) }}"><i class="fa fa-edit"></i></a>
+                                                        @endif
+                                                    </td>
+                                                        
+                                                    <td class="text-center">
+                                                        @if(in_array('kategorie', $user_permissions['remove']))
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.category.remove', ['id' => $category->cat_id]) }}"><i class="fa fa-trash"></i></a>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

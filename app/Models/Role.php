@@ -24,4 +24,11 @@ class Role extends Model
             ->where('ur.user_id', '=', $user_id)
             ->get();
     }
+    
+    public function getUserWithRole($user_id) {
+        return DB::table('users AS u')  
+            ->selectRaw('u.*, ur.role_id')
+            ->join('users_roles AS ur', 'ur.user_id', '=', 'u.id') 
+            ->first();
+    }
 }

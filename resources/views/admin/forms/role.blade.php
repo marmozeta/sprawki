@@ -44,6 +44,22 @@
                                     
                                     <div class="row">
                                         <label class="form-label pt-2">Uprawnienia do modułów *</label>
+                                         <fieldset class="checkbox d-flex justify-content-between">
+                                        <label>
+                                            <input type="checkbox" class="attribute" name="menu" @if(in_array('menu', $permissions['modify']) || in_array('menu', $permissions['remove'])) checked @endif> &nbsp; &nbsp; &nbsp;Pozycje menu
+                                        </label>
+                                        <div class="d-flex required @if(!in_array('menu', $permissions['modify']) && !in_array('menu', $permissions['remove'])) d-none @endif" style="column-gap: 50px;">
+                                            <div class="form-check form-switch required">
+                                                <input class="form-check-input" type="checkbox" name="modify[menu]" role="switch" id="modify_menu" @if(in_array('menu', $permissions['modify'])) checked @endif>
+                                                <label class="form-check-label" for="modify_menu">Edycja</label>
+                                        </div>
+                                            <div class="form-check form-switch required">
+                                                <input class="form-check-input" type="checkbox" name="remove[menu]" role="switch" id="remove_menu" @if(in_array('menu', $permissions['remove'])) checked @endif>
+                                                <label class="form-check-label" for="remove_menu">Usuwanie</label>
+                                        </div>
+                                            </div>
+                                    </fieldset>
+                                        <hr style="margin: 0.3rem 0;">
                                         @foreach($menus as $menu)
                                         <fieldset class="checkbox d-flex justify-content-between">
                                     <label>
@@ -96,22 +112,6 @@
                                         <hr style="margin: 0.3rem 0;">
                                          <fieldset class="checkbox d-flex justify-content-between">
                                         <label>
-                                            <input type="checkbox" class="attribute" name="media" @if(in_array('media', $permissions['modify']) || in_array('media', $permissions['remove'])) checked @endif> &nbsp; &nbsp; &nbsp;Biblioteka mediów
-                                        </label>
-                                        <div class="d-flex required @if(!in_array('media', $permissions['modify']) && !in_array('media', $permissions['remove'])) d-none @endif" style="column-gap: 50px;">
-                                            <div class="form-check form-switch required">
-                                                <input class="form-check-input" type="checkbox" name="modify[media]" role="switch" id="modify_media" @if(in_array('media', $permissions['modify'])) checked @endif>
-                                                <label class="form-check-label" for="modify_media">Edycja</label>
-                                        </div>
-                                            <div class="form-check form-switch required">
-                                                <input class="form-check-input" type="checkbox" name="remove[media]" role="switch" id="remove_media" @if(in_array('media', $permissions['remove'])) checked @endif>
-                                                <label class="form-check-label" for="remove_media">Usuwanie</label>
-                                        </div>
-                                            </div>
-                                    </fieldset>
-                                        <hr style="margin: 0.3rem 0;">
-                                         <fieldset class="checkbox d-flex justify-content-between">
-                                        <label>
                                             <input type="checkbox" class="attribute" name="uzytkownicy" @if(in_array('uzytkownicy', $permissions['modify']) || in_array('uzytkownicy', $permissions['remove'])) checked @endif> &nbsp; &nbsp; &nbsp;Lista użytkowników
                                         </label>
                                         <div class="d-flex required @if(!in_array('uzytkownicy', $permissions['modify']) && !in_array('uzytkownicy', $permissions['remove'])) d-none @endif" style="column-gap: 50px;">
@@ -147,10 +147,10 @@
                                             <input type="checkbox" class="attribute" name="komentarze" @if(in_array('komentarze', $permissions['modify']) || in_array('komentarze', $permissions['remove'])) checked @endif> &nbsp; &nbsp; &nbsp;Komentarze
                                         </label>
                                         <div class="d-flex required @if(!in_array('komentarze', $permissions['modify']) && !in_array('komentarze', $permissions['remove'])) d-none @endif" style="column-gap: 50px;">
-                                            <div class="form-check form-switch required">
+                                           <!-- <div class="form-check form-switch required">
                                                 <input class="form-check-input" type="checkbox" name="modify[komentarze]" role="switch" id="modify_komentarze" @if(in_array('komentarze', $permissions['modify'])) checked @endif>
                                                 <label class="form-check-label" for="modify_komentarze">Edycja</label>
-                                        </div>
+                                        </div>-->
                                             <div class="form-check form-switch required">
                                                 <input class="form-check-input" type="checkbox" name="remove[komentarze]" role="switch" id="remove_komentarze" @if(in_array('komentarze', $permissions['remove'])) checked @endif>
                                                 <label class="form-check-label" for="remove_komentarze">Usuwanie</label>
@@ -178,12 +178,12 @@
                                         <label>
                                             <input type="checkbox" class="attribute" name="ustawienia" @if(in_array('ustawienia', $permissions['modify'])) checked @endif> &nbsp; &nbsp; &nbsp;Ustawienia
                                         </label>
-                                        <div class="d-flex required d-none" style="column-gap: 50px;">
-                                          <!--   <div class="form-check form-switch required">
-                                                <input class="form-check-input" type="checkbox" name="modify[ustawienia]" role="switch" id="modify_ustawienia">
+                                        <div class="d-flex required @if(!in_array('ustawienia', $permissions['modify'])) d-none @endif" style="column-gap: 50px;">
+                                       <div class="form-check form-switch required">
+                                                <input class="form-check-input" type="checkbox" name="modify[ustawienia]" role="switch" id="modify_ustawienia" @if(in_array('ustawienia', $permissions['modify'])) checked @endif>
                                                 <label class="form-check-label" for="modify_ustawienia">Edycja</label>
                                         </div>
-                                           <div class="form-check form-switch required">
+                                               <!--  <div class="form-check form-switch required">
                                                 <input class="form-check-input" type="checkbox" name="remove[komentarze]" role="switch" id="remove_ustawienia">
                                                 <label class="form-check-label" for="remove_ustawienia">Usuwanie</label>
                                         </div>-->

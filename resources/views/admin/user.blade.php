@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.user') }}">Nowy użytkownik</a>
+                            @if(in_array('uzytkownicy', $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.user') }}">Nowy użytkownik</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -61,9 +63,16 @@
                                                     <td>Admin</td>
                                                     <td>{{ Carbon\Carbon::parse($user->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($user->updated_at) }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.user.edit', ['id' => $user->id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.user.remove', ['id' => $user->id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @if(in_array('uzytkownicy', $user_permissions['modify']))
+                                                            <a href="{{ route('admin.forms.user.edit', ['id' => $user->id]) }}"><i class="fa fa-edit"></i></a>
+                                                         @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(in_array('uzytkownicy', $user_permissions['remove']))
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.user.remove', ['id' => $user->id]) }}"><i class="fa fa-trash"></i></a>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

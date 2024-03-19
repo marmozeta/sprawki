@@ -57,9 +57,13 @@
                                                     <td>{{ $comment->comment }}</td>
                                                     <td>{{ $comment->name }}</td>
                                                     <td>{{ Carbon\Carbon::parse($comment->created_at) }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.comment.edit', ['id' => $comment->comm_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.comment.remove', ['id' => $comment->comm_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        <!--<a href="{{ route('admin.forms.comment.edit', ['id' => $comment->comm_id]) }}"><i class="fa fa-edit"></i></a>-->
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(in_array('komentarze', $user_permissions['remove']))
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.comment.remove', ['id' => $comment->comm_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>

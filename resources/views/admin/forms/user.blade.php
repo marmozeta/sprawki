@@ -47,11 +47,9 @@
                                         <div class="col-6 form-group mb-3">
                                             <label class="form-label">Rola *</label>
                                             <select class="form-control" name="role">
-                                                <option value="admin">Admin</option>
-                                                <option value="publisher">Publisher</option>
-                                                <option value="writer">Writer</option>
-                                                <option value="viewer">Viewer</option>
-                                                <option value="client">Client</option>
+                                                @foreach($roles as $role)
+                                                    <option value="{{ $role->id }}" @if($user->role_id == $role->id) checked @endif>{{ $role->role_name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

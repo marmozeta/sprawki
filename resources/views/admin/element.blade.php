@@ -18,7 +18,9 @@
                     </div>
                     <div class="col-5 align-self-center">
                         <div class="customize-input float-end">
-                            <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.element', $menu->slug) }}">Nowy element</a>
+                            @if(in_array($menu->slug, $user_permissions['modify']))
+                                <a class="btn waves-effect waves-light btn-rounded btn-primary" href="{{ route('admin.forms.element', $menu->slug) }}">Nowy element</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -64,9 +66,16 @@
                                                     </td>
                                                     <td>{{ Carbon\Carbon::parse($element->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->updated_at) }}</td>
-                                                    <td class="text-center"><a href="{{ route('admin.forms.element.edit', ['slug' => $menu->slug, 'id' => $element->element_id]) }}"><i class="fa fa-edit"></i></a></td>
                                                     <td class="text-center">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.element.remove', ['slug' => $menu->slug, 'id' => $element->element_id]) }}"><i class="fa fa-trash"></i></a></td>
+                                                        @if(in_array($menu->slug, $user_permissions['modify']))
+                                                            <a href="{{ route('admin.forms.element.edit', ['slug' => $menu->slug, 'id' => $element->element_id]) }}"><i class="fa fa-edit"></i></a>
+                                                        @endif
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if(in_array($menu->slug, $user_permissions['remove']))
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="{{ route('admin.forms.element.remove', ['slug' => $menu->slug, 'id' => $element->element_id]) }}"><i class="fa fa-trash"></i></a>
+                                                            @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

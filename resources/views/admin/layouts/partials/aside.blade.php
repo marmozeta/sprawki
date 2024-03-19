@@ -10,12 +10,13 @@
                                     class="hide-menu">Tablica</span></a></li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Elementy</span></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.menu') }}"
-                                aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
-                                    class="hide-menu">Pozycje menu
-                                </span></a>
-                        </li>
+                        @if(in_array('menu', $user_permissions['modify']) || in_array('menu', $user_permissions['remove']))   
+                            <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.menu') }}"
+                                    aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+                                        class="hide-menu">Pozycje menu
+                                    </span></a>
+                            </li>
+                        @endif
                         @foreach ($menus as $menu)
                             @if(in_array($menu->slug, $user_permissions['modify']) || in_array($menu->slug, $user_permissions['remove']))
                                 <li class="sidebar-item"> <a class="sidebar-link" href="{{ route('admin.element', $menu->slug) }}"
