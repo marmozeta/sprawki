@@ -91,7 +91,7 @@ class ElementController extends Controller
         $element->discount = (float)$request->discount;
         $element->in_sale = ($request->in_sale == 'on');
         $element->is_virtual = ($request->is_virtual == 'on');
-        $element->publish_date = $request->publish_date;
+        $element->publish_date = (empty($request->publish_date)) ? date('Y-m-d H:i:s') : $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();
         $element_id = $element->element_id;
@@ -225,7 +225,7 @@ class ElementController extends Controller
         $element->discount = (float)$request->discount;
         $element->in_sale = ($request->in_sale == 'on');
         $element->is_virtual = ($request->is_virtual == 'on');
-        $element->publish_date = $request->publish_date;
+        if(!empty($request->publish_date)) $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
         $element->save();
         
