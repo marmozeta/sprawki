@@ -83,6 +83,7 @@ class ElementController extends Controller
             $element->author = $author[0]->value;
             $author_user = User::where('friendly_name', $element->author)->first();
             if(!empty($author_user)) $element->author_id = $author_user->id;
+            else $element->author_id = 0;
         }
         $element->price = (float)$request->price;
         $element->vat = (float)$request->vat;
@@ -216,6 +217,7 @@ class ElementController extends Controller
             $element->author = $author[0]->value;
             $author_user = User::where('friendly_name', $element->author)->first();
             if(!empty($author_user)) $element->author_id = $author_user->id;
+            else $element->author_id = 0;
         }
         $element->price = (float)$request->price;
         $element->vat = (float)$request->vat;
