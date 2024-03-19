@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\Menu;
 use App\Models\Element;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -56,19 +57,37 @@ class DashboardController extends Controller
         if(!empty($menus_for_elements)) {
             foreach($menus_for_elements as $menu) {
                 $elements = $elementModel->getBySlug($menu->slug, $request->search);
-                foreach($elements as $element) {
-                    $result[] = (object) array(
-                        'id' => $element->element_id, 
-                        'type' => 'element', 
-                        'type_name' => $menu->name, 
-                        'slug' => $menu->slug, 
-                        'name' => $element->title,
-                        'created_at' => $element->created_at,
-                        'updated_at' => $element->updated_at,
-                        'modify' => in_array($menu->slug, $user_permissions['modify']),
-                        'remove' => in_array($menu->slug, $user_permissions['remove'])
-                        );
+                if(!empty($elements)) {
+                    foreach($elements as $element) {
+                        $result[] = (object) array(
+                            'id' => $element->element_id, 
+                            'type' => 'element', 
+                            'type_name' => $menu->name, 
+                            'slug' => $menu->slug, 
+                            'name' => $element->title,
+                            'created_at' => $element->created_at,
+                            'updated_at' => $element->updated_at,
+                            'modify' => in_array($menu->slug, $user_permissions['modify']),
+                            'remove' => in_array($menu->slug, $user_permissions['remove'])
+                            );
+                    }
                 }
+            }
+        }
+        
+        $users = User::whereRaw("name LIKE '%{$request->search}%'")->get();
+        if(!empty($users)) {
+            foreach($users as $user) {
+                $result[] = (object) array(
+                        'id' => $user->id, 
+                        'type' => 'user', 
+                        'type_name' => 'Użytkownik', 
+                        'name' => $user->name,
+                        'created_at' => $user->created_at,
+                        'updated_at' => $user->updated_at,
+                        'modify' => in_array('uzytkownicy', $user_permissions['modify']),
+                        'remove' => in_array('uzytkownicy', $user_permissions['remove'])
+                        );
             }
         }
         
