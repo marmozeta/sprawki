@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         
         view()->composer('*', function($view) {
             if(auth()->check() && auth()->user()->is_admin==1) {
-                $user_permissions = array();
+                $user_permissions = array('modify' => array(), 'remove' => array());
                 $roleModel = new Role;
                 $permissions = $roleModel->getUserPermissions(auth()->user()->id);
                 foreach($permissions as $perm) {
