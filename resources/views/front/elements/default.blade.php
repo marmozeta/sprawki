@@ -126,7 +126,18 @@
 </div>
 
 @section('scripts')
-@if(auth()->check()) 
+@if(auth()->check())  
+<script>
+$(document).ready(function(){
+    $("#newCommentModal").on('shown.bs.modal', function(){
+        $(this).find('textarea[id="social_element"]').focus();
+    });
+    
+    $("#editCommentModal").on('shown.bs.modal', function(){
+        $(this).find('textarea[id="social_element"]').focus();
+    });
+});
+    </script>
 <div class="modal fade" id="newCommentModal" tabindex="-1" aria-labelledby="newCommentModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
@@ -139,8 +150,9 @@
           <div class="item d-flex p-3">
                 <div class="col-12 p-2">
                    <div class="w-100">
-                    <textarea id="social_element" name="comment" class="form-control" style="width: 450px; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
-                    <input type="hidden" name="element_id" value="" />
+                      
+                       <textarea id="social_element" name="comment" class="form-control" style="width: 450px; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
+                       <input type="hidden" name="element_id" value="" />
                     <input type="hidden" name="comment_id" value="" />
                     <input type="hidden" name="redirect" value="{{ Request::path() }}#komentarze" />
                     </div>
@@ -169,7 +181,7 @@
           <div class="item d-flex p-3">
                 <div class="col-12 p-2">
                    <div class="w-100">
-                    <textarea id="social_element" name="comment" class="form-control required" required style="width: 450px; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
+                       <textarea id="social_element" name="comment" class="form-control required" required style="width: 450px; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
                     <input type="hidden" name="element_id" value="" />
                     <input type="hidden" name="comment_id" value="" />
                     <input type="hidden" name="redirect" value="{{ Request::path() }}#komentarze" />
@@ -311,14 +323,14 @@ $(document).on('click', '.removeComment', function() {
     </div>
   </div>
 </div>
-
+@if($menu->is_social && Auth::check() && $element->user_id == Auth()->user()->id)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
 <script type="text/javascript" src="//js.nicedit.com/nicEdit-latest.js"></script> 
 <script> 
 bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_desc');  });
-bkLib.onDomLoaded(function() {  new nicEditor({buttonList : ['bold','italic','underline','left','center','right','justify','ol','ul']}).panelInstance('social_element');  });
 $('.nicEdit-panelContain').parent().width('100%');
 $('.nicEdit-panelContain').parent().next().width('100%');</script>
+
 <script>
 Dropzone.options.addMedia =
          {
@@ -368,7 +380,9 @@ Dropzone.options.addMedia =
                return false;
             }
 };
-
+</script>
+@endif
+<script>
 var newCommentModal = document.getElementById('newCommentModal')
 newCommentModal.addEventListener('show.bs.modal', function (event) {
   // Button that triggered the modal
@@ -383,9 +397,10 @@ newCommentModal.addEventListener('show.bs.modal', function (event) {
   var modalCommentId = newCommentModal.querySelector('[name="comment_id"]')
   modalCommentId.value = comment_id;
   
-  var modalDesc = newCommentModal.querySelector('[name="desc"]')
+  var modalDesc = newCommentModal.querySelector('[name="comment"]')
   modalDesc.value = '';
 });
+
 
 $('.toggle_like').on('click', function() {
     var element_id = $(this).attr('data-element-id');

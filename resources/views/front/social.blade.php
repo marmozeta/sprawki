@@ -74,7 +74,7 @@
           <div class="item d-flex p-3">
                 <div class="col-12 p-2">
                    <div class="w-100">
-                    <textarea id="social_element" name="comment" class="form-control" style="width: 100%; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
+                    <textarea autofocus id="social_element" name="comment" class="form-control" style="width: 100%; height: 120px;" placeholder="Opublikuj swój komentarz"></textarea>
                     <input type="hidden" name="element_id" value="" />
                     <input type="hidden" name="redirect" value="" />
                     </div>

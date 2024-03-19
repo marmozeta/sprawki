@@ -18,8 +18,9 @@ ct_$('html').ultimateGDPR({
         always_show: false, // true, false, when true popup is displayed always even when consent is given
         gear_display: true, // true, false when true displays icon with cookie settings
         popup_title: 'Pliki cookie', // title for popup
-        popup_text: 'Aby ta strona działała poprawnie, czasami umieszczamy na urządzeniu małe pliki z danymi zwane plikami cookie. Większość dużych witryn również to robi.', // text for popup
+        popup_text: 'Aby ta strona działała poprawnie, czasami umieszczamy na urządzeniu małe pliki z danymi zwane plikami cookie. Możesz zaakceptować wszystkie lub dostosować konfigurację (w tym zablokować wszystkie) wedle swojego uznania.', // text for popup
         accept_button_text: 'Zaakceptuj', // string, text for accept button
+        reject_button_text: 'Blokuj wszystkie', // string, text for accept button
         read_button_text: 'Czytaj więcej', // string, text for read more button
         read_more_link: '', // string, link to the Read More page
         advenced_button_text: 'Zmień ustawienia', // string, text for advenced button
