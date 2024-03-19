@@ -77,6 +77,15 @@ Route::namespace('App\Http\Controllers\Admin')->group(function () {
     Route::get('admin/user/edit/{id}', 'UserController@edit')->name('admin.forms.user.edit')->middleware('isadmin'); 
     Route::get('admin/user/remove/{id}', 'UserController@remove')->name('admin.forms.user.remove')->middleware('isadmin'); 
  
+    //role
+    Route::get('admin/role', 'UserController@role_index')->name('admin.role')->middleware('isadmin'); 
+    Route::get('admin/role/create', 'UserController@create_role')->name('admin.forms.role')->middleware('isadmin'); 
+    Route::post('admin/role/store', 'UserController@store_role')->name('admin.forms.role.store')->middleware('isadmin'); 
+    Route::post('admin/role/update/{id}', 'UserController@update_role')->name('admin.forms.role.update')->middleware('isadmin'); 
+    Route::get('admin/role/edit/{id}', 'UserController@edit_role')->name('admin.forms.role.edit')->middleware('isadmin'); 
+    Route::get('admin/role/remove/{id}', 'UserController@remove_role')->name('admin.forms.role.remove')->middleware('isadmin'); 
+ 
+    
     //komentarze
     Route::get('admin/comment', 'CommentController@index')->name('admin.comment')->middleware('isadmin'); 
     Route::get('admin/comment/create', 'CommentController@create')->name('admin.forms.comment')->middleware('isadmin'); 

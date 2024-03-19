@@ -183,7 +183,8 @@
       <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
         <button class="btn btn-primary" type="submit" data-bs-dismiss="modal">Edytuj komentarz</button>
-      </div>    </form>
+      </div>    
+        </form>
     </div>
   </div>
 </div>
