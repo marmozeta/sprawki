@@ -960,3 +960,7 @@ a[data-totalitems="0"]:before {
 .thank_you .download-button {
     line-height: 22px !important;
 }
+
+.bootstrap-select > .dropdown-toggle {
+    background: #fff;
+}

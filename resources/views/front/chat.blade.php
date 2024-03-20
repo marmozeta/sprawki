@@ -147,6 +147,7 @@ function dropdownHeaderTemplate(suggestions){
         success: function (data){
             var new_data = [];
             for(var i in data) {
+                if(data[i].picture == '') data[i].picture = 'person.png';
                 new_data.push({ name: data[i].name, value: data[i].id, picture: '/public/images/users/'+data[i].picture, friendly_name: data[i].friendly_name });
             }
             

@@ -15,7 +15,8 @@ class ChatController extends Controller
       //  $conversation = Chat::createConversation($participants);
         
         $participants = User::all();   
-        return view('front.chat', array('participants' => $participants));
+        $messages = array();
+        return view('front.chat', array('participants' => $participants, 'messages' => $messages));
     }
     
     public function get_participants() {

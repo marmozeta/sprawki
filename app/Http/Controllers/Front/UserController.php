@@ -62,9 +62,16 @@ class UserController extends Controller
         $observedModel = new Observed;
         $observed_list = $observedModel->getObserved($user->id);
         $is_observable_list = $observedModel->getIsObservable($user->id);
+        $other_users = $observedModel->getOtherUsers($user->id);
         $observed = Observed::where('user_id', $user->id)->count();
         $is_observable = Observed::where('observed_id', $user->id)->count();
         
-        return view('front.observed', array('user' => $user, 'observed_list' => $observed_list, 'is_observable_list' => $is_observable_list, 'observed' => $observed, 'is_observable' => $is_observable));
+        return view('front.observed', array(
+                                        'user' => $user, 
+                                        'observed_list' => $observed_list, 
+                                        'is_observable_list' => $is_observable_list, 
+                                        'observed' => $observed, 
+                                        'other_users' => $other_users, 
+                                        'is_observable' => $is_observable));
     }
 }
