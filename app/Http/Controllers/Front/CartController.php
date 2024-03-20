@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Element;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Mail\OrderCompleted;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use ZipArchive;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Hash;
 
 class CartController extends Controller
 {
@@ -115,6 +117,21 @@ class CartController extends Controller
             $order_item->save();
         }
         
+        //zakładamy mu konto jak nie ma
+        if(!empty($request->password)) {
+            $user = new User();
+            $user->name = $request->firstname." ".$request->lastname;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->is_admin = 0;
+            $user->save();
+
+            //próbujemy go zalogować
+            $credentials = array('email' => $request->email, 'password' => $request->password);
+            $user_data = Auth::getProvider()->retrieveByCredentials($credentials);
+            Auth::login($user_data);
+        }
+        
         //przekierowanie do Tpay
         $id = env("TPAY_CLIENT_ID");
         $amount = Cart::total();
@@ -135,7 +152,7 @@ class CartController extends Controller
     
     public function thank_you($order_id) {
         $order = Order::find($order_id);
-        Mail::to($order->email)->send(new OrderCompleted($order));
+        //Mail::to($order->email)->send(new OrderCompleted($order));
         return view('front.thank_you', array('order' => $order));
     }
     

@@ -956,3 +956,7 @@ a[data-totalitems="0"]:before {
     height: 45px !important;
     line-height: 40px !important;
 }
+
+.thank_you .download-button {
+    line-height: 22px !important;
+}

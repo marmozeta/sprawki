@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid pt-5">
     <div class="container">
-        <form action="{{ route('front.process') }}" method="POST">
+        <form id="checkout_process" action="{{ route('front.process') }}" method="POST">
         <section class="checkout_view container mt-2 my-3 py-5">
             <div class="row mt-2">
                 <h1 class="element_title">Kasa</h1>
@@ -17,7 +17,7 @@
                         <div class="col-12">
                             <h3 class="subtitle">Dane zamawiającego</h3>
                             @if(empty(Auth::id()))
-                            <span class="text-white pb-3 d-block" style="font-family: Oswald;">Jeżeli masz już konto, <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white" id="register_button">kliknij, aby się zalogować</a>.</span>
+                            <span class="text-white pb-3 d-block" style="font-family: Oswald;">Jeżeli masz już konto, <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white" id="register_button">kliknij, aby się zalogować</a>. Jeśli nie, wypełnij dane poniżej, żeby założyć konto i zamówić.</span>
                             @else
                             
                             @endif
@@ -25,13 +25,14 @@
                                 <input type="email" name="email" placeholder="Adres e-mail *" class="form-control bg-white border-0 required my-3" required value="{{ Auth::user() ? Auth::user()->email : '' }}" />
                                 <input type="text" name="firstname" placeholder="Imię *" class="form-control bg-white border-0 required my-3" required value="{{ $firstname }}" />
                                 <input type="text" name="lastname" placeholder="Nazwisko *" class="form-control bg-white border-0 required my-3" required value="{{ $lastname }}" />
+                                <input type="password" id="password" name="password" placeholder="Hasło *" class="form-control bg-white border-0 required my-3" required />
+                                <input type="password" id="confirm_password" name="confirm_password" placeholder="Powtórz hasło *" class="form-control bg-white border-0 required my-3" required />
                                 <textarea name="comments" placeholder="Uwagi do zamówienia" class="form-control bg-white border-0 my-3"></textarea>
                                <small class="text-white d-block py-3">Drogi Sprawkowiczu, administratorem danych jest Dawid Mysior, ul. Sobieskiego 21 81-761 Sopot, NIP:  527-231-24-72. Przetwarzamy Wasze dane osobowe w celu umożliwienia korzystania z funkcji naszej strony internetowej, w tym udziału w życiu Społeczności Sprawek, dokonywania zakupów w naszym sklepie internetowym, a także do pozostałych celów wskazanych w naszej polityce prywatności.</small>
                              
                         </div>
                         <div class="col-12 mt-5">
                             <h3 class="subtitle">Metoda płatności</h3>
-                            <form>
                                 @csrf
                                 <div class="form-check">
                                   <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
@@ -39,7 +40,6 @@
                                     Płacę z Tpay
                                   </label>
                                 </div>
-                            </form>
                         </div>
                     </div>
                     </div>
@@ -98,4 +98,23 @@
         </section>
  </form>
     </div></div>
+@endsection
+
+
+@section('scripts')
+<script>
+        var password = document.getElementById("password")
+      , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Hasła nie zgadzają się!");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
 @endsection

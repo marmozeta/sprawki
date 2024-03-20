@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid pt-5">
     <div class="container">
-        <section class="cart_view container mt-2 my-3 py-5">
+        <section class="cart_view thank_you container mt-2 my-3 py-5">
             <div class="row mt-2">
                 <h1 class="element_title">Zamówienie #{{ $order->id}}</h1>
                 <div class="divide"><i class="fa-solid fa-handshake"></i>&nbsp;</div>
