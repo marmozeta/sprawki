@@ -74,7 +74,7 @@ class HomeController extends Controller
         $elementModel = new Element;
         $element = $elementModel->getElement($element_id, (Auth::check()) ? Auth::user()->id : 0, request()->getClientIp());
         $intro = "Wartościowy materiał na sprawki.pl: ";
-        $element->text_for_social = $intro.str_replace('%', 'percent', $element->title);
+        $element->text_for_social = urlencode($intro.$element->title);
         
         $catModel = new Category;
         $product_categories = $catModel->getElementCategories($element_id);
