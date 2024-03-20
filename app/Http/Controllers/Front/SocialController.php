@@ -132,10 +132,10 @@ class SocialController extends Controller
         }
         else {
             if(!empty($request->comment_id)) {
-                $issetLike = Like::where('comment_comm_id', $request->comment_id)->where('ip', $request->getClientIp())->first();
+                $issetLike = Like::where('comment_comm_id', $request->comment_id)->where('user_id', NULL)->where('ip', $request->getClientIp())->first();
             }
             else {
-                $issetLike = Like::where('element_element_id', $request->element_id)->where('ip', $request->getClientIp())->first();
+                $issetLike = Like::where('element_element_id', $request->element_id)->where('user_id', NULL)->where('ip', $request->getClientIp())->first();
             }
         }
         

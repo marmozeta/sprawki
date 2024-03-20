@@ -401,32 +401,6 @@ newCommentModal.addEventListener('show.bs.modal', function (event) {
   modalDesc.value = '';
 });
 
-
-$('.toggle_like').on('click', function() {
-    var element_id = $(this).attr('data-element-id');
-    var element = $(this);
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('input[name="_token"]').val()
-        },
-        type: 'POST',
-        url: '{{ url("social/like/save") }}',
-        data: {element_id: element_id},
-        success: function (data){
-            console.log(data);
-            var count = parseInt(element.find('.count').html())+parseInt(data);
-            element.find('.count').html(count);
-            if(parseInt(data) == 1) element.find('i').removeClass('fa-regular').addClass('fa-solid');
-            else element.find('i').removeClass('fa-solid').addClass('fa-regular');
-            console.log("Like saved!!");
-        },
-        error: function(e) {
-            console.log(e);
-        }
-    });
-    return false;
-})
-
     var removeCommentModal = document.getElementById('removeCommentModal')
     removeCommentModal.addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
