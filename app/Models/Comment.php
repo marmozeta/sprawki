@@ -65,6 +65,7 @@ class Comment extends Model
                 $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as owner_is_liked'));
             }
 
+            $new_comments = array();             
             $comments = $result->groupBy('c.comm_id')->get();
             
             if(!empty($comments)) {
