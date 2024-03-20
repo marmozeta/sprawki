@@ -42,12 +42,11 @@ class Comment extends Model
     
     public function getCommentsByUser($parent_id, $user_id, $ip, $logged_user) {
         $result = DB::table('comments AS c')
-            ->selectRaw('c.*, users.id, users.friendly_name, users.name, users.picture, u2.id AS owner_id, u2.friendly_name AS owner_friendly_name, 
-                u2.name AS owner_name, u2.picture AS owner_picture, u3.friendly_name AS comment_friendly_name, 
+            ->selectRaw('c.*, users.id, users.friendly_name, users.name, users.picture, u3.friendly_name AS comment_friendly_name, 
                 u3.name AS comment_name, u3.picture AS comment_picture, 
-                    CASE WHEN cr.comment IS NOT NULL THEN cr.comment WHEN e.title IS NOT NULL THEN e.title ELSE SUBSTR(e.description, 0, 50) END AS teaser')
+                    e.title, CONCAT(m.slug, "/", e.element_id, "-", e.slug) AS url')
             ->join('elements AS e', 'e.element_id', '=', 'c.element_id')
-            ->leftJoin('users AS u2', 'e.user_id', '=', 'u2.id')
+            ->join('menus AS m', 'm.menu_id', '=', 'e.menu_id')
             ->leftJoin('users', 'c.user_id', '=', 'users.id')
             ->leftJoin('comments AS cr', 'c.comment_comm_id', '=', 'cr.comm_id')
             ->leftJoin('users AS u3', 'cr.user_id', '=', 'users.id')
@@ -63,9 +62,16 @@ class Comment extends Model
             }
             else {
                 $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = c.comm_id AND likes.ip = "'.$ip.'") as is_liked'));
-                 $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as owner_is_liked'));
+                $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = e.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as owner_is_liked'));
             }
 
-            return $result->groupBy('c.comm_id')->get();
+            $comments = $result->groupBy('c.comm_id')->get();
+            
+            if(!empty($comments)) {
+                foreach($comments as $comment) {
+                    $new_comments[$comment->element_id][] = $comment;
+                }
+            }
+            return $new_comments;
     }
 }

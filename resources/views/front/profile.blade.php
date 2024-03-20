@@ -57,13 +57,13 @@
             </div>
         </div>
     @endif
-        @if(!$comments->isEmpty())
+        @if(!empty($comments))
         <div class="row">
             <div class="col-6 offset-3 justify-content-center mt-5" style="column-gap: 20px;">
                 <h3 class="w-100 text-center" id="komentarze">Komentarze</h3>
                 <div class="divide long"><i class="fa-regular fa-comments"></i></div>       
-                    @foreach($comments as $comment)
-                        @include('front.elements.loop.comment') 
+                    @foreach($comments as $comm_element)
+                        @include('front.elements.loop.profile_comment') 
                     @endforeach    
             </div>
         </div>
