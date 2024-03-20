@@ -53,7 +53,7 @@ class Element extends Model
             $result->addSelect(DB::raw('(SELECT COUNT(*) FROM element_user_logs WHERE element_user_logs.element_id = elements.element_id AND element_user_logs.user_id = '.$user_id.') as is_read'));
         }
         else {
-            $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0 AND likes.ip = "'.$ip.'") as is_liked'));
+            $result->addSelect(DB::raw('(SELECT 1 FROM likes WHERE likes.element_element_id = elements.element_id AND likes.comment_comm_id = 0 AND likes.user_id IS NULL AND likes.ip = "'.$ip.'") as is_liked'));
         }
         return $result->get();
     }
