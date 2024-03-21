@@ -286,6 +286,10 @@ h1.element_title {
     width: 100%;
 }
 
+.thank_you .divide {
+    left: 0;
+}
+
 .divide:after {
     content: '';
     position: absolute;
@@ -963,4 +967,9 @@ a[data-totalitems="0"]:before {
 
 .bootstrap-select > .dropdown-toggle {
     background: #fff;
+}
+
+.acceptances label {
+    display: initial;
+    font-weight: 400;
 }
