@@ -17,7 +17,7 @@
                         <div class="col-12">
                             <h3 class="subtitle">Dane zamawiającego</h3>
                             @if(!Auth::check())
-                            <span class="text-white pb-3 d-block" style="font-family: Oswald;">Jeżeli masz już konto, <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white" id="register_button">kliknij, aby się zalogować</a>. Jeśli nie, wypełnij dane poniżej, żeby założyć konto i zamówić.</span>
+                            <span class="text-white pb-3 d-block" style="font-family: Oswald;">Jeżeli masz już konto, <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" class="text-white" id="register_button">kliknij, aby się <span style='text-decoration: underline;'>zalogować</span></a>. Jeśli nie, wypełnij dane poniżej, żeby założyć konto i zamówić.</span>
                             @else
                             
                             @endif
@@ -85,10 +85,10 @@
    			<div class="col-5 text-right" id="total" style="color: #ef5353"><?php echo Cart::total(); ?> zł</div>
                     </div>
                         <div class="row pt-5 acceptances">
-                             <div class="text-dark"><input type="checkbox" required /> * Akceptuję zasady określone w regulaminie.</div>
-                             <div class="text-dark"><input type="checkbox" /> Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie. Więcej informacji o przetwarzaniu moich danych osobowych.</a>
-    <div class="text-dark"><input type="checkbox" required /> * Wyrażam zgodę na udostępnienie plików przed 14-dniowym terminem na odstąpienie od umowy zawartej na odległość.</a>
-    <div class="text-dark"><input type="checkbox" required /> * Jestem świadomy, że stracę prawo do odstąpienia po dostarczeniu mi plików przed upływem 14 dni na odstąpienie od umowy zawartej na odległość.</a>
+                            <div class="text-dark"><input type="checkbox" id="acceptance1" required /><label for="acceptance1"> * Akceptuję zasady określone w regulaminie.</label></div>
+                            <div class="text-dark"><input type="checkbox" id="acceptance2" /><label for="acceptance2">  Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie. Więcej informacji o przetwarzaniu moich danych osobowych.</label></a>
+                            <div class="text-dark"><input type="checkbox" id="acceptance3" required /><label for="acceptance3">  * Wyrażam zgodę na udostępnienie plików przed 14-dniowym terminem na odstąpienie od umowy zawartej na odległość.</label></a>
+                            <div class="text-dark"><input type="checkbox" id="acceptance4" required /><label for="acceptance4">  * Jestem świadomy, że stracę prawo do odstąpienia po dostarczeniu mi plików przed upływem 14 dni na odstąpienie od umowy zawartej na odległość.</label></a>
 
                         </div>
                         <div class="row">
