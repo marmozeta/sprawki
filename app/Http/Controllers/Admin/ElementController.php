@@ -27,7 +27,8 @@ class ElementController extends Controller
         
     public function index($slug)
     {
-        $menu = Menu::where('slug', $slug)->first();
+        $modelMenu = new Menu();
+        $menu = $modelMenu->getMenuBySlug($slug);
         $elementModel = new Element;
         $elements = $elementModel->getBySlug($slug);
         return view('admin.element', ['menu' => $menu, 'elements' => $elements]);
@@ -42,7 +43,8 @@ class ElementController extends Controller
     }
     
     public function edit($slug, $id) {
-        $menu = Menu::where('slug', $slug)->first();
+        $modelMenu = new Menu();
+        $menu = $modelMenu->getMenuBySlug($slug);
         $elementModel = new Element;
         $element = $elementModel->getElementForEdit($id);
         $element->product_categories = explode(',', $element->product_categories);
@@ -93,6 +95,8 @@ class ElementController extends Controller
         $element->is_virtual = ($request->is_virtual == 'on');
         $element->publish_date = (empty($request->publish_date)) ? date('Y-m-d H:i:s') : $request->publish_date;
         $element->youtube = $request->youtube;
+        if(!empty($request->ad_weight)) $element->ad_weight = $request->ad_weight;
+        $element->is_active = (isset($request->is_active)) ? ($request->is_active == 'on') : 1;
         $element->save();
         $element_id = $element->element_id;
        
@@ -227,6 +231,9 @@ class ElementController extends Controller
         $element->is_virtual = ($request->is_virtual == 'on');
         if(!empty($request->publish_date)) $element->publish_date = $request->publish_date;
         $element->youtube = $request->youtube;
+        if(!empty($request->ad_weight)) $element->ad_weight = $request->ad_weight;
+        $element->is_active = (isset($request->is_active)) ? ($request->is_active == 'on') : 1;
+        
         $element->save();
         
         //najpierw usuwamy dotychczasowe tagi

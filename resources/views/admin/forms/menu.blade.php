@@ -99,7 +99,7 @@
                                     <label>
                                         <input type="checkbox" class="attribute" name="attrs[{{$attr->attr_id}}]" @if(array_key_exists($attr->attr_id, $checked)) checked @endif> &nbsp; &nbsp; &nbsp;{{ $attr->name }}
                                     </label>
-                                    @if($attr->slug != 'is_new' && $attr->slug != 'is_hot' && $attr->slug != 'is_sale' && $attr->slug != 'is_virtual')  
+                                    @if($attr->slug != 'is_new' && $attr->slug != 'is_hot' && $attr->slug != 'is_sale' && $attr->slug != 'is_virtual' && $attr->slug != 'is_active')  
                                         <div class="form-check form-switch required @if(!array_key_exists($attr->attr_id, $checked)) d-none @endif mb-0">
                                             <input class="form-check-input" type="checkbox" name="required[{{$attr->attr_id}}]" role="switch" id="flexSwitchCheckDefault{{ $attr->attr_id }}" @if(isset($checked[$attr->attr_id]) && $checked[$attr->attr_id]) checked @endif>
                                                    <label class="form-check-label" for="flexSwitchCheckDefault{{ $attr->attr_id }}">Wymagany</label>

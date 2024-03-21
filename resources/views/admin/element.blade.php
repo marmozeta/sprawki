@@ -49,6 +49,12 @@
                                                 <th>Tytuł</th>
                                                 <th>Obrazek</th>
                                                 <th>Autor</th>
+                                                @if(is_array($menu->attrs_list) && in_array('is_active', $menu->attrs_list))
+                                                    <th>Aktywny</th>
+                                                @endif
+                                                @if(is_array($menu->attrs_list) && in_array('ad_weight', $menu->attrs_list))
+                                                    <th>Waga reklamy</th>
+                                                @endif
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
@@ -65,7 +71,23 @@
                                                             <img src="{{ asset('images/elements') }}/{{ $element->image }}" width="150" class="img-thumbnail" />
                                                         @endif
                                                     </td>
-                                                    <td>@if(!empty($element->friendly_name)) {{ '@'.$element->friendly_name }}@endif</td>
+                                                    <td>@if(!empty($element->friendly_name)) {{ '@'.$element->friendly_name }}@endif</td>                                                  
+                                                    @if(is_array($menu->attrs_list) && in_array('is_active', $menu->attrs_list))
+                                                        <td class="text-center">
+                                                            @if($element->is_active == 1)
+                                                                <i class="fa fa-circle text-success font-12"
+                                                            data-bs-toggle="tooltip" data-placement="top"
+                                                            title="Aktywna"></i>
+                                                            @else
+                                                                <i class="fa fa-circle text-danger font-12"
+                                                            data-bs-toggle="tooltip" data-placement="top"
+                                                            title="Nieaktywna"></i>
+                                                            @endif
+                                                        </td>
+                                                    @endif
+                                                    @if(is_array($menu->attrs_list) && in_array('ad_weight', $menu->attrs_list))
+                                                        <td>{{ $element->ad_weight }}</td>
+                                                    @endif
                                                     <td>{{ Carbon\Carbon::parse($element->created_at) }}</td>
                                                     <td>{{ Carbon\Carbon::parse($element->updated_at) }}</td>
                                                     <td class="text-center">
@@ -87,6 +109,12 @@
                                                 <th>Tytuł</th>
                                                 <th>Obrazek</th>
                                                 <th>Autor</th>
+                                                @if(is_array($menu->attrs_list) && in_array('is_active', $menu->attrs_list))
+                                                    <th>Aktywny</th>
+                                                @endif
+                                                @if(is_array($menu->attrs_list) && in_array('ad_weight', $menu->attrs_list))
+                                                    <th>Waga reklamy</th>
+                                                @endif
                                                 <th>Data dodania</th>
                                                 <th>Data modyfikacji</th>
                                                 <th></th>
