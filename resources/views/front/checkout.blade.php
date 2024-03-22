@@ -85,11 +85,11 @@
    			<div class="col-5 text-right" id="total" style="color: #ef5353"><?php echo Cart::total(); ?> zł</div>
                     </div>
                         <div class="row pt-5 acceptances">
-                            <div class="text-dark"><input type="checkbox" id="acceptance1" required /><label for="acceptance1"> * Akceptuję zasady określone w regulaminie.</label></div>
-                            <div class="text-dark"><input type="checkbox" id="acceptance2" /><label for="acceptance2">  Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie. Więcej informacji o przetwarzaniu moich danych osobowych.</label></a>
-                            <div class="text-dark"><input type="checkbox" id="acceptance3" required /><label for="acceptance3">  * Wyrażam zgodę na udostępnienie plików przed 14-dniowym terminem na odstąpienie od umowy zawartej na odległość.</label></a>
-                            <div class="text-dark"><input type="checkbox" id="acceptance4" required /><label for="acceptance4">  * Jestem świadomy, że stracę prawo do odstąpienia po dostarczeniu mi plików przed upływem 14 dni na odstąpienie od umowy zawartej na odległość.</label></a>
-
+                            <div class="text-dark"><input type="checkbox" id="acceptance1" required /><label for="acceptance1"> <span class="text-danger">*</span> Akceptuję zasady określone w regulaminie.</label></div>
+                            <div class="text-dark"><input type="checkbox" id="acceptance2" required /><label for="acceptance2">  <span class="text-danger">*</span> Wyrażam zgodę na udostępnienie plików przed 14-dniowym terminem na odstąpienie od umowy zawartej na odległość.</label></a>
+                            <div class="text-dark"><input type="checkbox" id="acceptance3" required /><label for="acceptance3">  <span class="text-danger">*</span> Jestem świadomy, że stracę prawo do odstąpienia po dostarczeniu mi plików przed upływem 14 dni na odstąpienie od umowy zawartej na odległość.</label></a>
+                            <div class="text-dark"><input type="checkbox" id="acceptance4" /><label for="acceptance4">  Chcę otrzymywać na podany adres e-mail informacje o nowościach, inicjatywach, promocjach i wydarzeniach. Wiem, że moją zgodę mogę odwołać w dowolnym momencie. Więcej informacji o przetwarzaniu moich danych osobowych.</label></a>
+                            <br/><small class="d-block w-100 text-right">* Zgody wymagane</small>
                         </div>
                         <div class="row">
                     <button id="process_button" class="btn btn-primary text-white mt-5">Zamawiam i płacę</button>
