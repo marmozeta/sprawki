@@ -977,3 +977,11 @@ a[data-totalitems="0"]:before {
 .tagify__input {
     width: 97%;
 }
+
+a.profile-link {
+    text-decoration: none;
+}
+
+a.profile-link:hover div.bg-white  {
+    background-color: rgba(239, 83, 83, 0.3) !important;
+}

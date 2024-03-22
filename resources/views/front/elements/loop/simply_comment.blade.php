@@ -1,4 +1,4 @@
-<div class="row like_line">
+<div class="row like_line" id="comm{{ $comment->comm_id }}">
     <div class="col-1 @if($comment->comment_comm_id > 0) offset-1 @endif bg-white py-3">
         <a href="/{{ $comment->friendly_name }}"><img src="{{ asset('images/users/') }}/{{ $comment->picture }}" alt="user" class="rounded-circle user-picture" /></a>
     </div>
