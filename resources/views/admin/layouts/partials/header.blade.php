@@ -108,15 +108,13 @@
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item d-none d-md-block">
-                            <a class="nav-link" href="javascript:void(0)">
                                 <form action="{{ route('admin.dashboard.search') }}">
-                                    <div class="customize-input">
+                                    <div class="customize-input" style="margin: 20px 0;">
                                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
                                                type="search" name="search" placeholder="Szukaj" aria-label="Szukaj" value="@if(!empty(request()->get('search'))){{ request()->get('search') }}@endif" >
-                                        <button><i class="form-control-icon" data-feather="search"></i></button>
+                                        <button style="background: transparent; border: none; position: absolute; top: -17px;"><i class="form-control-icon" data-feather="search"></i></button>
                                     </div>
                                 </form>
-                            </a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -124,8 +122,13 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset('images/users/profile-pic.jpg') }}" alt="user" class="rounded-circle"
+                                @if(!empty(auth()->user()->picture))
+                                <img src="{{ asset('images/users') }}/{{ auth()->user()->picture }}" alt="user" class="rounded-circle"
                                     width="40">
+                                @else
+                                <img src="{{ asset('images/users') }}/person.png" alt="user" class="rounded-circle"
+                                    width="40">
+                                @endif
                                 <span class="ms-2 d-none d-lg-inline-block"><span>Witaj,</span> <span
                                         class="text-dark">{{ auth()->user()->email }}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
