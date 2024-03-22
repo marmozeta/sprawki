@@ -97,6 +97,7 @@ class ElementController extends Controller
         $element->youtube = $request->youtube;
         if(!empty($request->ad_weight)) $element->ad_weight = $request->ad_weight;
         $element->is_active = (isset($request->is_active)) ? ($request->is_active == 'on') : 1;
+        $element->is_donation = (isset($request->is_donation)) ? ($request->is_donation == 'on') : 1;
         $element->save();
         $element_id = $element->element_id;
        
@@ -233,7 +234,7 @@ class ElementController extends Controller
         $element->youtube = $request->youtube;
         if(!empty($request->ad_weight)) $element->ad_weight = $request->ad_weight;
         $element->is_active = (isset($request->is_active)) ? ($request->is_active == 'on') : 1;
-        
+        $element->is_donation = (isset($request->is_donation)) ? ($request->is_donation == 'on') : 1;
         $element->save();
         
         //najpierw usuwamy dotychczasowe tagi

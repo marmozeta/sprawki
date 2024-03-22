@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-3">
                     <ul class="persons">
-                        <li class="active"><img src="{{ asset('images/person.png') }}" class="rounded-circle" width="50" /><div><span>NOWA WIADOMOŚĆ</span></div></li>
+                        <li class="active"><img src="{{ asset('/images/users/person.png') }}" class="rounded-circle" width="50" /><div><span>NOWA WIADOMOŚĆ</span></div></li>
                         <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="50"> <div><span>Dawid Mysior</span><small>@dawidmysior</small></div></li>
                         <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="50"> <div><span>Regina Szulc-Andrzejewska</span><small>@reginaszulc</small></div></li>
                         <li><img src="/public/images/users/profile-pic.jpg" alt="user" class="rounded-circle" width="50"> <div><span>Dawid Mysior</span><small>@dawidmysior</small></div></li>
@@ -26,8 +26,13 @@
                 <div class="col-9">
                     <div class="recipient_area">
                         @foreach($participants as $participant)
+                            @if(!empty($participant->picture))
                         <img src="/public/images/users/{{ $participant->picture }}" alt="user" class="rounded-circle user-picture" width="30"> {{ $participant->name }}     
-                      @endforeach
+                            @else
+                             <img src="/public/images/users/person.png" alt="user" class="rounded-circle user-picture" width="30"> {{ $participant->name }}     
+                         
+                            @endif
+                        @endforeach
                     </div>
                     <div class="my-3 bg-white">
                         @foreach($messages as $message)

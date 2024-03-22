@@ -14,7 +14,8 @@
                     @include('front.elements.loop.default') 
                 @endif
                 
-                @if(!empty($ad_element) && ($key+1)%4==0) 
+                @if(!empty($ad_element) && 
+                (($ad_element->ad_weight == 2 && ($key+1)%5==0) || ($ad_element->ad_weight == 4 && ($key+1)%4==0))) 
                     @include('front.elements.loop.ad') 
                 @endif
             @endforeach

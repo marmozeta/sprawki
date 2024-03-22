@@ -276,4 +276,29 @@ class CartController extends Controller
             return Response::download($file, $media[0]->filename, $headers);
         }
     }
+    
+    public function donate(Request $request) {
+         //przekierowanie do Tpay
+        $id = env("TPAY_CLIENT_ID");
+        $amount = $request->amount;
+        $code = env("TPAY_SECURITY_CODE");
+        $email = $request->email;
+        $name = $request->firstname.' '.$request->lastname;
+        $result_url = url('/').'/public/transaction_receive.php';
+        $return_url = url('/').'/darowizna/podziekowanie';
+        $return_error_url = url('/').'/darowizna/blad';
+        $crc = rand(1000, 9999);
+         
+        $md5sum = md5($id.'&'.$amount.'&'.$crc.'&'.$code);
+        $link = "https://secure.tpay.com?id={$id}&amount={$amount}&description=darowizna&crc={$crc}&email={$email}&name={$name}&result_url={$result_url}&return_url={$return_url}&return_error_url={$return_error_url}&md5sum={$md5sum}";
+        return redirect($link);
+    }
+    
+    public function donate_ok() {
+        return view('front.donate_ok');
+    }
+    
+    public function donate_error() {
+        return view('front.donate_error');
+    }
 }

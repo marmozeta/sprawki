@@ -113,7 +113,9 @@
        actual_val = $(this).val();
        if(actual_val != '') window.location.href='/'+actual_val;
     });
-
+</script>
+@if(Auth::check())
+<script>
         $(document).on('click', '#add_to_observe', function() {
             var button = $(this);
         $.ajax({
@@ -165,7 +167,9 @@
     });
     
       if($('input[name="users_list"]').length>0) {
-        
+       </script>
+       @endif
+       <script>
    function tagTemplate(tagData){
     return `
         <tag title="${tagData.email}"

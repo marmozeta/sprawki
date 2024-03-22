@@ -20,12 +20,12 @@ class ChatController extends Controller
     }
     
     public function get_participants() {
-        $result = User::all();   
+        $result = User::whereRaw('id <> '.Auth::user()->id)->get();   
         return response($result, 200); 
     }
     
     public function new_chat(Request $request) {
-        $participants = array();
+        $participants = array(User::find(Auth::user()->id));
         $userslist = json_decode($request->userslist);
         foreach($userslist as $user) {
             $participants[] = User::find($user->value);

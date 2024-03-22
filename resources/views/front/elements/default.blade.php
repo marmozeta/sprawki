@@ -58,6 +58,17 @@
                 </div>
             </div>
         </div>
+      
+        @if($element->is_donation) 
+            <div class="row">
+                <div class="col-8 offset-2 pb-5">
+                    <div class="container-fluid">
+                        @include('front.elements.loop.donation') 
+                    </div>
+                </div>
+            </div>
+        @endif
+      
         @if(!$product_tags->isEmpty())
         <div class="row">
             <div class="col-8 offset-2 d-flex justify-content-center my-3" style="column-gap: 10px;">

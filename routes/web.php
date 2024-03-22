@@ -155,6 +155,10 @@ Route::namespace('App\Http\Controllers\Front')->group(function () {
     Route::post('chat/participants/get', 'ChatController@get_participants')->name('front.participants.get')->middleware('auth');
     Route::post('chat/messenger/new', 'ChatController@new_chat')->name('front.messenger.new')->middleware('auth');
     
+    Route::post('donate', 'CartController@donate')->name('front.donate');
+    Route::get('darowizna/podziekowanie', 'CartController@donate_ok')->name('front.donate_ok');
+    Route::get('darowizna/blad', 'CartController@donate_error')->name('front.donate_error');
+    
     Route::get('/', function () { return redirect()->to('/sprawki');});
     
     foreach(Menu::all() as $menu) {

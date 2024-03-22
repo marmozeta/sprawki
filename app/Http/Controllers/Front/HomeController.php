@@ -100,6 +100,8 @@ class HomeController extends Controller
         $hot_likes = Setting::where('name', 'like_counter')->first()->value;
         
         $ad_element = Element::where('menu_id', 9)->first();
+        
+        $name = (Auth::user()) ? explode(' ', Auth::user()->name) : array('', '');
            
         return view('front.element', array(
                                         'menu' => $menu, 
@@ -112,7 +114,9 @@ class HomeController extends Controller
                                         'arguments' => $arguments, 
                                         'hot_comments' => $hot_comments, 
                                         'hot_likes' => $hot_likes,
-                                        'ad_element' => $ad_element));
+                                        'ad_element' => $ad_element,
+                                        'firstname' => $name[0], 
+                                        'lastname' => $name[1]));
     }
     
     private function _build_comments_tree($element_id, $parent_id) {

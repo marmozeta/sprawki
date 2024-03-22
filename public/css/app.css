@@ -973,3 +973,7 @@ a[data-totalitems="0"]:before {
     display: initial;
     font-weight: 400;
 }
+
+.tagify__input {
+    width: 97%;
+}
