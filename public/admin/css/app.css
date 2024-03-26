@@ -46,3 +46,8 @@ img {
     color: #fff;
     cursor: pointer;
 }
+
+.user-picture {
+    object-fit: cover;
+    background: #fff;
+}
