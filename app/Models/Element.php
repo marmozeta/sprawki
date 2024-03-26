@@ -24,7 +24,7 @@ class Element extends Model
             ->whereNull('menus.deleted_at')
             ->orderBy('elements.created_at', 'DESC');
         
-        if(!empty($search)) $result->whereRaw("(title LIKE '%{$search}%' OR description LIKE '%{$search}%')");
+        if(!empty($search)) $result->whereRaw("(elements.title LIKE '%{$search}%' OR elements.description LIKE '%{$search}%')");
         return $result->get();
     }
     
