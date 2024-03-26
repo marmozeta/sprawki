@@ -123,7 +123,7 @@
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                 @if(!empty(auth()->user()->picture))
-                                <img src="{{ asset('images/users') }}/{{ auth()->user()->picture }}" alt="user" class="rounded-circle user-picture"
+                                <img src="{{ asset('images/users') }}/{{ auth()->user()->picture }}" alt="user" class="rounded-circle avatar"
                                     width="40">
                                 @else
                                 <img src="{{ asset('images/users') }}/person.png" alt="user" class="rounded-circle"
